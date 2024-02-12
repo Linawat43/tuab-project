@@ -45,9 +45,6 @@ router.post('/', jsonParser, async function (req, res, next) {
         res.json({ status: 'ok', message: 'login success'});
         // res.json({ status: 'ok', message: 'login success', data: response.data });
       } 
-      // if (response.data.message = ''){
-        
-      // }
       else {
         res.json({ status: 'error', message: 'login-failed', data: response.data });
         console.log('1');

@@ -1,6 +1,7 @@
-<!-- <script setup>
+<script setup>
 import LoginTuab from './components/LoginTuab.vue';
 import GeneralHome from './components/GeneralHome.vue';
+import TuabInformation from './components/TuabInformation.vue';
 </script>
 
 <template>
@@ -13,6 +14,9 @@ import GeneralHome from './components/GeneralHome.vue';
       <LoginTuab />
     </main>
 
+    <footer>
+      <TuabInformation />
+    </footer>
   </div>
 </template>
 
@@ -22,10 +26,13 @@ div {
     width:100%;
     background-color: #275496;
     }
-</style> -->
+</style>
 
-<template>
+<!-- <template>
   <div>
+    <header>
+      <div><img src="logo.png" width=600px height=200px></div>
+    </header>
     <router-view />
   </div>
 </template>
@@ -37,15 +44,12 @@ export default {
 </script>
 
 <style>
-#App {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-body{
-  background: #2c3e50;
-}
-</style>
+div {
+    height:max-content;
+    width:100%;
+    background-color: #275496;
+    }
+body {
+    background-color: #DFE9F5;
+  }
+</style> -->

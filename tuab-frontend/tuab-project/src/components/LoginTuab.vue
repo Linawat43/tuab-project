@@ -17,55 +17,56 @@
 <script>
 import axios from 'axios';
 
-export default {
-  methods: {
-    async login() {
-      try {
-        const response = await axios.post('http://localhost:3000/login', {
-          username: this.username,
-          password: this.password,
-        });
-
-        console.log('Login successfull:', response.data);
-
-        this.$route.push('/general-home');
-      }catch (error) {
-        console.error('Error', error.response.data);
-      }
-    },
-  },
-  data() {
-    return {
-      username: '',
-      password: '',
-    };
-  },
-};
-
 // export default {
+//   methods: {
+//     async login() {
+//       try {
+//         const response = await axios.post('http://localhost:3000/login', {
+//           username: this.username,
+//           password: this.password,
+//         });
+
+//         console.log('Login successfull:', response.data);
+
+//         this.$route.push('/general-home');
+//       }catch (error) {
+//         console.error('Error', error.response.data);
+//       }
+//     },
+//   },
 //   data() {
 //     return {
 //       username: '',
 //       password: '',
 //     };
 //   },
-//   methods: {
-//     async login() {
-//     //   document.write(5 + 6)
-//     //   alert('hello');
-//         try {
-//         const response = await axios.post('http://localhost:3000/login', {
-//           username: this.$data.username,
-//           password: this.$data.password,
-//         });
-
-//         console.log(response.data);
-//       } catch (error) {
-//         console.error('Error:', error.response.data);
-//       }
-//     },
-//   },
 // };
+
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+  methods: {
+    async login() {
+    //   document.write(5 + 6)
+    //   alert('hello');
+        try {
+        const response = await axios.post('http://localhost:3000/login', {
+          username: this.$data.username,
+          password: this.$data.password,
+        });
+
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error:', error.response.data);
+        
+      }
+    },
+  },
+};
 </script>
 <style scoped>
 body {

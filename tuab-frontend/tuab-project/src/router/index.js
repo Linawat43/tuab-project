@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import LoginTuab from '../component/LoginTuab.vue'
-import GeneralHome from '../component/GeneralHome.vue'
+import LoginTuab from './component/LoginTuab.vue'
+import GeneralHome from './component/GeneralHome.vue'
 
 
 Vue.use(VueRouter)

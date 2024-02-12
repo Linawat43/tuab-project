@@ -17,13 +17,13 @@ var app = express();
 
 app.use(cors());
 
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME
-});
+// const connection = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   database: process.env.DB_NAME
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
