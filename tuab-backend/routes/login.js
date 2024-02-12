@@ -24,7 +24,7 @@ router.post('/', jsonParser, async function (req, res, next) {
           'Application-Key': process.env.APP_KEY
         }
       });
-  
+      //When finding data frome the restapi.tu.ac.th
       if (response.data.message == 'Success') {
         const whereCondition = `username = '${req.body.username}'`;
 
@@ -33,7 +33,7 @@ router.post('/', jsonParser, async function (req, res, next) {
             console.error('Error executing SELECT query:', err);
             return;
           }
-
+          //When username is not found in the Database
           if (users.length == 0) {
               await connection.execute("INSERT INTO User (username, name) VALUES (?, ?)",
                 [req.body.username, response.data.displayname_th],
