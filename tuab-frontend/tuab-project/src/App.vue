@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import LoginTuab from './components/LoginTuab.vue';
 import GeneralHome from './components/GeneralHome.vue';
 import TuabInformation from './components/TuabInformation.vue';
@@ -26,10 +26,10 @@ div {
     width:100%;
     background-color: #275496;
     }
-</style>
+</style> -->
 
-<!-- <template>
-  <div>
+<template>
+  <div id="app">
     <header>
       <div><img src="logo.png" width=600px height=200px></div>
     </header>
@@ -39,7 +39,7 @@ div {
 
 <script>
 export default {
-  name: 'App'
+  name: 'app'
 }
 </script>
 
@@ -52,4 +52,4 @@ div {
 body {
     background-color: #DFE9F5;
   }
-</style> -->
+</style>

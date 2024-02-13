@@ -1,5 +1,5 @@
-<template lang="">
-    <div>
+<template>
+    <div id="Login" class="main-box">
         <body>
                 <br><br><br>
             <form @submit.prevent="login">
@@ -52,13 +52,18 @@ export default {
   methods: {
     async login() {
     //   document.write(5 + 6)
-    //   alert('hello');
+      // alert('hello');
         try {
         const response = await axios.post('http://localhost:3000/login', {
           username: this.$data.username,
           password: this.$data.password,
         });
-
+        if (response.data.message == 'Success'){
+          this.$router.replace("general-home");
+        }
+        else{
+          alert(err.message)
+        }
         console.log(response.data);
       } catch (error) {
         console.error('Error:', error.response.data);
