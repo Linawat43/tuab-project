@@ -68,10 +68,18 @@ export default {
           password: this.$data.password,
         });
         if (response.data.status == 'ok'){
-          this.$router.replace("general-home");
+          if (response.data.roles == '1'){
+            this.$router.replace("general-home");
+          }
+          else if (response.data.roles == '2'){
+            this.$router.replace("superStaff-home");
+          }
+          else if (response.data.roles == '3'){
+            this.$router.replace("staff-home");
+          }
         }
         if (response.data.status == 'error'){
-          alert('UserName or PassWord Invalid!');
+          alert('Invalid Username or Password!');
         }
         else{
           this.errorMessage = response.data.message;

@@ -41,9 +41,18 @@ router.post('/', jsonParser, async function (req, res, next) {
                   console.log("==> insert results", results);
                 });
           }
-        })
-        res.json({ status: 'ok', message: 'login success'});
-        // res.json({ status: 'ok', message: 'login success', data: response.data });
+          //Check roleID when found username in Database
+          else {
+            await connection.execute('SELECT roleID FROM User WHERE username = ?', [req.body.username], async (err, roles) => {
+              if (err) {
+                console.error('Error executing SELECT query for roles:', err);
+                return;
+              }
+              let userRoles = roles.map(role => role.roleID);
+              res.json({ status: 'ok', message: 'login success', roles: userRoles});
+            });
+          }
+        });
       } 
       else {
         res.json({ status: 'error', message: 'login-failed', data: response.data });

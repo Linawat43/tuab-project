@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import LoginTuab from './components/LoginTuab.vue'
 import GeneralHome from './components/GeneralHome.vue'
+import SuperStaffHome from './components/SuperStaffHome.vue'
+import StaffHome from './components/StaffHome.vue'
 
 
 Vue.use(Router)
@@ -18,6 +20,16 @@ export default new Router({
         path: '/general-home',
         name: 'general-home',
         component: GeneralHome
+    },
+    { 
+        path: '/superStaff-home',
+        name: 'superStaff-home',
+        component: SuperStaffHome
+    },
+    { 
+        path: '/staff-home',
+        name: 'staff-home',
+        component: StaffHome
     }
     ]
 })

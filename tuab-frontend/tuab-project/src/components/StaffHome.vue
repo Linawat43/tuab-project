@@ -5,13 +5,18 @@
             <br><br><br>
             <p Align=center><button> BOOKING </button></p><br>
             <p Align=center><button> SHIFT SCHEDULE </button></p><br>
-
+            <br><br><br>
+            <p Align=right><button @click="logout"> LOGOUT </button></p><br>
         </body>
     </div>
 </template>
 <script>
 export default {
-    
+    methods: {
+        logout() {
+            this.$router.push('/');
+        }
+    }
 }
 </script>
 <style scoped>
