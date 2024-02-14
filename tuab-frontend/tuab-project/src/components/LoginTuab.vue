@@ -11,6 +11,15 @@
                 <br><br>
                 <p Align="center"><button type="submit">LOGIN</button></p>
             </form>
+            <br><br><br><br><br><br><br><br>
+            <div>
+                <br><br>
+                <info>TU Archery club information</info><br>
+                <info>Facebook Page: TU Archery Club</info><br>
+                <info>Instagram: @tuarcheryclub</info><br>
+                <info>Monday - Thursday</info><br>
+                <info>17.00 - 18.00 pm.</info><br><br><br>
+            </div>
         </body>
     </div>
 </template>
@@ -58,11 +67,14 @@ export default {
           username: this.$data.username,
           password: this.$data.password,
         });
-        if (response.data.message == 'Success'){
+        if (response.data.status == 'ok'){
           this.$router.replace("general-home");
         }
+        if (response.data.status == 'error'){
+          alert('UserName or PassWord Invalid!');
+        }
         else{
-          alert(err.message)
+          this.errorMessage = response.data.message;
         }
         console.log(response.data);
       } catch (error) {
@@ -120,4 +132,11 @@ note {
     font-size: 15px;
     font-family: sans-serif;
 }
+
+info {
+        color: #FFFFFF;
+        font-size: 15px;
+        font-family: Verdana;
+        padding-left: 50px;
+    }
 </style>

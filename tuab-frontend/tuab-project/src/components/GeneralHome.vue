@@ -5,6 +5,8 @@
             <p Align=center><button> BOOK NOW </button></p><br>
             <p Align=center><button> CANCEL BOOKING </button></p><br>
             <p Align=center><button> BOOKING HISTORY </button></p><br>
+            <br><br><br>
+            <p Align=center><button @click="logout"> LOGOUT </button></p><br>
             <br><br>
             <h2>Location</h2>
             <center><img src="TUABmap.jpeg" width=850px height=500px></center>
@@ -32,7 +34,11 @@
 </template>
 <script>
 export default {
-    
+    methods: {
+        logout() {
+            this.$router.push('/');
+        }
+    }
 }
 </script>
 <style scoped>
