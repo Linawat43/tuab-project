@@ -36,10 +36,13 @@ router.post('/', jsonParser, async function (req, res, next) {
           //When username is not found in the Database
           if (users.length == 0) {
               await connection.execute("INSERT INTO User (username, name) VALUES (?, ?)",
-                [req.body.username, response.data.displayname_th],
+                [req.body.username, response.data.displayname_en],
                 (err, results) => {
                   console.log("==> insert results", results);
                 });
+              let userRoles = '1';
+              res.json({ status: 'ok', message: 'login success', roles: userRoles});
+
           }
           //Check roleID when found username in Database
           else {
