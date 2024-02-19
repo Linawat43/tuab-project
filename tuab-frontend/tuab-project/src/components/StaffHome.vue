@@ -3,10 +3,11 @@
         <body>
 
             <br><br><br>
-            <p Align=center><button> BOOKING </button></p><br>
-            <p Align=center><button> SHIFT SCHEDULE </button></p><br>
+            <h1>Staff mode : </h1><br>
+            <p Align=center><button class="menu"> BOOKING </button></p><br>
+            <p Align=center><button class="menu"> SHIFT SCHEDULE </button></p><br>
             <br><br><br>
-            <p Align=right><button @click="logout"> LOGOUT </button></p><br>
+            <p Align=right><button class="logout" @click="logout"> LOGOUT </button></p><br>
         </body>
     </div>
 </template>
@@ -21,49 +22,110 @@ export default {
 </script>
 <style scoped>
     body {
-    background-color: #DFE9F5;
-  }
-
-label {
-    color: #000000;
-    font-size: 20px;
-    font-family: sans-serif;
-    padding-top: 30px;
-}
-
-div {
-    height:max-content;
-    width:100%;
-    background-color: #275496;
+        background-color: #DFE9F5;
     }
 
-input {
-    background-color: #C5D4EB;
-    border-color: #C5D4EB;
-    font-family: sans-serif;
-    font-size: 20px;
-    width: 500px;
-    height: 50px;
-    border: none;
-    border-radius: 10px;
-    padding-left: 20px;
-}
+    label {
+        color: #000000;
+        font-size: 20px;
+        font-family: Verdana;
+        padding-top: 30px;
+    }
 
-button {
-    background-color: #C5D4EB;
-    border-color: #C5D4EB;
-    font-family: sans-serif;
-    font-size: 20px;
-    width: 350px;
-    height: 50px;
-    border-style: outset;
-    border-radius: 10px;
-    cursor: pointer;
-}
+    div {
+        height:max-content;
+        width:100%;
+        background-color: #275496;
+        }
 
-note {
-    color: #000000;
-    font-size: 15px;
-    font-family: sans-serif;
-}
+    input {
+        background-color: #C5D4EB;
+        border-color: #C5D4EB;
+        font-family: Verdana;
+        font-size: 20px;
+        width: 500px;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+        padding-left: 20px;
+    }
+
+    .menu {
+        background-color: #C5D4EB;
+        border-color: #C5D4EB;
+        font-family: Verdana;
+        font-size: 20px;
+        width: 700px;
+        height: 60px;
+        border-style: outset;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .logout {
+        background-color: #D9D9D9;
+        border-color: #D9D9D9;
+        font-family: Verdana;
+        font-size: 20px;
+        width: 200px;
+        height: 50px;
+        border-style: outset;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    note {
+        color: #000000;
+        font-size: 15px;
+        font-family: Verdana;
+    }
+
+    h1 {
+        color: #000000;
+        font-size: 35px;
+        font-family: Verdana;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-left: 200px;
+        padding-bottom: 30px;
+    }
+
+    h2 {
+        color: #000000;
+        font-size: 40px;
+        font-family: Verdana;
+        padding-top: 10px;
+        padding-left: 200px;
+        padding-bottom: 20px;
+    }
+
+    a {
+        color: #000000;
+        font-size: 20px;
+        font-family: Verdana;
+        font-weight: bold;
+        padding-top: 30px;
+    }
+
+    info {
+        color: #FFFFFF;
+        font-size: 15px;
+        font-family: Verdana;
+        padding-left: 50px;
+    }
+
+    name {
+        color: #000000;
+        font-size: 35px;
+        font-family: Verdana;
+        font-weight: bold;
+        padding-top: 10px;
+        padding-left: 200px;
+    }
+
+    bar {
+        height:max-content;
+        width:100%;
+        background-color: #FFD13F;
+        }
 </style>
