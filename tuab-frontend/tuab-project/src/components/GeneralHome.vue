@@ -1,19 +1,16 @@
 <template lang="">
     <div>
         <body>
-            <br><br><br>
-           <!-- name bar -->
-            <name>Hello, (User's name)</name>
-            <p Align=right><button class="logout" @click="logout"> LOGOUT </button></p>
-            
-
-            <br><br><br>
+            <div class="namebar">
+                <name> Displayed Name </name>
+                <button class="logout" @click="logout"> LOGOUT </button>
+            </div>
+            <br><br><br><br>
             <p Align=center><button class="menu"> BOOK NOW </button></p><br>
             <p Align=center><button class="menu"> CANCEL BOOKING </button></p><br>
             <p Align=center><button class="menu"> BOOKING HISTORY </button></p><br>
-            <br>
-            <!-- <p Align=center><button class="logout" @click="logout"> LOGOUT </button></p><br> -->
-            <br><br><br><br>
+    
+            <br><br><br>
             <h2>Location</h2>
             <center><img src="TUABmap.jpeg" width=850px height=500px></center>
             <br>
@@ -92,8 +89,8 @@ export default {
     }
 
     .logout {
-        background-color: #D9D9D9;
-        border-color: #D9D9D9;
+        background-color: #C5D4EB;
+        border-color: #C5D4EB;
         font-family: Verdana;
         font-size: 20px;
         width: 200px;
@@ -101,6 +98,8 @@ export default {
         border-style: outset;
         border-radius: 10px;
         cursor: pointer;
+        margin-left: 750px;
+        margin-top: 7px;
     }
 
     note {
@@ -121,7 +120,7 @@ export default {
 
     h2 {
         color: #000000;
-        font-size: 40px;
+        font-size: 35px;
         font-family: Verdana;
         padding-top: 10px;
         padding-left: 200px;
@@ -143,18 +142,17 @@ export default {
         padding-left: 50px;
     }
 
-    name {
-        color: #000000;
-        font-size: 35px;
-        font-family: Verdana;
-        font-weight: bold;
-        padding-top: 10px;
-        padding-left: 200px;
+    .namebar {
+        background-color: #abc3e8;
+        width: 100%;
+        height: 65px;
+        flex-direction: row;
     }
 
-    bar {
-        height:max-content;
-        width:100%;
-        background-color: #FFD13F;
-        }
+    name{
+        color: #000000;
+        font-size: 23px;
+        font-family: Verdana;
+        padding-left: 150px;
+    }
 </style>
