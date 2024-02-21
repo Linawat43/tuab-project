@@ -11,7 +11,7 @@
               <br><br>
               <p Align="center"><button class="login" type="submit">LOGIN</button></p>
           </form>
-          <br><br><br><br><br><br>
+          <br><br><br><br><br><br><br><br>
           <div>
               <br><br>
               <info>TU Archery club information</info><br>
@@ -91,7 +91,7 @@ input {
     border-color: #C5D4EB;
     font-family: sans-serif;
     font-size: 20px;
-    width: 500px;
+    width: 50%;
     height: 50px;
     border: none;
     border-radius: 10px;
@@ -103,7 +103,7 @@ input {
     border-color: #C5D4EB;
     font-family: sans-serif;
     font-size: 20px;
-    width: 350px;
+    width: 35%;
     height: 50px;
     border-style: outset;
     border-radius: 10px;
@@ -120,7 +120,7 @@ info {
         color: #FFFFFF;
         font-size: 15px;
         font-family: Verdana;
-        padding-left: 50px;
+        padding-left: 5%;
 }
 .main-box {
   height:max-content;

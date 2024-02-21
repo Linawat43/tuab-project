@@ -31,7 +31,7 @@ div {
 <template>
   <div id="app">
     <header>
-      <img src="logo.png" width=600px height=200px>
+      <img src="logo.png" width=30% height=15%>
     </header>
     <router-view />
   </div>

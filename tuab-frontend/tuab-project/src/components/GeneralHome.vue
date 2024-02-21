@@ -11,8 +11,8 @@
             <p Align=center><button class="menu"> BOOKING HISTORY </button></p><br>
     
             <br><br><br>
-            <h2>Location</h2>
-            <center><img src="TUABmap.jpeg" width=850px height=500px></center>
+            <h2>Location</h2><br>
+            <center><img src="TUABmap.jpeg" width=60% height=40%></center>
             <br>
             <center>
                 <a href="https://maps.app.goo.gl/AHKZVHwujk3bU3dj7?g_st=ic">Google map: TU Archery Range</a>
@@ -22,7 +22,7 @@
             </center>
             <br><br><br>
             <h2>Line Official</h2><br>
-            <center><img src="lineoa.jpg" width=300px height=300px></center>
+            <center><img src="lineoa.jpg" width=30% height=30%></center>
             <br><br><br><br><br><br><br><br>
 
             <div class="footer">
@@ -63,25 +63,12 @@ div {
     width:100%;
     background-color: #275496;
 }
-
-input {
-    background-color: #C5D4EB;
-    border-color: #C5D4EB;
-    font-family: Verdana;
-    font-size: 20px;
-    width: 500px;
-    height: 50px;
-    border: none;
-    border-radius: 10px;
-    padding-left: 20px;
-}
-
 .menu {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: Verdana;
     font-size: 20px;
-    width: 700px;
+    width: 50%;
     height: 60px;
     border-style: outset;
     border-radius: 10px;
@@ -92,39 +79,21 @@ input {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: Verdana;
-    font-size: 20px;
-    width: 200px;
+    font-size: 80%;
+    width: 15%;
     height: 50px;
     border-style: outset;
     border-radius: 10px;
     cursor: pointer;
-    margin-left: 750px;
-    margin-top: 7px;
-}
-
-note {
-    color: #000000;
-    font-size: 15px;
-    font-family: Verdana;
-}
-
-h1 {
-    color: #000000;
-    font-size: 35px;
-    font-family: Verdana;
-    font-weight: bold;
-    padding-top: 10px;
-    padding-left: 200px;
-    padding-bottom: 30px;
+    margin-left: 75%;
+    /* margin-top: 0%; */
 }
 
 h2 {
     color: #000000;
-    font-size: 35px;
+    font-size: 250%;
     font-family: Verdana;
-    padding-top: 10px;
-    padding-left: 200px;
-    padding-bottom: 20px;
+    padding-left: 10%;
 }
 
 a {
@@ -139,7 +108,7 @@ info {
     color: #FFFFFF;
     font-size: 15px;
     font-family: Verdana;
-    padding-left: 50px;
+    padding-left: 5%;
 }
 
 .namebar {
@@ -153,7 +122,7 @@ name{
     color: #000000;
     font-size: 23px;
     font-family: Verdana;
-    padding-left: 150px;
+    padding-left: 10%;
 }
 .container {
     height:max-content;

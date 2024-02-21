@@ -87,7 +87,7 @@ export default {
         font-family: Verdana;
         font-weight: bold;
         padding-top: 10px;
-        padding-left: 200px;
+        padding-left: 10%;
         padding-bottom: 30px;
     }
 

@@ -1,13 +1,14 @@
 <template lang="">
     <div>
         <body>
-
+            <div class="namebar">
+                <name> Staff Mode </name>
+                <button class="logout" @click="logout"> LOGOUT </button>
+            </div>
             <br><br><br>
-            <h1>Staff mode : </h1><br>
             <p Align=center><button class="menu"> BOOKING </button></p><br>
             <p Align=center><button class="menu"> SHIFT SCHEDULE </button></p><br>
             <br><br><br>
-            <p Align=right><button class="logout" @click="logout"> LOGOUT </button></p><br>
         </body>
     </div>
 </template>
@@ -86,7 +87,7 @@ export default {
         font-family: Verdana;
         font-weight: bold;
         padding-top: 10px;
-        padding-left: 200px;
+        padding-left: 10%;
         padding-bottom: 30px;
     }
 
@@ -114,18 +115,22 @@ export default {
         padding-left: 50px;
     }
 
-    name {
-        color: #000000;
-        font-size: 35px;
-        font-family: Verdana;
-        font-weight: bold;
-        padding-top: 10px;
-        padding-left: 200px;
-    }
-
     bar {
         height:max-content;
         width:100%;
         background-color: #FFD13F;
         }
+.namebar {
+    background-color: #abc3e8;
+    width: 100%;
+    height: 65px;
+    flex-direction: row;
+}
+
+name{
+    color: #000000;
+    font-size: 23px;
+    font-family: Verdana;
+    padding-left: 10%;
+}
 </style>
