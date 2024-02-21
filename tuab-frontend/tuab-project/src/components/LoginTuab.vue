@@ -121,5 +121,18 @@ info {
         font-size: 15px;
         font-family: Verdana;
         padding-left: 50px;
-    }
+}
+.main-box {
+  width: 90%; /* Example of percentage-based width */
+  max-width: 1200px; /* Example of max-width */
+  margin: 0 auto; /* Center the container */
+}
+
+/* Example of media query for adjusting styles based on screen width */
+@media screen and (max-width: 768px) {
+  .main-box {
+    width: 100%; /* Adjust width for smaller screens */
+    padding: 0 20px; /* Example of adjusting padding */
+  }
+}
 </style>

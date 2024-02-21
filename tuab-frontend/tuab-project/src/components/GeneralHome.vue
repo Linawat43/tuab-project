@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div class="container">
         <body>
             <div class="namebar">
                 <name> Displayed Name </name>
@@ -25,7 +25,7 @@
             <center><img src="lineoa.jpg" width=300px height=300px></center>
             <br><br><br><br><br><br><br><br>
 
-            <div>
+            <div class="footer">
                 <br><br>
                 <info>TU Archery club information</info><br>
                 <info>Facebook Page: TU Archery Club</info><br>
@@ -47,112 +47,125 @@ export default {
 </script>
 
 <style scoped>
-    body {
-        background-color: #DFE9F5;
-    }
+body {
+    background-color: #DFE9F5;
+}
 
-    label {
-        color: #000000;
-        font-size: 20px;
-        font-family: Verdana;
-        padding-top: 30px;
-    }
+label {
+    color: #000000;
+    font-size: 20px;
+    font-family: Verdana;
+    padding-top: 30px;
+}
 
-    div {
-        height:max-content;
-        width:100%;
-        background-color: #275496;
-        }
+div {
+    height:max-content;
+    width:100%;
+    background-color: #275496;
+}
 
-    input {
-        background-color: #C5D4EB;
-        border-color: #C5D4EB;
-        font-family: Verdana;
-        font-size: 20px;
-        width: 500px;
-        height: 50px;
-        border: none;
-        border-radius: 10px;
-        padding-left: 20px;
-    }
+input {
+    background-color: #C5D4EB;
+    border-color: #C5D4EB;
+    font-family: Verdana;
+    font-size: 20px;
+    width: 500px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    padding-left: 20px;
+}
 
-    .menu {
-        background-color: #C5D4EB;
-        border-color: #C5D4EB;
-        font-family: Verdana;
-        font-size: 20px;
-        width: 700px;
-        height: 60px;
-        border-style: outset;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+.menu {
+    background-color: #C5D4EB;
+    border-color: #C5D4EB;
+    font-family: Verdana;
+    font-size: 20px;
+    width: 700px;
+    height: 60px;
+    border-style: outset;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-    .logout {
-        background-color: #C5D4EB;
-        border-color: #C5D4EB;
-        font-family: Verdana;
-        font-size: 20px;
-        width: 200px;
-        height: 50px;
-        border-style: outset;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-left: 750px;
-        margin-top: 7px;
-    }
+.logout {
+    background-color: #C5D4EB;
+    border-color: #C5D4EB;
+    font-family: Verdana;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    border-style: outset;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 750px;
+    margin-top: 7px;
+}
 
-    note {
-        color: #000000;
-        font-size: 15px;
-        font-family: Verdana;
-    }
+note {
+    color: #000000;
+    font-size: 15px;
+    font-family: Verdana;
+}
 
-    h1 {
-        color: #000000;
-        font-size: 35px;
-        font-family: Verdana;
-        font-weight: bold;
-        padding-top: 10px;
-        padding-left: 200px;
-        padding-bottom: 30px;
-    }
+h1 {
+    color: #000000;
+    font-size: 35px;
+    font-family: Verdana;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-left: 200px;
+    padding-bottom: 30px;
+}
 
-    h2 {
-        color: #000000;
-        font-size: 35px;
-        font-family: Verdana;
-        padding-top: 10px;
-        padding-left: 200px;
-        padding-bottom: 20px;
-    }
+h2 {
+    color: #000000;
+    font-size: 35px;
+    font-family: Verdana;
+    padding-top: 10px;
+    padding-left: 200px;
+    padding-bottom: 20px;
+}
 
-    a {
-        color: #000000;
-        font-size: 20px;
-        font-family: Verdana;
-        font-weight: bold;
-        padding-top: 30px;
-    }
+a {
+    color: #000000;
+    font-size: 20px;
+    font-family: Verdana;
+    font-weight: bold;
+    padding-top: 30px;
+}
 
-    info {
-        color: #FFFFFF;
-        font-size: 15px;
-        font-family: Verdana;
-        padding-left: 50px;
-    }
+info {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-family: Verdana;
+    padding-left: 50px;
+}
 
-    .namebar {
-        background-color: #abc3e8;
-        width: 100%;
-        height: 65px;
-        flex-direction: row;
-    }
+.namebar {
+    background-color: #abc3e8;
+    width: 100%;
+    height: 65px;
+    flex-direction: row;
+}
 
-    name{
-        color: #000000;
-        font-size: 23px;
-        font-family: Verdana;
-        padding-left: 150px;
-    }
+name{
+    color: #000000;
+    font-size: 23px;
+    font-family: Verdana;
+    padding-left: 150px;
+}
+.container {
+  width: 90%; /* Example of percentage-based width */
+  max-width: 1200px; /* Example of max-width */
+  margin: 0 auto; /* Center the container */
+}
+
+/* Example of media query for adjusting styles based on screen width */
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%; /* Adjust width for smaller screens */
+    padding: 0 20px; /* Example of adjusting padding */
+  }
+}
 </style>
