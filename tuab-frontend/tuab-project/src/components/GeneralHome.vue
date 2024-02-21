@@ -156,8 +156,8 @@ name{
     padding-left: 150px;
 }
 .container {
-  width: 90%; /* Example of percentage-based width */
-  max-width: 1200px; /* Example of max-width */
+    height:max-content;
+    width:100%;
   margin: 0 auto; /* Center the container */
 }
 
