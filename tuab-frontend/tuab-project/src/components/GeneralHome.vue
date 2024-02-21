@@ -167,5 +167,19 @@ name{
     width: 100%; /* Adjust width for smaller screens */
     padding: 0 20px; /* Example of adjusting padding */
   }
+  .namebar {
+    width: 100%; /* Adjust width for smaller screens */
+    padding: 0 20px; /* Example of adjusting padding */
+  }
+}
+@media screen and (max-width: 576px) {
+  .container {
+    width: 100%; /* Adjust width for smaller screens */
+    padding: 0 20px; /* Example of adjusting padding */
+  }
+  .namebar {
+    width: 100%; /* Adjust width for smaller screens */
+    padding: 0 20px; /* Example of adjusting padding */
+  }
 }
 </style>

@@ -45,7 +45,7 @@ export default {
 
 <style>
 div {
-    height:200px;
+    height:220px;
     width:100%;
     background-color: #275496;
     }
