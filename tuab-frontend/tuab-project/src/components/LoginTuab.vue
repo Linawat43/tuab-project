@@ -75,7 +75,7 @@ body {
 
 label {
     color: #000000;
-    font-size: 20px;
+    font-size: 130%;
     font-family: sans-serif;
     padding-top: 30px;
 }
@@ -90,19 +90,19 @@ input {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 130%;
     width: 50%;
     height: 50px;
     border: none;
     border-radius: 10px;
-    padding-left: 20px;
+    padding-left: 2%;
 }
 
 .login {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 120%;
     width: 35%;
     height: 50px;
     border-style: outset;
@@ -112,27 +112,26 @@ input {
 
 note {
     color: #000000;
-    font-size: 15px;
+    font-size: 90%;
     font-family: sans-serif;
 }
 
 info {
-        color: #FFFFFF;
-        font-size: 15px;
-        font-family: Verdana;
-        padding-left: 5%;
+    color: #FFFFFF;
+    font-size: 90%;
+    font-family: Verdana;
+    padding-left: 5%;
 }
 .main-box {
   height:max-content;
-    width:100%;
-  margin: 0 auto; /* Center the container */
+  width:100%;
+  margin: 0 auto;
 }
 
-/* Example of media query for adjusting styles based on screen width */
 @media screen and (max-width: 768px) {
   .main-box {
-    width: 100%; /* Adjust width for smaller screens */
-    padding: 0 20px; /* Example of adjusting padding */
+    width: 100%;
+    padding: 0 20px;
   }
 }
 </style>

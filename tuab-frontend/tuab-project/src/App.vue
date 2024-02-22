@@ -31,7 +31,7 @@ div {
 <template>
   <div id="app">
     <header>
-      <img src="logo.png" width=30% height=15%>
+      <img src="logo.png" width=40% height=30%>
     </header>
     <router-view />
   </div>
@@ -45,12 +45,13 @@ export default {
 
 <style>
 div {
-    height:220px;
     width:100%;
     background-color: #275496;
     }
 body {
     background-color: #DFE9F5;
   }
-
+img {
+  padding-left: 3%;
+}
 </style>

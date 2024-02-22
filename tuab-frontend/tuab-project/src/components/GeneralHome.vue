@@ -5,11 +5,13 @@
                 <name> Displayed Name </name>
                 <button class="logout" @click="logout"> LOGOUT </button>
             </div>
+            <!-- MENU -->
             <br><br><br><br>
             <p Align=center><button class="menu"> BOOK NOW </button></p><br>
             <p Align=center><button class="menu"> CANCEL BOOKING </button></p><br>
             <p Align=center><button class="menu"> BOOKING HISTORY </button></p><br>
-    
+
+            <!-- Map and LineOA -->
             <br><br><br>
             <h2>Location</h2><br>
             <center><img src="TUABmap.jpeg" width=60% height=40%></center>
@@ -53,13 +55,13 @@ body {
 
 label {
     color: #000000;
-    font-size: 20px;
-    font-family: Verdana;
+    font-size: 130%;
+    font-family: sans-serif;
     padding-top: 30px;
 }
 
 div {
-    height:max-content;
+    height:100%;
     width:100%;
     background-color: #275496;
 }
@@ -67,25 +69,24 @@ div {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: Verdana;
-    font-size: 20px;
+    font-size: 130%;
     width: 50%;
     height: 60px;
     border-style: outset;
     border-radius: 10px;
     cursor: pointer;
 }
-
 .logout {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: Verdana;
-    font-size: 80%;
+    font-size: 85%;
     width: 15%;
     height: 50px;
     border-style: outset;
     border-radius: 10px;
     cursor: pointer;
-    margin-left: 75%;
+    margin-left: 80%;
     /* margin-top: 0%; */
 }
 
@@ -106,7 +107,7 @@ a {
 
 info {
     color: #FFFFFF;
-    font-size: 15px;
+    font-size: 90%;
     font-family: Verdana;
     padding-left: 5%;
 }
@@ -114,41 +115,40 @@ info {
 .namebar {
     background-color: #abc3e8;
     width: 100%;
-    height: 65px;
+    height: 60px;
     flex-direction: row;
 }
 
 name{
     color: #000000;
-    font-size: 23px;
+    font-size: 140%;
     font-family: Verdana;
     padding-left: 10%;
 }
 .container {
     height:max-content;
     width:100%;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto;
 }
 
-/* Example of media query for adjusting styles based on screen width */
 @media screen and (max-width: 768px) {
   .container {
-    width: 100%; /* Adjust width for smaller screens */
-    padding: 0 20px; /* Example of adjusting padding */
+    width: 100%;
+    padding: 0 20px;
   }
   .namebar {
-    width: 100%; /* Adjust width for smaller screens */
-    padding: 0 20px; /* Example of adjusting padding */
+    width: 100%;
+    padding: 0 20px;
   }
 }
-@media screen and (max-width: 576px) {
+/* @media screen and (max-width: 576px) {
   .container {
-    width: 100%; /* Adjust width for smaller screens */
-    padding: 0 20px; /* Example of adjusting padding */
+    width: 100%;
+    padding: 0 20px;
   }
   .namebar {
-    width: 100%; /* Adjust width for smaller screens */
-    padding: 0 20px; /* Example of adjusting padding */
+    width: 100%;
+    padding: 0 20px;
   }
-}
+} */
 </style>
