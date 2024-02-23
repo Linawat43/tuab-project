@@ -12,3 +12,6 @@
 //   user: process.env.DB_USER,
 //   database: process.env.DB_NAME
 // });
+
+
+// module.exports = router;
