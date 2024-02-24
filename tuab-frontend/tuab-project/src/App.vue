@@ -1,45 +1,19 @@
-<!-- <script setup>
-import LoginTuab from './components/LoginTuab.vue';
-import GeneralHome from './components/GeneralHome.vue';
-import TuabInformation from './components/TuabInformation.vue';
-</script>
-
-<template>
-  <div>
-    <header>
-      <div><img src="logo.png" width=600px height=200px></div>
-    </header>
-
-    <main>
-      <LoginTuab />
-    </main>
-
-    <footer>
-      <TuabInformation />
-    </footer>
-  </div>
-</template>
-
-<style scoped>
-div {
-    height:max-content;
-    width:100%;
-    background-color: #275496;
-    }
-</style> -->
-
 <template>
   <div id="app">
     <header>
-      <img src="logo.png" width=40% height=30%>
+      <img class="logo" src="logo.png" width=40% height=30%>
     </header>
     <router-view />
+    <Information />
   </div>
 </template>
 
 <script>
+import Information from './components/Information.vue';
+
 export default {
-  name: 'app'
+    name: 'app',
+    components: { Information }
 }
 </script>
 
@@ -51,7 +25,7 @@ div {
 body {
     background-color: #DFE9F5;
   }
-img {
-  padding-left: 3%;
+.logo {
+  padding-left: 5%;
 }
 </style>

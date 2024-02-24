@@ -40,8 +40,9 @@ router.post('/', jsonParser, async function (req, res, next) {
                 (err, results) => {
                   console.log("==> insert results", results);
                 });
-              let userRoles = '1';
-              res.json({ status: 'ok', message: 'login success', roles: userRoles});
+              let userRoles = '1'; // set role generalUser
+              // let uname = response.data.displayname_en;
+              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en});
 
           }
           //Check roleID when found username in Database
@@ -52,7 +53,7 @@ router.post('/', jsonParser, async function (req, res, next) {
                 return;
               }
               let userRoles = roles.map(role => role.roleID);
-              res.json({ status: 'ok', message: 'login success', roles: userRoles});
+              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en});
             });
           }
         });

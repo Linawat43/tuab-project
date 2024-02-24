@@ -1,0 +1,17 @@
+<template>
+    <p class="info">
+                TU Archery club information<br>
+                Facebook Page: TU Archery Club<br>
+                Instagram: @tuarcheryclub<br>
+                Monday - Thursday<br>
+                17.00 - 18.00 pm.<br>
+              </p>
+</template>
+<style scoped>
+.info {
+    color: #FFFFFF;
+    font-size: 90%;
+    font-family: Verdana;
+    padding-left: 5%;
+}
+</style>

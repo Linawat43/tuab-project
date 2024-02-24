@@ -1,25 +1,18 @@
 <template>
   <div id="Login" class="main-box">
       <body>
-              <br><br><br>
+              <br><br><br><br>
           <form @submit.prevent="login">
               <p Align="center"><label for="username">Username</label></p>
               <p Align="center"><input type="text" v-model="username"></p><br>
               <p Align="center"><label for="password">Password</label></p>
               <p Align="center"><input type="password" v-model="password"></p>
-              <p Align="center"><note>*Login via TU account</note></p>
-              <br><br>
+              <br><br><br>
+              <p Align="center" class="note">*Login via TU account</p>
               <p Align="center"><button class="login" type="submit">LOGIN</button></p>
           </form>
           <br><br><br><br><br><br><br><br>
-          <div>
-              <br><br>
-              <info>TU Archery club information</info><br>
-              <info>Facebook Page: TU Archery Club</info><br>
-              <info>Instagram: @tuarcheryclub</info><br>
-              <info>Monday - Thursday</info><br>
-              <info>17.00 - 18.00 pm.</info><br><br><br>
-          </div>
+
       </body>
   </div>
 </template>
@@ -35,14 +28,13 @@ export default {
   },
   methods: {
     async login() {
-    //   document.write(5 + 6)
-      // alert('hello');
         try {
         const response = await axios.post('http://localhost:3000/login', {
           username: this.$data.username,
           password: this.$data.password,
         });
         if (response.data.status == 'ok'){
+          localStorage.setItem("username", response.data.name);
           if (response.data.roles == '1'){
             this.$router.replace("general-home");
           }
@@ -52,6 +44,7 @@ export default {
           else if (response.data.roles == '3'){
             this.$router.replace("staff-home");
           }
+          // alert(response.data.name);
         }
         if (response.data.status == 'error'){
           alert('Invalid Username or Password!');
@@ -110,13 +103,13 @@ input {
     cursor: pointer;
 }
 
-note {
+.note {
     color: #000000;
     font-size: 90%;
     font-family: sans-serif;
 }
 
-info {
+.info {
     color: #FFFFFF;
     font-size: 90%;
     font-family: Verdana;
