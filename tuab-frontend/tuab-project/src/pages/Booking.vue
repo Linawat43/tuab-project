@@ -54,6 +54,7 @@ body {
     float: left;
 }
 .menu {
+    color: #000000;
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: Verdana;
