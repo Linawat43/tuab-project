@@ -12,13 +12,13 @@
 
             <div class="content">
                 <div class="namebar">
-                    <name>{{name}}</name>
+                    <h3>{{name}}</h3>
                 </div>
                 <br><br><br><br>
                 <h1>Welcome to TU Archery Booking system</h1><br>
-                <wnote>1. to booking the Archery range click " BOOK NOW "</wnote><br>
-                <wnote>2. to cancel your booking click " CANCEL BOOKING "</wnote><br>
-                <wnote>3. to recheck your booking history click " BOOKING HISTORY "</wnote><br>
+                <h4>1. to booking the Archery range click " BOOK NOW "</h4><br>
+                <h4>2. to cancel your booking click " CANCEL BOOKING "</h4><br>
+                <h4>3. to recheck your booking history click " BOOKING HISTORY "</h4><br>
                 <br><br>
                 <center><img src="archery.JPG" width=50% height=30%></center><br>
                 <br><br>
@@ -128,7 +128,7 @@ label {
     height: 55px;
 }
 
-name {
+h3 {
     color: #000000;
     font-size: 150%;
     font-family: Verdana;
@@ -137,7 +137,7 @@ name {
     padding-top: 6px;
 }
 
-wnote {
+h4 {
     color: #000000;
     font-family: Verdana;
     padding-left: 15%;
