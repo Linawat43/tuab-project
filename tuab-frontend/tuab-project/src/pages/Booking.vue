@@ -9,7 +9,14 @@
             <div class="content">
                 <br><br><br>
                 <h1>Select Date</h1><br>
-                <wnote>date picker...</wnote><br>
+                <note>*You can booking up to 1 day in advance</note><br>
+                <form action="/action_page.php">
+                <p Align="center">
+                    <input class="datepicker" type="date" id="bookdate" name="bookdate">
+                    <button class="select" type="submit">Select</button>
+                </p>
+                </form>
+            
                 <br><br><br><br><br><br><br><br><br><br>
                 <h1>Lane 1</h1><br><br><br><br>
                 <h1>Lane 2</h1><br><br><br><br>
@@ -30,7 +37,12 @@ export default {
     methods: {
         backhome () {
             this.$router.push('/general-home')
-        }
+        },
+        function () { 
+            $(".datepicker").datepicker({ 
+                maxDate: "+1d" 
+            }); 
+        } 
     }
 }
 </script>
@@ -64,6 +76,32 @@ body {
     border-style: outset;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.datepicker {
+    background-color: #ffffff;
+    border-color: #C5D4EB;
+    font-family: sans-serif;
+    padding-left: 2%;
+    padding-right: 1%;
+    font-size: 120%;
+    width: 40%;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+}
+
+.select {
+    background-color: #C5D4EB;
+    border-color: #C5D4EB;
+    font-family: Verdana;
+    font-size: 100%;
+    width: 10%;
+    height: 40px;
+    border-style: outset;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 2%;
 }
 
 h1 {
