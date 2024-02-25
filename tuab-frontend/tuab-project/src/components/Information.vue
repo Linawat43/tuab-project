@@ -13,5 +13,7 @@
     font-size: 90%;
     font-family: Verdana;
     padding-left: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 </style>

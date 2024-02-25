@@ -7,7 +7,7 @@
               <p Align="center"><input type="text" v-model="username"></p><br>
               <p Align="center"><label for="password">Password</label></p>
               <p Align="center"><input type="password" v-model="password"></p>
-              <br><br><br>
+              <br><br>
               <p Align="center" class="note">*Login via TU account</p>
               <p Align="center"><button class="login" type="submit">LOGIN</button></p>
           </form>
@@ -35,6 +35,7 @@ export default {
         });
         if (response.data.status == 'ok'){
           localStorage.setItem("username", response.data.name);
+          localStorage.setItem("role", response.data.roles);
           if (response.data.roles == '1'){
             this.$router.replace("general-home");
           }
@@ -108,6 +109,7 @@ input {
     color: #000000;
     font-size: 90%;
     font-family: sans-serif;
+    padding-bottom: 1%;
 }
 
 .info {

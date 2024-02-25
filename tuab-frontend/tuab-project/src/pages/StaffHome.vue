@@ -3,9 +3,9 @@
         <body>
             <div class="menubar">
                 <br><br>
-                <p Align=center><button class="menu" @click="logout">LOGOUT</button>
+                <p Align=center><LogoutBotton /></p>
                 <br><br><br><br>
-                <p Align=center><button class="menu" @click="book"> BOOK NOW </button></p><br>
+                <p Align=center><button class="menu" @click="booking"> BOOK NOW </button></p><br>
                 <p Align=center><button class="menu"> CANCEL BOOKING </button></p><br>
                 <p Align=center><button class="menu"> BOOKING HISTORY </button></p><br>
                 <p Align=center><button class="menu"> SHIFT SCHEDULE </button></p><br>
@@ -13,22 +13,33 @@
 
             <div class="content">
                 <div class="namebar">
-                    <name>Staff's name</name>
+                    <h3>{{name}}</h3>
                 </div>
                 <br><br><br><br>
                 <h1>Welcome to TU Archery Booking system</h1><br>
-                <wnote>You're logging-in in Staff mode...</wnote><br>
+                <h4>You're logging-in in Staff mode...</h4><br>
             </div>
         </body>
     </div>
 </template>
 <script>
+import LogoutBotton from '../components/LogoutBotton.vue';
 export default {
+    components:{
+        LogoutBotton
+    },
+    data() {
+        return {
+            name: '',
+        };
+    },
+    mounted() {
+        this.name = localStorage.getItem("username")
+    },
     methods: {
-        logout() {
-            this.$router.push('/');
+        booking() {
+            this.$router.replace("booking");
         }
-
     }
 }
 </script>
@@ -52,6 +63,7 @@ body {
     float: left;
 }
 .menu {
+    color: #000000;
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: Verdana;
@@ -93,7 +105,7 @@ label {
     height: 55px;
 }
 
-name {
+h3 {
     color: #000000;
     font-size: 150%;
     font-family: Verdana;
@@ -102,7 +114,7 @@ name {
     padding-top: 6px;
 }
 
-wnote {
+h4 {
     color: #000000;
     font-family: Verdana;
     padding-left: 15%;

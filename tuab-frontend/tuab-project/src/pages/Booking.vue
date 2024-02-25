@@ -9,40 +9,52 @@
             <div class="content">
                 <br><br><br>
                 <h1>Select Date</h1><br>
-                <note>*You can booking up to 1 day in advance</note><br>
+                <h4>*Please book in a current day or 1 day in advance</h4><br>
                 <form action="/action_page.php">
                 <p Align="center">
                     <input class="datepicker" type="date" id="bookdate" name="bookdate">
                     <button class="select" type="submit">Select</button>
                 </p>
                 </form>
-            
-                <br><br><br><br><br><br><br><br><br><br>
-                <h1>Lane 1</h1><br><br><br><br>
-                <h1>Lane 2</h1><br><br><br><br>
-                <h1>Lane 3</h1><br><br><br><br>
-                <h1>Lane 4</h1><br><br><br><br>
-                <h1>Lane 5</h1><br><br><br><br>
-                <h1>Lane 6</h1><br><br><br><br>
-                <br><br><br><br>
+                <br><br><br><br><br>
+                <h5>Lane 1</h5><button class="round"> 17.00 </button><button class="round"> 17.30 </button><br><br><br>
+                <h5>Lane 2</h5><button class="round"> 17.00 </button><button class="round"> 17.30 </button><br><br><br>
+                <h5>Lane 3</h5><button class="round"> 17.00 </button><button class="round"> 17.30 </button><br><br><br>
+                <h5>Lane 4</h5><button class="round"> 17.00 </button><button class="round"> 17.30 </button><br><br><br>
+                <h5>Lane 5</h5><button class="round"> 17.00 </button><button class="round"> 17.30 </button><br><br><br>
+                <h5>Lane 6</h5><button class="round"> 17.00 </button><button class="round"> 17.30 </button>
+
                 <img class="colorstatus" src="status.jpeg" width=17% height=17%>
 
-                <br><br><br><br><br>
             </div>
         </body>
     </div>
 </template>
 <script>
 export default {
+    data() {
+        return {
+            roles: '',
+            date: '2018-03-02',
+        };
+    },
+
     methods: {
         backhome () {
-            this.$router.push('/general-home')
+            if(this.roles == '1'){
+                this.$router.push('/general-home')
+            }
+            else if(this.roles == '2'){
+                this.$router.push('/superStaff-home')
+            }
+            else if(this.roles == '3'){
+                this.$router.push('/staff-home')
+            }
         },
-        function () { 
-            $(".datepicker").datepicker({ 
-                maxDate: "+1d" 
-            }); 
-        } 
+        allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
+    },
+    mounted() {
+        this.roles = localStorage.getItem("role")
     }
 }
 </script>
@@ -56,7 +68,7 @@ body {
     background-color: #abc3e8;
     width: 25%;
     height:100%;
-    padding-bottom: 100%;
+    padding-bottom: 79.33%;
     float: left;
 }
 
@@ -92,6 +104,7 @@ body {
 }
 
 .select {
+    color: #000000;
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: Verdana;
@@ -112,23 +125,42 @@ h1 {
     padding-left: 10%;
 }
 
-label {
+h5 {
     color: #000000;
-    font-size: 135%;
-    font-family: sans-serif;
-    padding-top: 30px;
+    font-size: 150%;
+    font-weight: bold;
+    font-family: Verdana;
+    float: left;
+    margin-left: 22%;
 }
 
-wnote {
+h4 {
     color: #000000;
     font-family: Verdana;
     padding-left: 15%;
     font-size: 130%;
 }
 
+.round {
+    color: #000000;
+    background-color: #C5D4EB;
+    border-color: #C5D4EB;
+    font-family: Verdana;
+    font-size: 110%;
+    font-weight: bold;
+    width: 18%;
+    height: 45px;
+    border-style: outset;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 5%;
+}
+
 .colorstatus {
     float: right;
     margin-right: 8%;
+    padding-top: 10%;
+    padding-bottom: 10%;
 }
 .container {
     height:max-content;

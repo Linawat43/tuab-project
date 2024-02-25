@@ -3,11 +3,11 @@
         <body>
             <div class="menubar">
                 <br><br>
-                <p Align=center><LogoutBotton />
-                <br><br><br><br>
                 <p Align=center><button class="menu" @click="booking"> BOOK NOW </button></p><br>
                 <p Align=center><button class="menu"> CANCEL BOOKING </button></p><br>
                 <p Align=center><button class="menu"> BOOKING HISTORY </button></p><br>
+                <br><br><br><br>
+                <p Align=center><LogoutBotton /></p>
             </div>
 
             <div class="content">
@@ -54,9 +54,6 @@ export default {
         };
     },
     methods: {
-        // logout() {
-        //     this.$router.push('/');
-        // },
         booking() {
             this.$router.replace("booking");
         }
