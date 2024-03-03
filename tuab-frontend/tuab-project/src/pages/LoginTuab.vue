@@ -85,19 +85,7 @@ div {
     width:100%;
     background-color: #275496;
     }
-
-/* input {
-    background-color: #DFE9F5;
-    border-style: ridge;
-    border-color: #305da0;
-    font-family: sans-serif;
-    text-align: center;
-    font-size: 130%;
-    width: 40%;
-    height: 50px;
-    border-radius: 10px;
-} */
-
+    
 input {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
