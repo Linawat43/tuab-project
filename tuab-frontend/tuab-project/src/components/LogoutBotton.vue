@@ -7,7 +7,7 @@ export default{
     methods: {
         logout() {
             localStorage.removeItem("username");
-            localStorage.removeItem("role");
+            sessionStorage.removeItem("role");
             this.$router.push('/');
         }
     },

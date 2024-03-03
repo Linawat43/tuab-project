@@ -1,7 +1,7 @@
 <template>
   <div id="Login" class="main-box">
       <body>
-              <br><br><br><br>
+        <br><br><br><br>
           <form @submit.prevent="login">
               <p Align="center"><label for="username">Username</label></p>
               <p Align="center"><input type="text" v-model="username"></p><br>
@@ -9,9 +9,8 @@
               <p Align="center"><input type="password" v-model="password"></p>
               <br><br>
               <p Align="center" class="note">*Login via TU account</p>
-              <p Align="center"><button class="login" type="submit">LOGIN</button></p>
+              <p Align="center"><button class="login" type="submit"><span>LOGIN</span></button></p>
           </form>
-          <br><br><br><br><br><br><br><br>
 
       </body>
   </div>
@@ -35,7 +34,7 @@ export default {
         });
         if (response.data.status == 'ok'){
           localStorage.setItem("username", response.data.name);
-          localStorage.setItem("role", response.data.roles);
+          sessionStorage.setItem("role", response.data.roles);
           if (response.data.roles == '1'){
             this.$router.replace("general-home");
           }
@@ -74,35 +73,79 @@ label {
     padding-top: 30px;
 }
 
+h1 {
+    color: #000000;
+    font-size: 200%;
+    font-weight: bolder;
+    font-family: Verdana;
+}
+
 div {
     height:max-content;
     width:100%;
     background-color: #275496;
     }
 
+/* input {
+    background-color: #DFE9F5;
+    border-style: ridge;
+    border-color: #305da0;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 130%;
+    width: 40%;
+    height: 50px;
+    border-radius: 10px;
+} */
+
 input {
     background-color: #C5D4EB;
     border-color: #C5D4EB;
     font-family: sans-serif;
+    text-align: center;
     font-size: 130%;
-    width: 50%;
+    width: 40%;
     height: 50px;
-    border: none;
     border-radius: 10px;
-    padding-left: 2%;
 }
 
 .login {
-  color: #000000;
-    background-color: #C5D4EB;
-    border-color: #C5D4EB;
-    font-family: sans-serif;
-    font-size: 120%;
-    width: 35%;
-    height: 50px;
-    border-style: outset;
-    border-radius: 10px;
-    cursor: pointer;
+  border-radius: 10px;
+  background-color: #3871c5;
+  font-family: sans-serif;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 130%;
+  width: 20%;
+  height: 50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.login span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.6s;
+}
+
+.login span:after {
+  content:'\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -5%;
+  transition: 0.6s;
+}
+
+.login:hover span {
+  padding-right: 8%;
+}
+
+.login:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 .note {

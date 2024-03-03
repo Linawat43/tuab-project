@@ -73,7 +73,7 @@ body {
     background-color: #abc3e8;
     width: 25%;
     height:100%;
-    padding-bottom: 100%;
+    padding-bottom: 103.5%;
     float: left;
 }
 
@@ -120,6 +120,7 @@ label {
 
 .namebar {
     background-color: #F9D871;
+    font-size: 85%;
     width: 100%;
     float: left;
     height: 55px;
@@ -149,21 +150,19 @@ h4 {
 @media screen and (max-width: 768px) {
   .container {
     width: 100%;
-    padding: 0 20px;
+    padding: 0 15px;
   }
-  .namebar {
-    width: 100%;
-    padding: 0 20px;
-  }
+  .menubar {
+    padding-bottom: 159.2%;
 }
-@media screen and (max-width: 576px) {
+}
+@media screen and (max-width: 500px) {
   .container {
     width: 100%;
-    padding: 0 20px;
+    padding: 0 10px;
   }
-  .namebar {
-    width: 100%;
-    padding: 0 20px;
-  }
+  .menubar {
+    padding-bottom: 241.5%;
+}
 }
 </style>
