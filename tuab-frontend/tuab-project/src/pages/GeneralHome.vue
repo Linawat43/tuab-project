@@ -2,28 +2,28 @@
     <div class="container">
         <body>
             <div class="menubar">
-                <br><br>
-                <p Align=center><button class="menu" @click="booking"> BOOK NOW </button></p><br>
-                <p Align=center><button class="menu"> CANCEL BOOKING </button></p><br>
-                <p Align=center><button class="menu"> BOOKING HISTORY </button></p><br>
-                <br><br><br><br>
-                <p Align=center><LogoutBotton /></p>
-            </div>
-
-            <div class="content">
                 <div class="namebar">
                     <h3>{{name}}</h3>
                 </div>
-                <br><br><br><br>
+                <br><br><br>
+                <p Align=center><LogoutBotton /></p>
+                <br><br>
+                <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>
+                <p Align=center><button class="menu"><span> CANCEL BOOKING </span></button></p><br>
+                <p Align=center><button class="menu"><span> BOOKING HISTORY </span></button></p><br>
+            </div>
+
+            <div class="content">
+                <br><br><br>
                 <h1>Welcome to TU Archery Booking system</h1><br>
                 <h4>1. to booking the Archery range click " BOOK NOW "</h4><br>
                 <h4>2. to cancel your booking click " CANCEL BOOKING "</h4><br>
                 <h4>3. to recheck your booking history click " BOOKING HISTORY "</h4><br>
-                <br><br>
+                <br>
                 <center><img src="archery.JPG" width=50% height=30%></center><br>
-                <br><br>
+                <br>
                 <h1>Location</h1>
-                <br><br>
+                <br>
                 <center><img src="TUABmap.jpeg" width=50% height=30%></center><br>
                 <center>
                     <a href="https://maps.app.goo.gl/AHKZVHwujk3bU3dj7?g_st=ic"> Google map: TU Archery Range </a>
@@ -31,13 +31,13 @@
                     <label>Opening day: Monday - Thursday</label><br>
                     <label>Opening hours: 17.00 - 18.00 pm.</label>
                 </center>
-                <br><br><br>
+                <br><br>
                 <h1>Line Official</h1><br>
                 <center><img src="lineoa.jpg" width=27% height=27%>
                 <br><br>
                 <label>Operated by TU Archery club of Thammasat University</label>
                 </center>
-                <br><br><br><br>
+                <br><br>
             </div>
         </body>
     </div>
@@ -73,7 +73,7 @@ body {
     background-color: #abc3e8;
     width: 25%;
     height:100%;
-    padding-bottom: 103.5%;
+    padding-bottom: 90%;
     float: left;
 }
 
@@ -83,16 +83,42 @@ body {
     float: left;
 }
 .menu {
-    color: #000000;
-    background-color: #C5D4EB;
-    border-color: #C5D4EB;
-    font-family: Verdana;
-    font-size: 100%;
-    width: 80%;
-    height: 60px;
-    border-style: outset;
-    border-radius: 10px;
-    cursor: pointer;
+  border-radius: 10px;
+  background-color: #3871c5;
+  font-family: Verdana;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 100%;
+  width: 80%;
+  height: 60px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.menu span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.6s;
+}
+
+.menu span:after {
+  content:'>';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -5%;
+  transition: 0.6s;
+}
+
+.menu:hover span {
+  padding-right: 8%;
+}
+
+.menu:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 
 h1 {
@@ -120,19 +146,18 @@ label {
 
 .namebar {
     background-color: #F9D871;
-    font-size: 85%;
     width: 100%;
     float: left;
-    height: 55px;
 }
 
 h3 {
     color: #000000;
-    font-size: 150%;
+    font-size: 110%;
     font-family: Verdana;
-    float: inline-start;
-    padding-left: 5%;
-    padding-top: 6px;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-transform: uppercase;
 }
 
 h4 {
@@ -150,19 +175,21 @@ h4 {
 @media screen and (max-width: 768px) {
   .container {
     width: 100%;
-    padding: 0 15px;
+    padding: 0 20px;
   }
-  .menubar {
-    padding-bottom: 159.2%;
+  .namebar {
+    width: 100%;
+    padding: 0 20px;
+  }
 }
-}
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 576px) {
   .container {
     width: 100%;
-    padding: 0 10px;
+    padding: 0 20px;
   }
-  .menubar {
-    padding-bottom: 241.5%;
-}
+  .namebar {
+    width: 100%;
+    padding: 0 20px;
+  }
 }
 </style>
