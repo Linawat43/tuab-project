@@ -3,8 +3,7 @@
         <body>
             <div class="menubar">
                 <div class="namebar">
-                    <h3>thichaporn krajaejan</h3>
-                    <!-- <h3>{{name}}</h3> -->
+                    <h3>{{name}}</h3>
                 </div>
                 <br><br><br>
                 <p Align=center><LogoutBotton /></p>
