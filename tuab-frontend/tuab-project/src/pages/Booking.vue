@@ -11,7 +11,7 @@
                 <h1>Select Date</h1><br>
                 <form>
                 <p Align="center">
-                    <input class="datepicker" type="date" id="bookdate" name="bookdate">
+                    <input class="datepicker" type="date" id="bookdate" name="bookdate" lang="en">
                     <button class="select" type="submit">Select</button>
                     <center><h4>*Please book in a current day or 1 day in advance</h4></center><br>
                 </p>
@@ -19,12 +19,12 @@
                 <br>
                 <center><img src="status.jpg" width=35% height=10%></center>
                 <br><br>
-                <h5>Lane 1</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 2</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 3</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 4</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 5</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 6</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button>
+                <h5>Lane 1</h5><button class="round" @click="selectLane('Lane 1')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 2')"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 2</h5><button class="round" @click="selectLane('Lane 3')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 4')"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 3</h5><button class="round" @click="selectLane('Lane 5')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 6')"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 4</h5><button class="round" @click="selectLane('Lane 7')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 8')"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 5</h5><button class="round" @click="selectLane('Lane 9')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 10')"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 6</h5><button class="round" @click="selectLane('Lane 11')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 12')"><span> 17.30 </span></button>
                 <br><br><br><br><br><br>
             </div>
         </body>
@@ -37,6 +37,8 @@ export default {
         return {
             roles: '',
             date: '2018-03-02',
+            selectedLane: '',
+            name: '',
         };
     },
 
@@ -52,10 +54,26 @@ export default {
                 this.$router.push('/staff-home')
             }
         },
-        allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
+        // allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
+        async selectLane() {
+            try {
+                const data = {
+                    date: this.date,
+                    lane: this.selectedLane,
+                    // username: this.username
+                };
+
+                const response = await axios.post('http://localhost:3000/booking', data);
+
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error selecting lane:', error);
+            }
+        }
     },
     mounted() {
-        this.roles = sessionStorage.getItem("role")
+      // this.username = sessionStorage.getItem("username")
+      this.roles = sessionStorage.getItem("role")
     }
 }
 </script>

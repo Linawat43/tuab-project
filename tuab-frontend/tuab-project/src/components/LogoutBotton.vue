@@ -6,13 +6,33 @@
 export default{
     methods: {
         logout() {
-            localStorage.removeItem("username");
+            sessionStorage.removeItem("name");
             sessionStorage.removeItem("role");
+            // sessionStorage.removeItem("username");
             this.$router.push('/');
         }
     },
 }
 </script>
+
+<!-- <script>
+import axios from 'axios';
+
+export default {
+  methods: {
+    async logout() {
+      try {
+        await axios.get('http://localhost:3000/logout');
+        localStorage.removeItem('username');
+        sessionStorage.removeItem('role');
+        this.$router.push('/');
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    },
+  },
+};
+</script> -->
 
 <style scoped>
 .logout {

@@ -8,13 +8,16 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 const axios = require('axios');
 require('dotenv').config();
+// const session = require('express-session');
+var jwt = require('jsonwebtoken');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+// const jwtMiddleware = require('./routes/jwtMiddleware');
 // var registerRouter = require('./routes/register');
 // var generalUseHomeRouter = require('./routes/generalUserHome');
-// var bookingRouter = require('./routes/booking');
+var bookingRouter = require('./routes/booking');
 
 var app = express();
 
@@ -45,7 +48,16 @@ app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 // app.use('/register', registerRouter);
 // app.use('/generalUserHome', generalUserHome);
-// app.use('/booking', booking);
+app.use('/booking', bookingRouter);
+
+// app.use('/protectedRoute', jwtMiddleware);
+// app.use(session({
+//   secret: 'your_secret_key',
+//   resave: false,
+//   saveUninitialized: true,
+// }));
+
+// app.use(authRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

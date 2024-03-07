@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 const axios = require('axios');
 require('dotenv').config();
+var jwt = require('jsonwebtoken');
 
 const mysql = require('mysql2');
 
@@ -41,9 +42,15 @@ router.post('/', jsonParser, async function (req, res, next) {
                   console.log("==> insert results", results);
                 });
               let userRoles = '1'; // set role generalUser
-              // let uname = response.data.displayname_en;
-              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en});
+              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
 
+              // const jwtToken = jwt.sign({
+              //   username: req.body.username,
+              //   roles: userRoles,
+              //   name: response.data.displayname_en
+              // }, process.env.JWT_SECRET, { expiresIn: '1h' }); // You can set expiry as per your requirement
+              
+              // res.json({ status: 'ok', token: jwtToken }); // Send the token back to the frontend
           }
           //Check roleID when found username in Database
           else {
@@ -53,7 +60,19 @@ router.post('/', jsonParser, async function (req, res, next) {
                 return;
               }
               let userRoles = roles.map(role => role.roleID);
-              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en});
+              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
+
+              // const jwtToken = jwt.sign({
+              //   username: req.body.username,
+              //   roles: userRoles,
+              //   name: response.data.displayname_en
+              // }, process.env.JWT_SECRET, { expiresIn: '1h' }); // You can set expiry as per your requirement
+              // req.session.user = {
+              //   username: req.body.username,
+              //   name: response.data.displayname_en,
+              //   roles: userRoles // Assuming userRoles is defined
+              // };
+              // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en });
             });
           }
         });
@@ -62,6 +81,13 @@ router.post('/', jsonParser, async function (req, res, next) {
         res.json({ status: 'error', message: 'login-failed', data: response.data });
         console.log('1');
       }
+      // req.session.user = {
+      //   username: req.body.username,
+      //   name: response.data.displayname_en,
+      //   roles: userRoles // Assuming userRoles is defined
+      // };
+      // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en });
+
     } catch (error) {
         console.error('Login error:', error);
         res.json({ status: 'error', message: 'login-failed', data: error.response?.data });

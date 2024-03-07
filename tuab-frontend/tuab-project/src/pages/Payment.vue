@@ -9,7 +9,7 @@
             <div class="content">
                 <br><br><br>
                 <h1>Bank Transfer : Amount 20 THB</h1><br><br>
-                <center><img src="bkkbank.jpg" width=60% height=20%></center>
+                <center><img src="bkkbank.png" width=60% height=20%></center>
                 <h2>Please check information before confirming payment</h2>
                 <h3>Noted: Please finish your payment within 10 minutes</h3>
                 

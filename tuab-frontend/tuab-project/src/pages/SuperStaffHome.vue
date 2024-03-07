@@ -37,7 +37,7 @@ export default {
         };
     },
     mounted() {
-        this.name = localStorage.getItem("username")
+        this.name = sessionStorage.getItem("name")
     },
     methods: {
         booking() {

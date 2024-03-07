@@ -33,8 +33,21 @@ export default {
           password: this.$data.password,
         });
         if (response.data.status == 'ok'){
-          localStorage.setItem("username", response.data.name);
+          sessionStorage.setItem("name", response.data.name);
           sessionStorage.setItem("role", response.data.roles);
+          // sessionStorage.setItem("username", response.data.username);
+          // localStorage.setItem('token', response.data.token);
+
+          // axios.interceptors.request.use(function (config) {
+          //   const token = localStorage.getItem('token');
+          //   if (token) {
+          //     config.headers.Authorization = `Bearer ${token}`;
+          //   }
+          //   return config;
+          // }, function (error) {
+          //   return Promise.reject(error);
+          // });
+
           if (response.data.roles == '1'){
             this.$router.replace("general-home");
           }
@@ -57,6 +70,21 @@ export default {
         console.error('Error:', error.response.data);
         
       }
+      // if (response.data.status === 'ok') {
+      //     // Redirect the user to different pages based on their roles
+      //     if (response.data.roles.includes('generalUser')) {
+      //       this.$router.replace('/general-home');
+      //     } else if (response.data.roles.includes('superStaff')) {
+      //       this.$router.replace('/superStaff-home');
+      //     } else if (response.data.roles.includes('staff')) {
+      //       this.$router.replace('/staff-home');
+      //     }
+      //   } else {
+      //     alert('Invalid Username or Password!');
+      //   }
+      // } catch (error) {
+      //   console.error('Error:', error.response.data);
+      // }
     },
   },
 };
