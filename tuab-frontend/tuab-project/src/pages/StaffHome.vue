@@ -3,7 +3,7 @@
         <body>
             <div class="menubar">
                 <div class="namebar">
-                    <h3>{{name}}</h3>
+                    <h3>Staff: {{name}}</h3>
                 </div>
                 <br><br><br>
                 <p Align=center><LogoutBotton /></p>
@@ -133,7 +133,7 @@ label {
 
 h3 {
     color: #000000;
-    font-size: 110%;
+    font-size: 90%;
     font-family: Verdana;
     text-align: center;
     padding-top: 2%;
