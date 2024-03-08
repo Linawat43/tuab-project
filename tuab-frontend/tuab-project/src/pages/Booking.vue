@@ -160,7 +160,7 @@ body {
     border-radius: 10px;
 }
 
-.select {
+.select:hover {
     color: #94b9ef;
     background-color: #FFFFFF;
     border-color: #94b9ef;
@@ -175,7 +175,7 @@ body {
     margin-left: 2%;
 }
 
-.select:hover {
+.select {
     color: #FFFFFF;
     background-color: #94b9ef;
     border-color: #94b9ef;
