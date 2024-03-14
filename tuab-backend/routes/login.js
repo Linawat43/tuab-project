@@ -48,9 +48,9 @@ router.post('/', jsonParser, async function (req, res, next) {
               //   username: req.body.username,
               //   roles: userRoles,
               //   name: response.data.displayname_en
-              // }, process.env.JWT_SECRET, { expiresIn: '1h' }); // You can set expiry as per your requirement
+              // }, process.env.JWT_SECRET, { expiresIn: '1h' });
               
-              // res.json({ status: 'ok', token: jwtToken }); // Send the token back to the frontend
+              // res.json({ status: 'ok', token: jwtToken });
           }
           //Check roleID when found username in Database
           else {
