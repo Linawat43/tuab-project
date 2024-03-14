@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
 
 router.post('/', jsonParser, function(req, res, next) {
   // Retrieve data from the request body
-  const { date, lane } = req.body;
+  const { date, lane, username } = req.body;
 
   // Insert the data into the database
   connection.execute("INSERT INTO Booking (bookingDate, targetLaneID, username) VALUES (?, ?, ?)",
