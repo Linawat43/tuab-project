@@ -67,6 +67,7 @@ export default {
 <style scoped>
 body {
     background-color: #DFE9F5;
+    width:100%;
 }
 
 .menubar {
@@ -75,12 +76,16 @@ body {
     height:100%;
     padding-bottom: 90%;
     float: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
     background-color: #DFE9F5;
     width: 75%;
     float: left;
+    display: flex;
+    flex-direction: column;
 }
 .menu {
   border-radius: 10px;
@@ -167,9 +172,7 @@ h4 {
     font-size: 130%;
 }
 .container {
-    height:max-content;
-    width:100%;
-  margin: 0 auto;
+    display: flex;
 }
 
 @media screen and (max-width: 768px) {

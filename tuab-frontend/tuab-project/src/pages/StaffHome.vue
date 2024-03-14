@@ -17,7 +17,7 @@
             <div class="content">
                 <br><br><br>
                 <h1>Welcome to TU Archery Booking system</h1><br>
-                <wnote>You're logging-in in Staff mode...</wnote><br>
+                <h4>You're logging-in in Staff mode...</h4><br>
             </div>
         </body>
     </div>
@@ -56,12 +56,16 @@ body {
     height:100%;
     padding-bottom: 11%;
     float: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
     background-color: #DFE9F5;
     width: 75%;
     float: left;
+    display: flex;
+    flex-direction: column;
 }
 .menu {
   border-radius: 10px;
@@ -141,16 +145,14 @@ h3 {
     text-transform: uppercase;
 }
 
-wnote {
+h4 {
     color: #000000;
     font-family: Verdana;
     padding-left: 15%;
     font-size: 130%;
 }
 .container {
-    height:max-content;
-    width:100%;
-  margin: 0 auto;
+    display: flex;
 }
 
 @media screen and (max-width: 768px) {

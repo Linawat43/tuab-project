@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header>
+    <header class="hd">
       <img class="logo" src="logo.png" width=40% height=30%>
     </header>
     <router-view />
@@ -18,13 +18,18 @@ export default {
 </script>
 
 <style>
-div {
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.hd {
     width:100%;
     background-color: #275496;
     }
-body {
+/* body {
     background-color: #DFE9F5;
-  }
+  } */
 .logo {
   padding-left: 5%;
 }

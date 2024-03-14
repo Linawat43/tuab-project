@@ -82,14 +82,18 @@ export default {
 <style scoped>
 body {
     background-color: #DFE9F5;
+    width:100%;
 }
 
 .menubar {
     background-color: #abc3e8;
     width: 25%;
-    height:100%;
-    padding-bottom: 58.5%;
+    height: 100%;
+    overflow-y: auto;
+    /* padding-bottom: 58.5%; */
     float: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .content {
@@ -250,9 +254,7 @@ h4 {
   right: 0;
 }
 .container {
-    height:max-content;
-    width:100%;
-  margin: 0 auto;
+  display: flex;
 }
 
 @media screen and (max-width: 768px) {
