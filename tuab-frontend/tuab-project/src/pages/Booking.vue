@@ -19,13 +19,14 @@
                 <br>
                 <center><img src="status.jpg" width=35% height=10%></center>
                 <br><br>
-                <h5>Lane 1</h5><button class="round" @click="selectLane('Lane 1')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 2')"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 2</h5><button class="round" @click="selectLane('Lane 3')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 4')"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 3</h5><button class="round" @click="selectLane('Lane 5')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 6')"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 4</h5><button class="round" @click="selectLane('Lane 7')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 8')"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 5</h5><button class="round" @click="selectLane('Lane 9')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 10')"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 6</h5><button class="round" @click="selectLane('Lane 11')"><span> 17.00 </span></button><button class="round" @click="selectLane('Lane 12')"><span> 17.30 </span></button>
+                <h5>Lane 1</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 2</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 3</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 4</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 5</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
+                <h5>Lane 6</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button>
                 <br><br><br><br><br><br>
+
             </div>
         </body>
     </div>
