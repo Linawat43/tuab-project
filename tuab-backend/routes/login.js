@@ -66,11 +66,11 @@ router.post('/', jsonParser, async function (req, res, next) {
               //   username: req.body.username,
               //   roles: userRoles,
               //   name: response.data.displayname_en
-              // }, process.env.JWT_SECRET, { expiresIn: '1h' }); // You can set expiry as per your requirement
+              // }, process.env.JWT_SECRET, { expiresIn: '1h' });
               // req.session.user = {
               //   username: req.body.username,
               //   name: response.data.displayname_en,
-              //   roles: userRoles // Assuming userRoles is defined
+              //   roles: userRoles
               // };
               // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en });
             });
