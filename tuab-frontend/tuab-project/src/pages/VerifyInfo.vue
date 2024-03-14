@@ -16,7 +16,7 @@
                 <h2>Student ID</h2><div class="info"> 6209XXXXXX </div><br><br>
                 <h2>Tel Number</h2><input type="text" v-model="tel"><br>
                 <h3>Please fill-in and verify your tel number (example: 0812345678)*</h3><br>
-                <center><button class="submit" type="submit"><span> SUBMIT </span></button></center>
+                <center><button class="submit" type="submit"><span> NEXT </span></button></center>
                 <br><br>
             </div>
         </body>
@@ -53,6 +53,8 @@ body {
     background-color: #DFE9F5;
     width: 75%;
     float: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .backbtn {
@@ -194,7 +196,7 @@ input {
     width: 100%;
     padding: 0 20px;
   }
-  .namebar {
+  .menubar {
     width: 100%;
     padding: 0 20px;
   }
@@ -204,7 +206,7 @@ input {
     width: 100%;
     padding: 0 20px;
   }
-  .namebar {
+  .menubar {
     width: 100%;
     padding: 0 20px;
   }

@@ -6,13 +6,7 @@ const axios = require('axios');
 require('dotenv').config();
 var jwt = require('jsonwebtoken');
 
-const mysql = require('mysql2');
-
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME
-});
+var connection = require('../connection/db.js');
 
 router.post('/', jsonParser, async function (req, res, next) {
     try {
@@ -45,9 +39,7 @@ router.post('/', jsonParser, async function (req, res, next) {
               res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
 
               // const jwtToken = jwt.sign({
-              //   username: req.body.username,
-              //   roles: userRoles,
-              //   name: response.data.displayname_en
+              //   username: req.body.username
               // }, process.env.JWT_SECRET, { expiresIn: '1h' });
               
               // res.json({ status: 'ok', token: jwtToken });

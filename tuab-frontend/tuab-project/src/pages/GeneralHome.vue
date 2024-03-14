@@ -5,7 +5,7 @@
                 <div class="namebar">
                     <h3>General User: {{name}}</h3>
                 </div>
-                <br><br><br>
+                <br><br>
                 <p Align=center><LogoutBotton /></p>
                 <br><br>
                 <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>

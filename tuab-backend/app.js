@@ -18,18 +18,11 @@ var loginRouter = require('./routes/login');
 // var registerRouter = require('./routes/register');
 // var generalUseHomeRouter = require('./routes/generalUserHome');
 var bookingRouter = require('./routes/booking');
+var userDetail = require('./routes/user/user_detail');
 
 var app = express();
 
 app.use(cors());
-
-// const mysql = require('mysql2');
-
-// const connection = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   database: process.env.DB_NAME
-// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,6 +42,7 @@ app.use('/login', loginRouter);
 // app.use('/register', registerRouter);
 // app.use('/generalUserHome', generalUserHome);
 app.use('/booking', bookingRouter);
+app.use('/user-detail', userDetail);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({

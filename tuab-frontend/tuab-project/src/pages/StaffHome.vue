@@ -48,6 +48,7 @@ export default {
 <style scoped>
 body {
     background-color: #DFE9F5;
+    width:100%;
 }
 
 .menubar {

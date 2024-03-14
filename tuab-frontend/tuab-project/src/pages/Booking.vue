@@ -191,6 +191,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
     margin-left: 2%;
+    font-weight: bold;
 }
 
 h1 {
