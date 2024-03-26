@@ -1,35 +1,35 @@
 <template lang="">
-    <div class="container">
-        <body>
-            <div class="menubar">
-                <br><br>
-                <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
-            </div>
+  <div class="container">
+      <body>
+          <div class="menubar">
+              <br><br>
+              <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
+          </div>
 
-            <div class="content">
-                <br><br><br>
-                <h1>Select Date</h1><br>
-                <form>
-                <p Align="center">
-                    <input class="datepicker" type="date" id="bookdate" name="bookdate" lang="en">
-                    <button class="select" type="submit">Select</button>
-                    <center><h4>*Please book in a current day or 1 day in advance</h4></center><br>
-                </p>
-                </form>
-                <br>
-                <center><img src="status.jpg" width=35% height=10%></center>
-                <br><br>
-                <h5>Lane 1</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 2</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 3</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 4</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 5</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button><br><br><br>
-                <h5>Lane 6</h5><button class="round"><span> 17.00 </span></button><button class="round"><span> 17.30 </span></button>
-                <br><br><br><br><br><br>
+          <div class="content">
+              <br><br><br>
+              <h1>Select Date</h1><br>
+              <form @submit.prevent="submitForm">
+              <p Align="center">
+                  <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" :max="maxDate">
+                  <button class="select" type="submit">Select</button>
+                  <center><h4>*Please book in a current day or 1 day in advance</h4></center><br>
+              </p>
+              </form>
+              <br>
+              <center><img src="status.jpg" width=35% height=10%></center>
+              <br><br>
+              <h5>Lane 1</h5><button class="round" @click="selectedLane('L1R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L1R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 2</h5><button class="round" @click="selectedLane('L2R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L2R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 3</h5><button class="round" @click="selectedLane('L3R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L3R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 4</h5><button class="round" @click="selectedLane('L4R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L4R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 5</h5><button class="round" @click="selectedLane('L5R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L5R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 6</h5><button class="round" @click="selectedLane('L6R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L6R2')"><span> 17.30 </span></button>
+              <br><br><br><br><br><br>
 
-            </div>
-        </body>
-    </div>
+          </div>
+      </body>
+  </div>
 </template>
 
 <script>
@@ -37,9 +37,12 @@ export default {
     data() {
         return {
             roles: '',
-            date: '2018-03-02',
+            date: '2018-03-02', // YYYY-MM-DD
             selectedLane: '',
             name: '',
+            selectedDate: '', // Selected date
+            minDate: '',      // Minimum date
+            maxDate: ''       // Maximum date
         };
     },
 
@@ -55,26 +58,40 @@ export default {
                 this.$router.push('/staff-home')
             }
         },
-        // allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
         async selectLane() {
             try {
-                const data = {
-                    date: this.date,
-                    lane: this.selectedLane,
-                    // username: this.username
-                };
-
-                const response = await axios.post('http://localhost:3000/booking', data);
-
-                console.log(response.data);
+              const formattedDate = this.selectedDate.toISOString().split('T')[0];
+              const data = {
+                  date: formattedDate,
+                  lane: selectedLane,
+                  // username: this.username
+              };
+              sessionStorage.setItem("selectedData", JSON.stringify(data));
+              this.$router.push('/verifyInfo');
             } catch (error) {
                 console.error('Error selecting lane:', error);
             }
-        }
+        },
+        submitForm() {
+        // Call selectLane method to handle submission logic
+        this.selectedLane(this.selectedLane);
+    }
     },
     mounted() {
       // this.username = sessionStorage.getItem("username")
       this.roles = sessionStorage.getItem("role")
+          // Get today's date
+      const today = new Date();
+
+      // Set the minimum date to today
+      this.minDate = today.toISOString().split('T')[0];
+
+      // Get tomorrow's date
+      const tomorrow = new Date();
+      tomorrow.setDate(today.getDate() + 1);
+
+      // Set the maximum date to tomorrow
+      this.maxDate = tomorrow.toISOString().split('T')[0];
     }
 }
 </script>

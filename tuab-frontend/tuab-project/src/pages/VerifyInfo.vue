@@ -53,8 +53,8 @@ body {
     background-color: #DFE9F5;
     width: 75%;
     float: left;
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
 }
 
 .backbtn {

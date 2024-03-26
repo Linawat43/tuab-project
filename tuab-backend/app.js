@@ -19,6 +19,7 @@ var loginRouter = require('./routes/login');
 // var generalUseHomeRouter = require('./routes/generalUserHome');
 var bookingRouter = require('./routes/booking');
 var userDetail = require('./routes/user/user_detail');
+var bookingCheckRouter = require('./routes/bookingCheck');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/login', loginRouter);
 // app.use('/generalUserHome', generalUserHome);
 app.use('/booking', bookingRouter);
 app.use('/user-detail', userDetail);
+app.use('/bookingCheck', bookingCheckRouter);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({

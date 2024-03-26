@@ -7,12 +7,10 @@ require('dotenv').config();
 var connection = require('../connection/db.js');
 
 router.post('/', jsonParser, function(req, res, next) {
-  // Retrieve data from the request body
-  const { date, lane, username } = req.body;
+  const { date, lane, username, shift } = req.body;
 
-  // Insert the data into the database
-  connection.execute("INSERT INTO Booking (bookingDate, targetLaneID, username) VALUES (?, ?, ?)",
-      [date, lane, username],
+  connection.execute("INSERT INTO Booking (bookingDate, targetLaneID, username, shiftID) VALUES (?, ?, ?, ?)",
+      [date, lane, username, shift],
       (err, results) => {
           if (err) {
               console.error('Error inserting booking into database:', err);

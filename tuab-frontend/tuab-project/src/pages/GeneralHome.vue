@@ -10,7 +10,7 @@
                 <br><br>
                 <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>
                 <p Align=center><button class="menu"><span> CANCEL BOOKING </span></button></p><br>
-                <p Align=center><button class="menu"><span> BOOKING HISTORY </span></button></p><br>
+                <p Align=center><button class="menu" @click="history"><span> BOOKING HISTORY </span></button></p><br>
             </div>
 
             <div class="content">
@@ -55,7 +55,10 @@ export default {
     },
     methods: {
         booking() {
-            this.$router.replace("booking");
+          this.$router.replace("booking");
+        },
+        history() {
+          this.$router.replace("history");
         }
     },
     mounted() {
