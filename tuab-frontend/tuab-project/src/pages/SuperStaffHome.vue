@@ -9,7 +9,7 @@
                 <p Align=center><LogoutBotton /></p>
                 <br><br>
                 <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>
-                <p Align=center><button class="menu"><span> CANCEL BOOKING </span></button></p><br>
+                <p Align=center><button class="menu" @click="cancel"><span> CANCEL BOOKING </span></button></p><br>
                 <p Align=center><button class="menu" @click="history"><span> BOOKING HISTORY </span></button></p><br>
                 <p Align=center><button class="menu"><span> SHIFT SCHEDULE </span></button></p><br>
                 <p Align=center><button class="menu"><span> OPERATION EDIT </span></button></p><br>
@@ -44,6 +44,9 @@ export default {
         },
         history() {
           this.$router.replace("history");
+        },
+        cancel() {
+          this.$router.replace("cancel");
         }
     }
 }

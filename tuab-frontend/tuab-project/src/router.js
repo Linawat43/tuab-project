@@ -60,6 +60,11 @@ export default new Router({
         path: '/add-payment',
         name: 'add-payment',
         component: AddPayment
+    },
+    {
+        path: '/cancel',
+        name: 'cancel',
+        component: Cancel
     }
     ]
 })
