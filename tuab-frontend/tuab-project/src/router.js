@@ -10,6 +10,7 @@ import Payment from './pages/Payment.vue'
 import History from './pages/History.vue'
 import AddPayment from './pages/AddPayment.vue'
 import Cancel from './pages/Cancel.vue'
+import Operation from './pages/Operation.vue'
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ export default new Router({
         path: '/cancel',
         name: 'cancel',
         component: Cancel
+    },
+    {
+        path: '/operation',
+        name: 'operation',
+        component: Operation
     }
     ]
 })
