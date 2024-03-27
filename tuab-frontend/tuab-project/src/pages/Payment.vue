@@ -15,7 +15,7 @@
               </center>
               <br>
               <h5>Please check the account no., account name, and the amount of money prior<br>to completing your transfer</h5>
-              <h3>Noted: Please finish your payment and upload slip photo within 10 minutes<br>After finish your booking please wait for verification from our staff</h3>
+              <h3>Note: Please finish your payment and upload slip photo within 10 minutes</h3>
               
               <form enctype="multipart/form-data">
                       <center>
@@ -23,8 +23,16 @@
                           <input class="imgdata" type="file" id="img" name="img" accept="image/*">
                       </center>
               </form>
-              <center><button class="submit" type="submit">UPLOAD</button></center>
+              <h6>Note: After uploading your slip photo, please wait for our confirming</h6>
+              <center><button class="submit" type="submit" @click="openPopup">UPLOAD</button></center>
           </div>
+
+          <div class="popup" id="popup">
+            <img src="paychecked.png" width=30% height=30%><br>
+                <h7>Thank you for supporting us!</h7><br>
+                <h8>We have recieving your slip photo, Please wait for our confirming</h8><br>
+                <button type="submit" @click="closePopup">DONE</button>
+          </div>  
       </body>
   </div>
 </template>
@@ -33,6 +41,14 @@ export default {
   methods: {
       backverify () {
           this.$router.push('/verify-info')
+      },
+
+      openPopup(){
+      popup.classList.add('open-popup')
+      },
+      
+      closePopup(){
+        this.$router.push('/General-Home')
       }
   }
 }
@@ -147,6 +163,15 @@ h5 {
   text-align: center;
 }
 
+h6 {
+  color: #013399;
+  font-size: 90%;
+  font-family: Verdana;
+  text-align: center;
+  padding-top: 5%;
+  padding-bottom: 1%;
+}
+
 .info {
   background-color:#C5D4EB;
   color: #000000;
@@ -193,7 +218,6 @@ input {
   height: 50px;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 5%;
   margin-bottom: 5%;
 }
 .submit:hover {
@@ -205,7 +229,6 @@ input {
   height: 50px;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 5%;
   margin-bottom: 5%;
 }
 
@@ -222,8 +245,80 @@ color: #000000;
 cursor: pointer;
 }
 
+/* PopUp */
+.popup{
+    width: 55%;
+    background: #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    visibility: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup img{
+    padding-top: 8%;
+    padding-bottom: 5%;
+}
+
+.popup h7{
+    font-size: 200%;
+    font-weight: bold;
+    font-family: Verdana;
+    text-align: center;
+    color: #000000;
+}
+
+.popup h8{
+    font-size: 140%;
+    font-family: Verdana;
+    text-align: center;
+    color: #000000;
+}
+
+.popup button{
+    width: 60%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    padding: 10px 0;
+    background-color: #013399;
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
+.popup button:hover{
+    width: 60%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    padding: 10px 0;
+    background-color: #3871c5;
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
 .container {
-  display: flex;
+  height:max-content;
+  width:100%;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 768px) {

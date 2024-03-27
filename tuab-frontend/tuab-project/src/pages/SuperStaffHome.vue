@@ -12,7 +12,7 @@
                 <p Align=center><button class="menu" @click="cancel"><span> CANCEL BOOKING </span></button></p><br>
                 <p Align=center><button class="menu" @click="history"><span> BOOKING HISTORY </span></button></p><br>
                 <p Align=center><button class="menu"><span> SHIFT SCHEDULE </span></button></p><br>
-                <p Align=center><button class="menu"><span> OPERATION EDIT </span></button></p><br>
+                <p Align=center><button class="menu" @click="operation"><span> OPERATION EDIT </span></button></p><br>
             </div>
 
             <div class="content">
@@ -36,7 +36,22 @@ export default {
         };
     },
     mounted() {
-        this.name = sessionStorage.getItem("name")
+      const token = localStorage.getItem("token");
+        if (token) {
+          axios.get('http://localhost:3000/user-detail', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            // Update the name property with user information retrieved from the server
+            this.name = response.data.name; // Assuming the response data structure
+        })
+        .catch(error => {
+            console.error('Error fetching user information:', error);
+            // Handle error appropriately, such as displaying an error message
+        });
+        }
     },
     methods: {
         booking() {
@@ -47,6 +62,9 @@ export default {
         },
         cancel() {
           this.$router.replace("cancel");
+        },
+        operation() {
+          this.$router.replace("operation");
         }
     }
 }

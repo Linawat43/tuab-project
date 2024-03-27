@@ -36,13 +36,14 @@ router.post('/', jsonParser, async function (req, res, next) {
                   console.log("==> insert results", results);
                 });
               let userRoles = '1'; // set role generalUser
-              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
+              const jwtSecret = process.env.JWT_SECRET;
+              const jwtToken = jwt.sign({
+                username: req.body.username
+            }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-              // const jwtToken = jwt.sign({
-              //   username: req.body.username
-              // }, process.env.JWT_SECRET, { expiresIn: '1h' });
-              
-              // res.json({ status: 'ok', token: jwtToken });
+            res.json({ status: 'ok', token: jwtToken, roles: userRoles, name: response.data.displayname_en, username: req.body.username });
+              // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
+
           }
           //Check roleID when found username in Database
           else {
@@ -52,19 +53,15 @@ router.post('/', jsonParser, async function (req, res, next) {
                 return;
               }
               let userRoles = roles.map(role => role.roleID);
-              res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
+              const jwtSecret = process.env.JWT_SECRET;
+              const jwtToken = jwt.sign({
+                username: req.body.username,
+                roles: userRoles,
+                name: response.data.displayname_en
+            }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-              // const jwtToken = jwt.sign({
-              //   username: req.body.username,
-              //   roles: userRoles,
-              //   name: response.data.displayname_en
-              // }, process.env.JWT_SECRET, { expiresIn: '1h' });
-              // req.session.user = {
-              //   username: req.body.username,
-              //   name: response.data.displayname_en,
-              //   roles: userRoles
-              // };
-              // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en });
+            res.json({ status: 'ok', token: jwtToken, roles: userRoles, name: response.data.displayname_en, username: req.body.username });
+              // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
             });
           }
         });
@@ -73,12 +70,6 @@ router.post('/', jsonParser, async function (req, res, next) {
         res.json({ status: 'error', message: 'login-failed', data: response.data });
         console.log('1');
       }
-      // req.session.user = {
-      //   username: req.body.username,
-      //   name: response.data.displayname_en,
-      //   roles: userRoles // Assuming userRoles is defined
-      // };
-      // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en });
 
     } catch (error) {
         console.error('Login error:', error);

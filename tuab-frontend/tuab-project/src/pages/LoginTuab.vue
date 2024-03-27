@@ -33,20 +33,9 @@ export default {
           password: this.$data.password,
         });
         if (response.data.status == 'ok'){
-          sessionStorage.setItem("name", response.data.name);
-          sessionStorage.setItem("role", response.data.roles);
-          // sessionStorage.setItem("username", response.data.username);
-          // localStorage.setItem('token', response.data.token);
-
-          // axios.interceptors.request.use(function (config) {
-          //   const token = localStorage.getItem('token');
-          //   if (token) {
-          //     config.headers.Authorization = `Bearer ${token}`;
-          //   }
-          //   return config;
-          // }, function (error) {
-          //   return Promise.reject(error);
-          // });
+          // sessionStorage.setItem("name", response.data.name);
+          // sessionStorage.setItem("role", response.data.roles);
+          localStorage.setItem('token', response.data.token); // Store JWT token
 
           if (response.data.roles == '1'){
             this.$router.replace("general-home");

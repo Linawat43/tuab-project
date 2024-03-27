@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     methods: {
         backhome () {
@@ -50,7 +51,23 @@ export default {
         }
     },
     mounted() {
-      this.roles = sessionStorage.getItem("role")
+        const token = localStorage.getItem("token");
+        if (token) {
+          axios.get('http://localhost:3000/user-detail', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            // Update the name property with user information retrieved from the server
+            this.roles = response.data.roleID;
+
+        })
+        .catch(error => {
+            console.error('Error fetching user information:', error);
+            // Handle error appropriately, such as displaying an error message
+        });
+        }
     }
 }  
 </script>
