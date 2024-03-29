@@ -19,12 +19,12 @@
               <br>
               <center><img src="status.jpg" width=35% height=10%></center>
               <br><br>
-              <h5>Lane 1</h5><button class="round" @click="selectedLane('L1R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L1R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 2</h5><button class="round" @click="selectedLane('L2R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L2R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 3</h5><button class="round" @click="selectedLane('L3R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L3R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 4</h5><button class="round" @click="selectedLane('L4R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L4R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 5</h5><button class="round" @click="selectedLane('L5R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L5R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 6</h5><button class="round" @click="selectedLane('L6R1')"><span> 17.00 </span></button><button class="round" @click="selectedLane('L6R2')"><span> 17.30 </span></button>
+              <h5>Lane 1</h5><button class="greyround " @click="selectedLane('L1R1')"><span> 17.00 </span></button><button class="blueround" @click="selectedLane('L1R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 2</h5><button class="greyround" @click="selectedLane('L2R1')"><span> 17.00 </span></button><button class="greyround" @click="selectedLane('L2R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 3</h5><button class="greyround" @click="selectedLane('L3R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L3R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 4</h5><button class="redround" @click="selectedLane('L4R1')"><span> 17.00 </span></button><button class="blueround" @click="selectedLane('L4R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 5</h5><button class="blueround" @click="selectedLane('L5R1')"><span> 17.00 </span></button><button class="blueround" @click="selectedLane('L5R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 6</h5><button class="redround" @click="selectedLane('L6R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L6R2')"><span> 17.30 </span></button>
               <br><br><br><br><br><br>
 
           </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import NotToken from '../components/NotToken.vue';
 export default {
     data() {
         return {
@@ -79,23 +79,6 @@ export default {
     }
     },
     mounted() {
-      const token = localStorage.getItem("token");
-        if (token) {
-          axios.get('http://localhost:3000/user-detail', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            // Update the name property with user information retrieved from the server
-            this.roles = response.data.roleID;
-
-        })
-        .catch(error => {
-            console.error('Error fetching user information:', error);
-            // Handle error appropriately, such as displaying an error message
-        });
-        }
           // Get today's date
       const today = new Date();
 
@@ -108,7 +91,8 @@ export default {
 
       // Set the maximum date to tomorrow
       this.maxDate = tomorrow.toISOString().split('T')[0];
-    }
+    },
+    mixins: [NotToken],
 }
 </script>
 
@@ -250,7 +234,30 @@ h4 {
     font-size: 100%;
     padding-top: 1%;
 }
-.round {
+
+.greyround {
+    color: #b1afaf;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    font-family: Verdana;
+    font-size: 110%;
+    width: 18%;
+    height: 45px;
+    margin-left: 5%;
+}
+
+.redround {
+    color: #f76a76;
+    background-color: #FF9DA5;
+    border-radius: 10px;
+    font-family: Verdana;
+    font-size: 110%;
+    width: 18%;
+    height: 45px;
+    margin-left: 5%;
+}
+
+.blueround {
     color: #FFFFFF;
     background-color: #3871C5;
     border-radius: 10px;
@@ -263,14 +270,14 @@ h4 {
     transition: all 0.5s;
 }
 
-.round span {
+.blueround span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.6s;
 }
 
-.round span:after {
+.blueround span:after {
   content:'>';
   position: absolute;
   opacity: 0;
@@ -279,11 +286,11 @@ h4 {
   transition: 0.6s;
 }
 
-.round:hover span {
+.blueround:hover span {
   padding-right: 9%;
 }
 
-.round:hover span:after {
+.blueround:hover span:after {
   opacity: 1;
   right: 0;
 }

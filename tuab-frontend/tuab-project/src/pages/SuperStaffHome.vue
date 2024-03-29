@@ -5,13 +5,13 @@
                 <div class="namebar">
                     <h3>Super Staff: {{name}}</h3>
                 </div>
-                <br><br><br>
+                <br><br>
                 <p Align=center><LogoutBotton /></p>
                 <br><br>
                 <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>
                 <p Align=center><button class="menu" @click="cancel"><span> CANCEL BOOKING </span></button></p><br>
                 <p Align=center><button class="menu" @click="history"><span> BOOKING HISTORY </span></button></p><br>
-                <p Align=center><button class="menu"><span> SHIFT SCHEDULE </span></button></p><br>
+                <p Align=center><button class="menu" @click="shiftSchedule"><span> SHIFT SCHEDULE </span></button></p><br>
                 <p Align=center><button class="menu" @click="operation"><span> OPERATION EDIT </span></button></p><br>
             </div>
 
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import NotToken from '../components/NotToken.vue';
 import LogoutBotton from '../components/LogoutBotton.vue';
 export default {
     components:{
@@ -35,24 +36,47 @@ export default {
             name: '',
         };
     },
-    mounted() {
-      const token = localStorage.getItem("token");
-        if (token) {
-          axios.get('http://localhost:3000/user-detail', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            // Update the name property with user information retrieved from the server
-            this.name = response.data.name; // Assuming the response data structure
-        })
-        .catch(error => {
-            console.error('Error fetching user information:', error);
-            // Handle error appropriately, such as displaying an error message
-        });
-        }
-    },
+    mixins: [NotToken],
+    // mounted() {
+    //   const token = localStorage.getItem("token");
+    //     if (token) {
+    //       axios.get('http://localhost:3000/user-detail', {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     })
+    //     .then(response => {
+    //         // Update the name property with user information retrieved from the server
+    //         this.name = response.data.name; // Assuming the response data structure
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching user information:', error);
+    //         // Handle error appropriately, such as displaying an error message
+    //     });
+    //     }
+    // },
+    // mounted() {
+    //     const token = localStorage.getItem("token");
+    //     if (!token) {
+    //         // Token not found, navigate back to login page
+    //         this.$router.push('/');
+    //         return; // Stop further execution
+    //     }
+
+    //     axios.get('http://localhost:3000/user-detail', {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     })
+    //     .then(response => {
+    //         // Update the name property with user information retrieved from the server
+    //         this.name = response.data.name; // Assuming the response data structure
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching user information:', error);
+    //         // Handle error appropriately, such as displaying an error message
+    //     });
+    // },
     methods: {
         booking() {
           this.$router.replace("booking");
@@ -65,6 +89,9 @@ export default {
         },
         operation() {
           this.$router.replace("operation");
+        },
+        shiftSchedule() {
+          this.$router.replace("shift-schedule");
         }
     }
 }

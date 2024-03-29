@@ -11,6 +11,7 @@ import History from './pages/History.vue'
 import AddPayment from './pages/AddPayment.vue'
 import Cancel from './pages/Cancel.vue'
 import Operation from './pages/Operation.vue'
+import ShiftSchedule from './pages/ShiftSchedule.vue'
 
 Vue.use(Router)
 
@@ -71,6 +72,11 @@ export default new Router({
         path: '/operation',
         name: 'operation',
         component: Operation
+    },
+    {
+        path: '/shift-schedule',
+        name: 'shift-schedule',
+        component: ShiftSchedule
     }
     ]
 })

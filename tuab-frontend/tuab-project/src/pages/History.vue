@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import NotToken from '../components/NotToken.vue';
 export default {
     methods: {
         backhome () {
@@ -43,25 +43,26 @@ export default {
           this.$router.replace("add-payment")
         }
     },
-    mounted() {
-        const token = localStorage.getItem("token");
-        if (token) {
-          axios.get('http://localhost:3000/user-detail', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        .then(response => {
-            // Update the name property with user information retrieved from the server
-            this.roles = response.data.roleID;
+    mixins: [NotToken],
+    // mounted() {
+    //     const token = localStorage.getItem("token");
+    //     if (token) {
+    //       axios.get('http://localhost:3000/user-detail', {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     })
+    //     .then(response => {
+    //         // Update the name property with user information retrieved from the server
+    //         this.roles = response.data.roleID;
 
-        })
-        .catch(error => {
-            console.error('Error fetching user information:', error);
-            // Handle error appropriately, such as displaying an error message
-        });
-        }
-    }
+    //     })
+    //     .catch(error => {
+    //         console.error('Error fetching user information:', error);
+    //         // Handle error appropriately, such as displaying an error message
+    //     });
+    //     }
+    // }
 }  
 </script>
 

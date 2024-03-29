@@ -54,7 +54,7 @@ export default {
         else{
           this.errorMessage = response.data.message;
         }
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error('Error:', error.response.data);
         
