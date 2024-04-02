@@ -3,7 +3,7 @@
         <body>
             <div class="menubar">
                 <div class="namebar">
-                    <h3>Staff: {{name}}</h3>
+                    <h3>{{roleName}}: {{name}}</h3>
                 </div>
                 <br><br>
                 <p Align=center><LogoutBotton /></p>
@@ -32,7 +32,8 @@ export default {
     },
     data() {
         return {
-            name: '',
+          roleName: '',
+          name: '',
         };
     },
     mixins: [NotToken],

@@ -2,6 +2,9 @@
   <div class="container">
       <body>
           <div class="menubar">
+            <div class="namebar">
+                    <h3>{{roleName}}: {{name}}</h3>
+                </div>
               <br><br>
               <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
           </div>
@@ -19,12 +22,12 @@
               <br>
               <center><img src="status.jpg" width=35% height=10%></center>
               <br><br>
-              <h5>Lane 1</h5><button class="greyround " @click="selectedLane('L1R1')"><span> 17.00 </span></button><button class="blueround" @click="selectedLane('L1R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 2</h5><button class="greyround" @click="selectedLane('L2R1')"><span> 17.00 </span></button><button class="greyround" @click="selectedLane('L2R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 3</h5><button class="greyround" @click="selectedLane('L3R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L3R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 4</h5><button class="redround" @click="selectedLane('L4R1')"><span> 17.00 </span></button><button class="blueround" @click="selectedLane('L4R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 1</h5><button class="blueround" @click="selectedLane('L1R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L1R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 2</h5><button class="blueround" @click="selectedLane('L2R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L2R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 3</h5><button class="redround" @click="selectedLane('L3R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L3R2')"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 4</h5><button class="redround" @click="selectedLane('L4R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L4R2')"><span> 17.30 </span></button><br><br><br>
               <h5>Lane 5</h5><button class="blueround" @click="selectedLane('L5R1')"><span> 17.00 </span></button><button class="blueround" @click="selectedLane('L5R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 6</h5><button class="redround" @click="selectedLane('L6R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L6R2')"><span> 17.30 </span></button>
+              <h5>Lane 6</h5><button class="greyround" @click="selectedLane('L6R1')"><span> 17.00 </span></button><button class="greyround" @click="selectedLane('L6R2')"><span> 17.30 </span></button>
               <br><br><br><br><br><br>
 
           </div>
@@ -37,6 +40,7 @@ import NotToken from '../components/NotToken.vue';
 export default {
     data() {
         return {
+            roleName: '',
             roles: '',
             date: '2018-03-02', // YYYY-MM-DD
             selectedLane: '',
@@ -235,6 +239,23 @@ h4 {
     padding-top: 1%;
 }
 
+.namebar {
+    background-color: #F9D871;
+    width: 100%;
+    float: left;
+}
+
+h3 {
+    color: #000000;
+    font-size: 90%;
+    font-family: Verdana;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-transform: uppercase;
+}
+
+/* Closed round */
 .greyround {
     color: #b1afaf;
     background-color: #D9D9D9;
@@ -246,6 +267,7 @@ h4 {
     margin-left: 5%;
 }
 
+/* Booked round */
 .redround {
     color: #f76a76;
     background-color: #FF9DA5;
@@ -257,6 +279,7 @@ h4 {
     margin-left: 5%;
 }
 
+/* Available round */
 .blueround {
     color: #FFFFFF;
     background-color: #3871C5;
@@ -294,6 +317,7 @@ h4 {
   opacity: 1;
   right: 0;
 }
+
 .container {
   display: flex;
 }

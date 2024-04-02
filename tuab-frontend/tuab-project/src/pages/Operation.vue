@@ -1,51 +1,69 @@
 <template lang="">
-    <div class="container">
-        <body>
-            <div class="menubar">
-                <br><br>
-                <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
-            </div>
-
-            <div class="content">
-              <br><br><br>
-              <h1>Operation Editor</h1><br>
-              <form @submit.prevent="submitForm">
-              <p Align="center">
-                  <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" >
-                  <button class="select" type="submit">Select</button>
-              </p>
-              </form>
-
+  <div class="container">
+      <body>
+          <div class="menubar">
+            <div class="namebar">
+                  <h4>{{roleName}}: {{name}}</h4>
+              </div>
+              <br><br>
+              <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
           </div>
-      </body>
-  </div>
+
+          <div class="content">
+            <br><br><br>
+            <h1>Operation Editor</h1><br>
+            <form @submit.prevent="submitForm">
+            <p Align="center">
+                <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" >
+                <button class="select" type="submit" @click="openPopup">SUBMIT</button>
+            </p>
+            </form>
+        </div>
+
+        <!-- PopUP -->
+        <div class="popup" id="popup">
+          <img src="paychecked.png" width=30% height=30%><br>
+              <h7>DONE !</h7><br>
+              <button type="submit" @click="closePopup">HOME</button>
+        </div> 
+    </body>
+</div>
 </template>
 
 <script>
+import NotToken from '../components/NotToken.vue';
 export default {
     data() {
         return {
-            selectedDate: '', // Selected date
-            minDate: '',      // Minimum date
+          roleName: '',
+          selectedDate: '', // Selected date
+          minDate: '',      // Minimum date
+          name: '',
         };
     },
 
     methods: {
         backhome () {
           this.$router.push('/superStaff-home')
+        },
+
+        openPopup(){
+          popup.classList.add('open-popup')
+        },
+
+        closePopup(){
+          this.$router.push('/superstaff-home')
         }
     },
 
     mounted() {
-      // this.username = sessionStorage.getItem("username")
-      this.roles = sessionStorage.getItem("role")
-      
       // Get today's date
       const today = new Date();
 
       // Set the minimum date to today
       this.minDate = today.toISOString().split('T')[0];
-    }
+    },
+    mixins: [NotToken],
 }
 </script>
 
@@ -141,6 +159,22 @@ h3 {
     text-align: center;   
 }
 
+.namebar {
+    background-color: #F9D871;
+    width: 100%;
+    float: left;
+}
+
+h4 {
+    color: #000000;
+    font-size: 90%;
+    font-family: Verdana;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-transform: uppercase;
+}
+
 .datepicker {
     background-color: #ffffff;
     border-color: #C5D4EB;
@@ -181,6 +215,75 @@ h3 {
     border-radius: 10px;
     cursor: pointer;
     margin-left: 2%;
+}
+/* PopUp */
+.popup{
+    width: 55%;
+    background: #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    visibility: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup img{
+    padding-top: 8%;
+    padding-bottom: 5%;
+}
+
+.popup h7{
+    font-size: 200%;
+    font-weight: bold;
+    font-family: Verdana;
+    text-align: center;
+    color: #000000;
+}
+
+.popup h8{
+    font-size: 140%;
+    font-family: Verdana;
+    text-align: center;
+    color: #000000;
+}
+
+.popup button{
+    width: 60%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    padding: 10px 0;
+    background-color: #013399;
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
+.popup button:hover{
+    width: 60%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    padding: 10px 0;
+    background-color: #3871c5;
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
 }
 
 .container {

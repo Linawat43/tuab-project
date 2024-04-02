@@ -1,30 +1,39 @@
 <template lang="">
-    <div class="container">
-        <body>
-            <div class="menubar">
-                <br><br>
-                <p Align=center><button class="backbtn" @click="backbook"><span> BACK </span></button></p><br>
-            </div>
+  <div class="container">
+      <body>
+          <div class="menubar">
+            <div class="namebar">
+                  <h4>{{roleName}}: {{name}}</h4>
+              </div>
+              <br><br>
+              <p Align=center><button class="backbtn" @click="backbook"><span> BACK </span></button></p><br>
+          </div>
 
-            <div class="content">
-                <br><br><br>
-                <h1>Please verify information</h1><br><br>
-                <h2>Date</h2><div class="info"> DD/MM/YYYY </div><br><br>
-                <h2>Lane</h2><div class="info"> Lane 1 </div><br><br>
-                <h2>Time</h2><div class="info"> 17.00 </div><br><br>
-                <h2>Name</h2><div class="info"> XXXX XXXXXX </div><br><br>
-                <h2>Student ID</h2><div class="info"> 6209XXXXXX </div><br><br>
-                <h2>Tel Number</h2><input type="text" v-model="tel"><br>
-                <h3>Please fill-in and verify your tel number (example: 0812345678)*</h3><br>
-                <center><button class="submit" type="submit"><span> NEXT </span></button></center>
-                <br><br>
-            </div>
-        </body>
-    </div>
+          <div class="content">
+              <br><br><br>
+              <h1>Please verify information</h1><br><br>
+              <h2>Date</h2><div class="info"> DD/MM/YYYY </div><br><br>
+              <h2>Lane</h2><div class="info"> Lane 1 </div><br><br>
+              <h2>Time</h2><div class="info"> 17.00 </div><br><br>
+              <h2>Name</h2><div class="info"> XXXX XXXXXX </div><br><br>
+              <h2>Student ID</h2><div class="info"> 6209XXXXXX </div><br><br>
+              <h2>Tel Number</h2><input type="text" v-model="tel"><br>
+              <h3>Please fill-in and verify your tel number (example: 0812345678)*</h3><br>
+              <center><button class="submit" type="submit" @click="payment"><span> NEXT </span></button></center>
+              <br><br>
+          </div>
+      </body>
+  </div>
 </template>
 
 <script>
 export default {
+  data() {
+        return {
+          roleName: '',
+          name: '',
+        };
+    },
     methods: {
         backbook () {
             this.$router.push('/booking')
@@ -53,8 +62,6 @@ body {
     background-color: #DFE9F5;
     width: 75%;
     float: left;
-    /* display: flex; */
-    /* flex-direction: column; */
 }
 
 .backbtn {
@@ -119,6 +126,22 @@ h3 {
     float: left;
     margin-left: 35%;
     padding-bottom: 3%;
+}
+
+.namebar {
+    background-color: #F9D871;
+    width: 100%;
+    float: left;
+}
+
+h4 {
+    color: #000000;
+    font-size: 90%;
+    font-family: Verdana;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-transform: uppercase;
 }
 
 .info {

@@ -1,34 +1,44 @@
 <template lang="">
-    <div class="container">
-        <body>
-            <div class="menubar">
-                <br><br>
-                <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
-            </div>
+  <div class="container">
+      <body>
+          <div class="menubar">
+            <div class="namebar">
+              <!-- Get Role and Name -->
+                  <h3>{{roleName}}: {{name}}</h3>
+              </div>
+              <br><br>
+              <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
+          </div>
 
-            <div class="content">
-              <br><br><br>
-              <h1>Shift Schedule</h1><br>
-            
-            <!-- Date select -->
-            <form @submit.prevent="submitForm" Align=center>
-                <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" >
-                <button class="select" type="submit">Select</button>
-            </form>
-            <br><br>
+          <div class="content">
+            <br><br><br>
+            <h1>Shift Schedule</h1><br>
+          
+          <!-- Date select -->
+          <form @submit.prevent="submitForm" Align=center>
+              <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" >
+              <button class="select" type="submit">Select</button>
+          </form>
+          <br><br>
 
-            <!-- Shift select -->
-            <form class="shiftbox" Align=center>
-                <input type="checkbox" id="shift1" name="shift1" value="17.00">
-                <label for="shift1">17.00 - 17.30</label><br>
-                <input type="checkbox" id="shift2" name="shift2" value="17.30">
-                <label for="shift2">17.30 - 18.00</label><br>
-                <button class="submit" type="submit">SAVE</button>
-            </form>
-        
-            </div>
-      </body>
-  </div>
+          <!-- Shift select -->
+          <form class="shiftbox" Align=center>
+              <input type="checkbox" id="shift1" name="shift1" value="17.00">
+              <label for="shift1">17.00 - 17.30</label><br>
+              <input type="checkbox" id="shift2" name="shift2" value="17.30">
+              <label for="shift2">17.30 - 18.00</label><br>
+              <button class="submit" type="submit" @click="openPopup">SAVE</button>
+          </form>
+          </div>
+
+          <!-- PopUP -->
+        <div class="popup" id="popup">
+          <img src="paychecked.png" width=30% height=30%><br>
+              <h7>Shift Operation saved!</h7><br>
+              <button type="submit" @click="closePopup">HOME</button>
+        </div>
+    </body>
+</div>
 </template>
 
 <script>
@@ -36,20 +46,35 @@ import NotToken from '../components/NotToken.vue';
 export default {
     data() {
         return {
-            selectedDate: '', // Selected date
-            minDate: '',      // Minimum date
+          roleName: '',
+          selectedDate: '', // Selected date
+          minDate: '',      // Minimum date
+          name: '',
         };
     },
 
     methods: {
         backhome () {
-            if(this.roles == '2'){
-                this.$router.push('/superStaff-home')
+          if(this.roles == '2'){
+              this.$router.push('/superStaff-home')
+          }
+          else if(this.roles == '3'){
+              this.$router.push('/staff-home')
+          }
+        },
+
+        openPopup(){
+          popup.classList.add('open-popup')
+        },
+
+        closePopup(){
+          if(this.roles == '2'){
+              this.$router.push('/superStaff-home')
             }
             else if(this.roles == '3'){
-                this.$router.push('/staff-home')
+              this.$router.push('/staff-home')
             }
-        }
+          }
     },
 
     mounted() {      
@@ -132,6 +157,22 @@ h1 {
     padding-left: 10%;
 }
 
+.namebar {
+    background-color: #F9D871;
+    width: 100%;
+    float: left;
+}
+
+h3 {
+    color: #000000;
+    font-size: 90%;
+    font-family: Verdana;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-transform: uppercase;
+}
+
 .datepicker {
     background-color: #ffffff;
     border-color: #C5D4EB;
@@ -210,6 +251,76 @@ h1 {
     font-size: 130%;
     font-family: Verdana; 
     padding-left: 2%;
+}
+
+/* PopUp */
+.popup{
+    width: 55%;
+    background: #ebebeb;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    visibility: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup img{
+    padding-top: 8%;
+    padding-bottom: 5%;
+}
+
+.popup h7{
+    font-size: 200%;
+    font-weight: bold;
+    font-family: Verdana;
+    text-align: center;
+    color: #000000;
+}
+
+.popup h8{
+    font-size: 140%;
+    font-family: Verdana;
+    text-align: center;
+    color: #000000;
+}
+
+.popup button{
+    width: 60%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    padding: 10px 0;
+    background-color: #013399;
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
+.popup button:hover{
+    width: 60%;
+    margin-top: 7%;
+    margin-bottom: 7%;
+    padding: 10px 0;
+    background-color: #3871c5;
+    color: #FFFFFF;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
 }
 
 .container {
