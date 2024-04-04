@@ -52,34 +52,34 @@ export default {
     },
 
     methods: {
-        backhome () {
-            if(this.roles == '1'){
-                this.$router.push('/general-home')
-            }
-            else if(this.roles == '2'){
-                this.$router.push('/superStaff-home')
-            }
-            else if(this.roles == '3'){
-                this.$router.push('/staff-home')
-            }
-        },
-        async selectLane() {
-            try {
-              const formattedDate = this.selectedDate.toISOString().split('T')[0];
-              const data = {
-                  date: formattedDate,
-                  lane: selectedLane,
-                  // username: this.username
-              };
-              sessionStorage.setItem("selectedData", JSON.stringify(data));
-              this.$router.push('/verifyInfo');
-            } catch (error) {
-                console.error('Error selecting lane:', error);
-            }
-        },
-        submitForm() {
-        // Call selectLane method to handle submission logic
-        this.selectedLane(this.selectedLane);
+      backhome () {
+          if(this.roles == '1'){
+              this.$router.push('/general-home')
+          }
+          else if(this.roles == '2'){
+              this.$router.push('/superStaff-home')
+          }
+          else if(this.roles == '3'){
+              this.$router.push('/staff-home')
+          }
+      },
+      async selectLane() {
+        try {
+          const formattedDate = this.selectedDate.toISOString().split('T')[0];
+          const data = {
+              date: formattedDate,
+              lane: selectedLane,
+              // username: this.username
+          };
+          sessionStorage.setItem("selectedData", JSON.stringify(data));
+          this.$router.push('/verifyInfo');
+          } catch (error) {
+              console.error('Error selecting lane:', error);
+          }
+      },
+      submitForm() {
+      // Call selectLane method to handle submission logic
+      this.selectedLane(this.selectedLane);
     }
     },
     mounted() {

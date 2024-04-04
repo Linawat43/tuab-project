@@ -11,8 +11,8 @@
                 <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>
                 <p Align=center><button class="menu" @click="cancel"><span> CANCEL BOOKING </span></button></p><br>
                 <p Align=center><button class="menu" @click="history"><span> BOOKING HISTORY </span></button></p><br>
-                <p Align=center><button class="menu" @click="shiftSchedule"><span> SHIFT SCHEDULE </span></button></p><br>
-                <p Align=center><button class="menu" @click="operation"><span> OPERATION EDIT </span></button></p><br>
+                <p Align=center><button class="staffmenu" @click="shiftSchedule"><span><img src="setting.png" width=9%> SHIFT SCHEDULE </span></button></p><br>
+                <p Align=center><button class="staffmenu" @click="operation"><span><img src="setting.png" width=9%> OPERATION EDIT </span></button></p><br>
             </div>
 
             <div class="content">
@@ -123,6 +123,7 @@ body {
     flex-direction: column;
 
 }
+
 .menu {
   border-radius: 10px;
   background-color: #3871c5;
@@ -161,6 +162,49 @@ body {
   opacity: 1;
   right: 0;
 }
+
+/* Staff menu */
+.staffmenu {
+  border-radius: 10px;
+  background-color: #3871c5;
+  font-family: Verdana;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 100%;
+  width: 80%;
+  height: 60px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.staffmenu span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.6s;
+}
+
+.staffmenu span:after {
+  content:'>';
+  position:initial;
+  opacity: 0;
+  top: 0;
+  right: -5%;
+  transition: 0.6s;
+}
+
+.staffmenu:hover span {
+  padding-right: 8%;
+}
+
+.staffmenu:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+/* .staffmenu:hover {
+  background-color: #538ce1;
+} */
 
 h1 {
     color: #000000;
