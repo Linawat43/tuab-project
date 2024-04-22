@@ -15,9 +15,9 @@
               <h2>Date</h2><div class="info"> DD/MM/YYYY </div><br><br>
               <h2>Lane</h2><div class="info"> Lane 1 </div><br><br>
               <h2>Time</h2><div class="info"> 17.00 </div><br><br>
-              <h2>Name</h2><div class="info"> XXXX XXXXXX </div><br><br>
-              <h2>Student ID</h2><div class="info"> 6209XXXXXX </div><br><br>
-              <h2>Tel Number</h2><input type="text" v-model="tel"><br>
+              <h2>Name</h2><div class="info"> {{name}} </div><br><br>
+              <h2>Student ID</h2><div class="info"> {{username}} </div><br><br>
+              <h2>Tel Number</h2><input type="text" v-model="tel" maxlength="10"><br>
               <h3>Please fill-in and verify your tel number (example: 0812345678)*</h3><br>
               <center><button class="submit" type="submit" @click="payment"><span> NEXT </span></button></center>
               <br><br>
@@ -27,18 +27,21 @@
 </template>
 
 <script>
+import NotToken from '../components/NotToken.vue';
 export default {
   data() {
         return {
           roleName: '',
           name: '',
+          username: '',
         };
     },
     methods: {
         backbook () {
             this.$router.push('/booking')
         }
-    }
+    },
+    mixins: [NotToken],
 }
 </script>
 

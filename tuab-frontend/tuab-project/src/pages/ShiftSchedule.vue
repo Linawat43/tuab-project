@@ -8,40 +8,42 @@
               </div>
               <br><br>
               <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
-          </div>
+            </div>
 
-          <div class="content">
-            <br><br><br>
-            <h1>Shift Schedule</h1><br>
-          
-          <!-- Date select -->
-          <form @submit.prevent="submitForm" Align=center>
-              <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" >
-              <button class="select" type="submit">Select</button>
-          </form>
-          <br><br>
+            <div class="content">
+              <br><br><br>
+              <h1>Shift Schedule</h1><br>
+            
+              <!-- Date select -->
+              <form align="center">
+                <input class="datepicker" type="date" v-model="selectedDate" :min="minDate">
+              </form>
+              <br><br>
 
-          <!-- Shift select -->
-          <form class="shiftbox" Align=center>
-              <input type="checkbox" id="shift1" name="shift1" value="17.00">
-              <label for="shift1">17.00 - 17.30</label><br>
-              <input type="checkbox" id="shift2" name="shift2" value="17.30">
-              <label for="shift2">17.30 - 18.00</label><br>
-              <button class="submit" type="submit" @click="openPopup">SAVE</button>
-          </form>
-          </div>
+              <!-- Shift select -->
+              <div class="shiftbox" align="center">
+                <input class="box" type="checkbox" id="shift1" name="shift1" value="1" v-model="selectedShifts">
+                <label for="shift1">17.00 - 17.30</label><br>
+                <input class="box" type="checkbox" id="shift2" name="shift2" value="2" v-model="selectedShifts">
+                <label for="shift2">17.30 - 18.00</label><br>
+              </div>
 
-          <!-- PopUP -->
-        <div class="popup" id="popup">
-          <img src="paychecked.png" width=30% height=30%><br>
+              <!-- SAVE button -->
+              <center><button class="submit" @click="saveSchedule">SAVE</button></center>
+            </div>
+
+            <!-- PopUP -->
+            <div class="popup" id="popup">
+              <img src="paychecked.png" width="30%" height="30%"><br>
               <h7>Shift Operation saved!</h7><br>
-              <button type="submit" @click="closePopup">HOME</button>
-        </div>
-    </body>
-</div>
+              <button @click="closePopup">HOME</button>
+            </div>
+      </body>
+  </div>
 </template>
 
 <script>
+import axios from 'axios';
 import NotToken from '../components/NotToken.vue';
 export default {
     data() {
@@ -50,6 +52,8 @@ export default {
           selectedDate: '', // Selected date
           minDate: '',      // Minimum date
           name: '',
+          username: '',
+          selectedShifts: []
         };
     },
 
@@ -64,17 +68,58 @@ export default {
         },
 
         openPopup(){
-          popup.classList.add('open-popup')
+          document.getElementById('popup').classList.add('open-popup');
         },
 
         closePopup(){
           if(this.roles == '2'){
               this.$router.push('/superStaff-home')
             }
-            else if(this.roles == '3'){
-              this.$router.push('/staff-home')
-            }
+          else if(this.roles == '3'){
+            this.$router.push('/staff-home')
           }
+        },
+        saveSchedule() {
+          if (!this.selectedDate) {
+            alert('please selectDate');
+            return;
+          }
+
+          if (this.selectedShifts.length === 0) {
+            alert('please checkbox ');
+            return;
+          }
+          const formData = {
+            username: this.username,
+            workDate: this.selectedDate,
+            workShift: this.calculateWorkShift()
+          };
+
+          axios.post('http://localhost:3000/workSchedule', formData)
+            .then(response => {
+              console.log('Shift schedule saved successfully!');
+              this.openPopup();
+            })
+            .catch(error => {
+              console.error('Error saving shift schedule:', error);
+            });
+        },
+
+        calculateWorkShift() {
+        // Check which checkboxes are selected
+        const shift1Selected = this.selectedShifts.includes('1');
+        const shift2Selected = this.selectedShifts.includes('2');
+
+        if (shift1Selected && shift2Selected) {
+          return '3';
+        } else if (shift1Selected) {
+          return '1';
+        } else if (shift2Selected) {
+          return '2';
+        } else {
+          return '';
+        }
+      }
     },
 
     mounted() {      
@@ -180,39 +225,10 @@ h3 {
     padding-left: 2%;
     padding-right: 1%;
     font-size: 120%;
-    width: 40%;
+    width: 45%;
     height: 40px;
     border: none;
     border-radius: 10px;
-}
-
-.select {
-    color: #FFFFFF;
-    background-color: #94b9ef;
-    border-color: #94b9ef;
-    font-family: Verdana;
-    font-size: 100%;
-    width: 10%;
-    height: 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 2%;
-    font-weight: bold;
-}
-
-.select:hover {
-    color: #94b9ef;
-    background-color: #FFFFFF;
-    border-color: #94b9ef;
-    border: 2px solid;
-    font-family: Verdana;
-    font-weight: bold;
-    font-size: 100%;
-    width: 10%;
-    height: 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 2%;
 }
 
 .submit {
@@ -242,15 +258,15 @@ h3 {
     margin-bottom: 5%;
 }
 
-.shiftbox input{
-    cursor: pointer;
-}
-
 .shiftbox label{
     color: #000000;
     font-size: 130%;
     font-family: Verdana; 
     padding-left: 2%;
+}
+
+.box {
+  cursor: pointer;
 }
 
 /* PopUp */

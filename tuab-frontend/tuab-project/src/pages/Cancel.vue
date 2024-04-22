@@ -2,6 +2,9 @@
     <div class="container">
         <body>
             <div class="menubar">
+              <div class="namebar">
+                    <h3>{{roleName}}: {{name}}</h3>
+                </div>
                 <br><br>
                 <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
             </div>
@@ -10,7 +13,7 @@
                 <br><br><br>
                 <h1>Cancel Booking</h1><br><br>
                 <div class="slot">
-                  <h2>DD/MM/YYYY</h2><h3>Lane 1</h3><h3>17.00</h3><button class="cancelbtn" @click="openPopup"> CANCEL </button><br>
+                  <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.00</s1><button class="cancelbtn" @click="openPopup"> CANCEL </button><br>
                 </div>
                 <br><br>
             </div>
@@ -19,7 +22,7 @@
               <a class="close" @click="closePopup">X</a>
               <img src="warning.png" width=40% height=40%><br>
                 <h7>Cancel your booking?</h7><br>
-                <h8>Please click "SUBMIT" to cancel your booking</h8><br>
+                <h8>Please click SUBMIT below, to cancelling your booking</h8><br>
                 <button type="submit" @click="closePopup"> SUBMIT </button>
           </div> 
         </body>
@@ -29,6 +32,12 @@
 <script>
 import NotToken from '../components/NotToken.vue';
 export default {
+  data() {
+        return {
+          roleName: '',
+          name: '',
+        };
+    },
     methods: {
         backhome () {
             if(this.roles == '1'){
@@ -78,7 +87,21 @@ body {
     background-color: #DFE9F5;
     width:100%;
 }
+.namebar {
+    background-color: #F9D871;
+    width: 100%;
+    float: left;
+}
 
+h3 {
+    color: #000000;
+    font-size: 90%;
+    font-family: Verdana;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-transform: uppercase;
+}
 .menubar {
     background-color: #abc3e8;
     width: 25%;
@@ -157,7 +180,7 @@ h2 {
     margin-left: 15%;
 }
 
-h3 {
+s1 {
     background-color:#C5D4EB;
     color: #000000;
     font-size: 120%;

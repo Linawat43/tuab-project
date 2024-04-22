@@ -16,9 +16,9 @@
             <div class="content">
                 <br><br><br>
                 <h1>Welcome to TU Archery Booking system</h1><br>
-                <h4>1. to booking the Archery range click " BOOK NOW "</h4><br>
-                <h4>2. to cancel your booking click " CANCEL BOOKING "</h4><br>
-                <h4>3. to recheck your booking history click " BOOKING HISTORY "</h4><br>
+                <h4>1. Book the Archery range, click BOOK NOW</h4><br>
+                <h4>2. Cancel your booking, click CANCEL BOOKING</h4><br>
+                <h4>3. Recheck your booking history, click BOOKING HISTORY</h4><br>
                 <br>
                 <center><img src="archery.JPG" width=50% height=30%></center><br>
                 <br>

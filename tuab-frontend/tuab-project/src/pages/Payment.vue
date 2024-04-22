@@ -2,6 +2,9 @@
   <div class="container">
       <body>
           <div class="menubar">
+            <div class="namebar">
+                    <h3>{{roleName}}: {{name}}</h3>
+                </div>
               <br><br>
               <p Align=center><button class="backbtn" @click="backverify"><span> BACK </span></button></p><br>
           </div>
@@ -15,7 +18,7 @@
               </center>
               <br>
               <h5>Please check the account no., account name, and the amount of money prior<br>to completing your transfer</h5>
-              <h3>Note: Please finish your payment and upload slip photo within 10 minutes</h3>
+              <n1>Note: Please finish your payment and upload slip photo within 10 minutes</n1>
               
               <form enctype="multipart/form-data">
                       <center>
@@ -37,7 +40,14 @@
   </div>
 </template>
 <script>
+import NotToken from '../components/NotToken.vue';
 export default {
+  data() {
+        return {
+          roleName: '',
+          name: '',
+        };
+    },
   methods: {
       backverify () {
           this.$router.push('/verify-info')
@@ -50,7 +60,8 @@ export default {
       closePopup(){
         this.$router.push('/General-Home')
       }
-  }
+  },
+    mixins: [NotToken],
 }
 </script>
 
@@ -58,7 +69,21 @@ export default {
 body {
   background-color: #DFE9F5;
 }
+.namebar {
+    background-color: #F9D871;
+    width: 100%;
+    float: left;
+}
 
+h3 {
+    color: #000000;
+    font-size: 90%;
+    font-family: Verdana;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-transform: uppercase;
+}
 .menubar {
   background-color: #abc3e8;
   width: 25%;
@@ -139,7 +164,7 @@ h2 {
   border: 3px solid;
 }
 
-h3 {
+n1 {
   color: #013399;
   font-size: 110%;
   font-family: Verdana;
@@ -319,6 +344,7 @@ cursor: pointer;
   height:max-content;
   width:100%;
   margin: 0 auto;
+  display: flex;
 }
 
 @media screen and (max-width: 768px) {

@@ -21,6 +21,7 @@ var bookingRouter = require('./routes/booking');
 var userDetail = require('./routes/user/user_detail');
 var bookingCheckRouter = require('./routes/bookingCheck');
 var workScheduleRouter = require('./routes/workSchedule');
+var checkWorkRouter = require('./routes/checkWork');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/booking', bookingRouter);
 app.use('/user-detail', userDetail);
 app.use('/bookingCheck', bookingCheckRouter);
 app.use('/workSchedule', workScheduleRouter);
+app.use('/checkWork', checkWorkRouter);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({

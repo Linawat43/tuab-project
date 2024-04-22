@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
-export default{
+
+export default {
     mounted() {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -8,6 +9,17 @@ export default{
             this.$router.push('/');
             return; // Stop further execution
         }
+
+        axios.interceptors.response.use(
+            response => response,
+            error => {
+                if (error.response && error.response.status === 401) {
+                    // Token expired or unauthorized, navigate back to login page
+                    this.$router.push('/');
+                }
+                return Promise.reject(error);
+            }
+        );
 
         axios.get('http://localhost:3000/user-detail', {
             headers: {
@@ -17,15 +29,14 @@ export default{
         .then(response => {
             // Update the name property with user information retrieved from the server
             this.name = response.data.name;
+            this.username = response.data.username;
             this.roles = response.data.roleID;
             var roleName;
-            if(this.roles == '1'){
+            if (this.roles == '1') {
                 this.roleName = "General User"
-            }
-            else if(this.roles == '2'){
+            } else if (this.roles == '2') {
                 this.roleName = "Super Staff"
-            }
-            else if(this.roles == '3'){
+            } else if (this.roles == '3') {
                 this.roleName = "Staff"
             }
         })

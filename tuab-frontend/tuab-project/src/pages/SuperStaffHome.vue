@@ -1,27 +1,49 @@
 <template lang="">
-    <div class="container">
-        <body>
-            <div class="menubar">
-                <div class="namebar">
-                    <h3>{{roleName}}: {{name}}</h3>
-                </div>
-                <br><br>
-                <p Align=center><LogoutBotton /></p>
-                <br><br>
-                <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>
-                <p Align=center><button class="menu" @click="cancel"><span> CANCEL BOOKING </span></button></p><br>
-                <p Align=center><button class="menu" @click="history"><span> BOOKING HISTORY </span></button></p><br>
-                <p Align=center><button class="staffmenu" @click="shiftSchedule"><span><img src="setting.png" width=9%> SHIFT SCHEDULE </span></button></p><br>
-                <p Align=center><button class="staffmenu" @click="operation"><span><img src="setting.png" width=9%> OPERATION EDIT </span></button></p><br>
-            </div>
+  <div class="container">
+      <body>
+          <div class="menubar">
+              <div class="namebar">
+                  <h3>{{roleName}}: {{name}}</h3>
+              </div>
+              <br><br>
+              <p Align=center><LogoutBotton /></p>
+              <br><br>
+              <p Align=center><button class="menu" @click="booking"><span> BOOK NOW </span></button></p><br>
+              <p Align=center><button class="menu" @click="cancel"><span> CANCEL BOOKING </span></button></p><br>
+              <p Align=center><button class="menu" @click="history"><span> BOOKING HISTORY </span></button></p><br>
+              <p Align=center><button class="staffmenu" @click="shiftSchedule"><span><img src="setting.png" width=9%> SHIFT SCHEDULE </span></button></p><br>
+              <p Align=center><button class="staffmenu" @click="operation"><span><img src="setting.png" width=9%> OPERATION EDIT </span></button></p><br>
+          </div>
 
-            <div class="content">
-                <br><br><br>
-                <h1>Welcome to TU Archery Booking system</h1><br>
-                <h4>You're logging-in in Super Staff mode...</h4><br>
+          <div class="content">
+              <br><br><br>
+              <h1>Welcome to TU Archery Booking system</h1><br>
+              <h4>You're logging-in in Super Staff mode, Please select date to approve the bookings</h4><br>
+              <form @submit.prevent="submitForm">
+              <p Align="center">
+                <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" :max="maxDate">
+              </p>
+            </form>
+            <br><br>
+
+            <!-- Bookings Slot -->
+            <div class="slot">
+                  <h2>620XXXXXXX</h2><h5>17.00</h5><h5>Lane 1</h5><button class="slipbtn" @click="openPopup">Slip photo</button>
+                  <select v-model="selectedStatus" id="status">
+                  <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
+                  </select>
+                  <br>
             </div>
-        </body>
-    </div>
+            <center><button class="submit" type="submit">SAVE</button></center>
+          </div>
+
+          <!-- Slip PopUp -->
+          <div class="popup" id="popup">
+              <a class="close" @click="closePopup">X</a>
+              <img src="slip.jpg" width=50%><br>
+          </div> 
+      </body>
+  </div>
 </template>
 
 <script>
@@ -35,49 +57,21 @@ export default {
         return {
           roleName: '',
           name: '',
+          date: '2018-03-02', // YYYY-MM-DD
+          selectedLane: '',
+          name: '',
+          selectedDate: '', // Selected date
+          minDate: '',      // Minimum date
+          maxDate: '',       // Maximum date
+          selectedStatus: null,
+          status: [
+            {id: null, name: 'Please select one:'},
+            {id: 1, name: 'Completed'},
+            {id: 2, name: 'Contact Required'},
+          ]
         };
     },
     mixins: [NotToken],
-    // mounted() {
-    //   const token = localStorage.getItem("token");
-    //     if (token) {
-    //       axios.get('http://localhost:3000/user-detail', {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //     .then(response => {
-    //         // Update the name property with user information retrieved from the server
-    //         this.name = response.data.name; // Assuming the response data structure
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching user information:', error);
-    //         // Handle error appropriately, such as displaying an error message
-    //     });
-    //     }
-    // },
-    // mounted() {
-    //     const token = localStorage.getItem("token");
-    //     if (!token) {
-    //         // Token not found, navigate back to login page
-    //         this.$router.push('/');
-    //         return; // Stop further execution
-    //     }
-
-    //     axios.get('http://localhost:3000/user-detail', {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //     .then(response => {
-    //         // Update the name property with user information retrieved from the server
-    //         this.name = response.data.name; // Assuming the response data structure
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching user information:', error);
-    //         // Handle error appropriately, such as displaying an error message
-    //     });
-    // },
     methods: {
         booking() {
           this.$router.replace("booking");
@@ -93,186 +87,341 @@ export default {
         },
         shiftSchedule() {
           this.$router.replace("shift-schedule");
+        },
+        openPopup(){
+          popup.classList.add('open-popup')
+        },
+        closePopup(){
+          popup.classList.remove('open-popup')
         }
+    },
+    mounted() {
+      // Get today's date
+      const today = new Date();
+
+      // Set the minimum date to today
+      this.minDate = today.toISOString().split('T')[0];
+
+      // Get tomorrow's date
+      const tomorrow = new Date();
+      tomorrow.setDate(today.getDate() + 1);
+
+      // Set the maximum date to tomorrow
+      this.maxDate = tomorrow.toISOString().split('T')[0];
     }
 }
 </script>
 
 <style scoped>
 body {
-    background-color: #DFE9F5;
-    width:100%;
+  background-color: #DFE9F5;
+  width:100%;
 }
 
 .menubar {
-    background-color: #abc3e8;
-    width: 25%;
-    height:100%;
-    padding-bottom: 4%;
-    float: left;
-    display: flex;
-    flex-direction: column;
+  background-color: #abc3e8;
+  width: 25%;
+  height:100%;
+  padding-bottom: 4%;
+  float: left;
+  display: flex;
+  flex-direction: column;
 
 }
 
 .content {
-    background-color: #DFE9F5;
-    width: 75%;
-    float: left;
-    display: flex;
-    flex-direction: column;
+  background-color: #DFE9F5;
+  width: 75%;
+  float: left;
+  display: flex;
+  flex-direction: column;
 
 }
 
 .menu {
-  border-radius: 10px;
-  background-color: #3871c5;
-  font-family: Verdana;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 100%;
-  width: 80%;
-  height: 60px;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
+border-radius: 10px;
+background-color: #3871c5;
+font-family: Verdana;
+color: #FFFFFF;
+text-align: center;
+font-size: 100%;
+width: 80%;
+height: 60px;
+transition: all 0.5s;
+cursor: pointer;
+margin: 5px;
 }
 
 .menu span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.6s;
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.6s;
 }
 
 .menu span:after {
-  content:'>';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -5%;
-  transition: 0.6s;
+content:'>';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -5%;
+transition: 0.6s;
 }
 
 .menu:hover span {
-  padding-right: 8%;
+padding-right: 8%;
 }
 
 .menu:hover span:after {
-  opacity: 1;
-  right: 0;
+opacity: 1;
+right: 0;
 }
 
 /* Staff menu */
 .staffmenu {
-  border-radius: 10px;
-  background-color: #3871c5;
-  font-family: Verdana;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: 100%;
-  width: 80%;
-  height: 60px;
-  transition: all 0.5s;
-  cursor: pointer;
+border-radius: 10px;
+background-color: #3871c5;
+font-family: Verdana;
+color: #FFFFFF;
+text-align: center;
+font-size: 100%;
+width: 80%;
+height: 60px;
+transition: all 0.5s;
+cursor: pointer;
 }
 
 .staffmenu span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.6s;
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.6s;
 }
 
 .staffmenu span:after {
-  content:'>';
-  position:initial;
-  opacity: 0;
-  top: 0;
-  right: -5%;
-  transition: 0.6s;
+content:'>';
+position:initial;
+opacity: 0;
+top: 0;
+right: -5%;
+transition: 0.6s;
 }
 
 .staffmenu:hover span {
-  padding-right: 8%;
+padding-right: 8%;
 }
 
 .staffmenu:hover span:after {
-  opacity: 1;
-  right: 0;
+opacity: 1;
+right: 0;
 }
 
-/* .staffmenu:hover {
-  background-color: #538ce1;
-} */
+.datepicker {
+  background-color: #ffffff;
+  border-color: #C5D4EB;
+  font-family: sans-serif;
+  padding-left: 2%;
+  padding-right: 1%;
+  font-size: 120%;
+  width: 45%;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+}
 
 h1 {
-    color: #000000;
-    font-size: 200%;
-    font-weight: bold;
-    font-family: Verdana;
-    padding-left: 10%;
+  color: #000000;
+  font-size: 200%;
+  font-weight: bold;
+  font-family: Verdana;
+  padding-left: 10%;
 }
 
 a {
-    color: #000000;
-    font-size: 20px;
-    font-family: Verdana;
-    font-weight: bold;
-    padding-top: 30px;
+  color: #000000;
+  font-size: 20px;
+  font-family: Verdana;
+  font-weight: bold;
+  padding-top: 30px;
 }
 
 label {
-    color: #000000;
-    font-size: 135%;
-    font-family: sans-serif;
-    padding-top: 30px;
+  color: #000000;
+  font-size: 135%;
+  font-family: sans-serif;
+  padding-top: 30px;
 }
 
 .namebar {
-    background-color: #F9D871;
-    width: 100%;
-    float: left;
+  background-color: #F9D871;
+  width: 100%;
+  float: left;
 }
 
 h3 {
-    color: #000000;
-    font-size: 90%;
-    font-family: Verdana;
-    text-align: center;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    text-transform: uppercase;
+  color: #000000;
+  font-size: 90%;
+  font-family: Verdana;
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  text-transform: uppercase;
 }
 
 h4 {
-    color: #000000;
-    font-family: Verdana;
-    padding-left: 15%;
-    font-size: 130%;
+  color: #000000;
+  font-family: Verdana;
+  padding-left: 15%;
+  font-size: 130%;
 }
+
+.slot {
+  background-color: #DFE9F5;
+  display: flex;
+  flex-direction: row;
+  column-gap: 4%;
+}
+
+h2 {
+    color: #000000;
+    font-size: 130%;
+    font-family: Verdana;
+    float: left;
+    margin-left: 10%;
+}
+
+h5 {
+    background-color:#C5D4EB;
+    color: #000000;
+    font-size: 120%;
+    font-family: Verdana;
+    border-radius: 10px;
+    border-style: none;
+    margin: auto;
+    padding: auto;
+    width: 15%;
+    height: 40px;
+    padding-top: 0.5%;
+    text-align: center;
+}
+
+.slipbtn {
+  color: #FFFFFF;
+  background-color: #94b9ef;
+  border-color: #94b9ef;
+  font-family: Verdana;
+  font-size: 120%;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: auto;
+  padding: auto;
+  width: 18%;
+  height: 40px;
+  text-align: center;
+}
+
+.slipbtn:hover {
+  color: #94b9ef;
+  background-color: #FFFFFF;
+  border-color: #94b9ef;
+  border: 2px solid;
+  font-family: Verdana;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* selection */
+select {
+  cursor: pointer;
+  font-family: Verdana;
+  width: 33%;
+  color: #000000;
+  border-radius: 10px;
+  padding-left: 2%;
+  font-size: 100%;
+  background-color: #ffffff;
+  border-style: initial;
+}
+
+.submit {
+    color: #FFFFFF;
+    background-color: #3871c5;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    width: 25%;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+.submit:hover {
+    color: #FFFFFF;
+    background-color: #649aeb;
+    font-family: Verdana;
+    font-size: 120%;
+    width: 25%;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* PopUp */
+.popup{
+    width: 40%;
+    background: #c2dbf0;
+    border-radius: 10px;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    visibility: hidden;
+    transition: all 0.4s ease-in-out;
+}
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+.popup img{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000000;
+}
+
 .container {
-    display: flex;
+  display: flex;
 }
 
 @media screen and (max-width: 768px) {
-  .container {
-    width: 100%;
-    padding: 0 20px;
-  }
-  .namebar {
-    width: 100%;
-    padding: 0 20px;
-  }
+.container {
+  width: 100%;
+  padding: 0 20px;
+}
+.namebar {
+  width: 100%;
+  padding: 0 20px;
+}
 }
 @media screen and (max-width: 576px) {
-  .container {
-    width: 100%;
-    padding: 0 20px;
-  }
-  .namebar {
-    width: 100%;
-    padding: 0 20px;
-  }
+.container {
+  width: 100%;
+  padding: 0 20px;
+}
+.namebar {
+  width: 100%;
+  padding: 0 20px;
+}
 }
 </style>

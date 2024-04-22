@@ -15,7 +15,6 @@
             <form @submit.prevent="submitForm">
             <p Align="center">
                 <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" >
-                <button class="select" type="submit" @click="openPopup">SUBMIT</button>
             </p>
             </form>
         </div>
@@ -182,40 +181,13 @@ h4 {
     padding-left: 2%;
     padding-right: 1%;
     font-size: 120%;
-    width: 40%;
+    width: 45%;
     height: 40px;
     border: none;
     border-radius: 10px;
     /* daysOfWeekHighlighted: "0,5,6"; */
 }
-.select {
-    color: #FFFFFF;
-    background-color: #94b9ef;
-    border-color: #94b9ef;
-    font-family: Verdana;
-    font-size: 100%;
-    width: 10%;
-    height: 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 2%;
-    font-weight: bold;
-}
 
-.select:hover {
-    color: #94b9ef;
-    background-color: #FFFFFF;
-    border-color: #94b9ef;
-    border: 2px solid;
-    font-family: Verdana;
-    font-weight: bold;
-    font-size: 100%;
-    width: 10%;
-    height: 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 2%;
-}
 /* PopUp */
 .popup{
     width: 55%;

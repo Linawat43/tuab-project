@@ -9,7 +9,8 @@ var connection = require('../connection/db.js');
 
 router.post('/', jsonParser, function(req, res, next) {
     const { username, workDate, workShift } = req.body;
-  
+    const formattedDate = new Date(workDate).toISOString().split('T')[0];
+
     connection.execute("INSERT INTO WorkSchedule (username, workingDate, workingShift) VALUES (?, ?, ?)",
         [username, workDate, workShift],
         (err, results) => {
