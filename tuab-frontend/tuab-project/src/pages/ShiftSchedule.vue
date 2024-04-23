@@ -32,12 +32,29 @@
               <center><button class="submit" @click="saveSchedule">SAVE</button></center>
             </div>
 
-            <!-- PopUP -->
-            <div class="popup" id="popup">
+            <!-- Accepted PopUP -->
+            <div class="popup" id="acceptpopup">
               <img src="paychecked.png" width="30%" height="30%"><br>
               <h7>Shift Operation saved!</h7><br>
               <button @click="closePopup">HOME</button>
             </div>
+
+            <!-- Date Warning PopUP -->
+            <div class="popup" id="datewarnpopup">
+              <img src="warning.png" width="30%" height="30%"><br>
+              <h7>Please select date before click "SAVE"</h7><br>
+              <button @click="closeDPopup">BACK</button>
+            </div>
+
+            <!-- Empty Shift PopUP -->
+            <div class="popup" id="emptypopup">
+              <a @click="closeEPopup">X</a>
+              <img src="warning.png" width=30% height=30%><br>
+                <h7>NO any shift was selected</h7><br>
+                <h8>Click "SUBMIT" to save your shift as No-working day</h8><br>
+                <button type="submit" @click="closePopup">SUBMIT</button>
+            </div> 
+
       </body>
   </div>
 </template>
@@ -68,7 +85,7 @@ export default {
         },
 
         openPopup(){
-          document.getElementById('popup').classList.add('open-popup');
+          document.getElementById('acceptpopup').classList.add('open-popup');
         },
 
         closePopup(){
@@ -79,14 +96,23 @@ export default {
             this.$router.push('/staff-home')
           }
         },
+
+        closeDPopup(){
+          document.getElementById('datewarnpopup').classList.remove('open-popup');
+        },
+
+        closeEPopup(){
+          document.getElementById('emptypopup').classList.remove('open-popup');
+        },
+
         saveSchedule() {
           if (!this.selectedDate) {
-            alert('please selectDate');
+            document.getElementById('datewarnpopup').classList.add('open-popup');
             return;
           }
 
           if (this.selectedShifts.length === 0) {
-            alert('please checkbox ');
+            document.getElementById('emptypopup').classList.add('open-popup');
             return;
           }
           const formData = {
@@ -258,15 +284,15 @@ h3 {
     margin-bottom: 5%;
 }
 
+.shiftbox input{
+    cursor: pointer;
+}
+
 .shiftbox label{
     color: #000000;
     font-size: 130%;
     font-family: Verdana; 
     padding-left: 2%;
-}
-
-.box {
-  cursor: pointer;
 }
 
 /* PopUp */
@@ -337,6 +363,17 @@ h3 {
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
+.popup a{
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000000;
 }
 
 .container {
