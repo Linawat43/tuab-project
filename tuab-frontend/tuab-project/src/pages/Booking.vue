@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { query } from 'express';
+
 import NotToken from '../components/NotToken.vue';
 import axios from 'axios';
 export default {
@@ -97,17 +97,18 @@ export default {
               this.$router.push('/staff-home')
           }
       },
-      selectLane() {
-      //   const laneId = event.target.getAttribute('data-lane-id');
-      //   const shiftId = event.target.getAttribute('data-shift-id');
+      selectLane(event) {
+        const laneId = event.target.getAttribute('data-lane-id');
+        const shiftId = event.target.getAttribute('data-shift-id');
 
-      //   const dataToSend = {
-      //     date: this.selectedDate,
-      //     lane: laneId,
-      //     username: this.username,
-      //     shift: shiftId
-      //   }
-      //   this.$router.push({path: '/verifyInfo', query: dataToSend,});
+        const dataToSend = {
+          date: this.selectedDate,
+          lane: laneId,
+          username: this.username,
+          shift: shiftId
+        }
+        this.$router.push('/verifyInfo');
+        // this.$router.push({path: '/verifyInfo', query: dataToSend,});
         // try {
         //   const formattedDate = this.selectedDate.toISOString().split('T')[0];
         //   const data = {
