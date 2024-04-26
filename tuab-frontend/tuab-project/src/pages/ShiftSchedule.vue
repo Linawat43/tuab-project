@@ -42,7 +42,7 @@
             <!-- Date Warning PopUP -->
             <div class="popup" id="datewarnpopup">
               <img src="warning.png" width="30%" height="30%"><br>
-              <h7>Please select date before click "SAVE"</h7><br>
+              <h7>Please specify working date before click "SAVE"</h7><br>
               <button @click="closeDPopup">BACK</button>
             </div>
 
@@ -110,24 +110,42 @@ export default {
             document.getElementById('datewarnpopup').classList.add('open-popup');
             return;
           }
-
-          if (this.selectedShifts.length === 0) {
-            document.getElementById('emptypopup').classList.add('open-popup');
-            return;
-          }
-          const formData = {
+          const formUD = {
             username: this.username,
-            workDate: this.selectedDate,
-            workShift: this.calculateWorkShift()
-          };
+            workDate: this.selectedDate
+          }
+          
 
-          axios.post('http://localhost:3000/workSchedule', formData)
+          axios.get(`http://localhost:3000/checkWork`, { params: formUD })
             .then(response => {
-              console.log('Shift schedule saved successfully!');
-              this.openPopup();
+              const userSchedules = response.data;
+
+              if (userSchedules.length > 0) {
+                alert("The date has already been selected.")
+              } else {
+                if (this.selectedShifts.length === 0) {
+                  document.getElementById('emptypopup').classList.add('open-popup');
+                  return;
+                }
+
+                const formData = {
+                  username: this.username,
+                  workDate: this.selectedDate,
+                  workShift: this.calculateWorkShift()
+                };
+
+                axios.post('http://localhost:3000/workSchedule', formData)
+                  .then(response => {
+                    console.log('Shift schedule saved successfully!');
+                    this.openPopup();
+                  })
+                  .catch(error => {
+                    console.error('Error saving shift schedule:', error);
+                  });
+              }
             })
             .catch(error => {
-              console.error('Error saving shift schedule:', error);
+              console.error('Error fetching user schedules:', error);
             });
         },
 

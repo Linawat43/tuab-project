@@ -1,15 +1,52 @@
 var express = require('express');
-var connection = require('../connection/db.js');
 var router = express.Router();
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+const axios = require('axios');
+var jwt = require('jsonwebtoken');
 
-router.get('/', async function (req, res, next) {
-    await connection.execute(`SELECT targetLaneID, shiftID, DATE_FORMAT(bookingDate, '%Y-%m-%d') AS bookingDate FROM Booking WHERE bookingDate='2024-01-01'`, async (err, rows) => {
+var connection = require('../connection/db.js');
+
+router.get('/', jsonParser, function(req, res, next) {
+  const { workDate } = req.query;
+  // const { workDate } = req.body;
+
+  connection.execute("SELECT targetLaneID, shiftID, DATE_FORMAT(bookingDate, '%Y-%m-%d') AS bookingDate FROM Booking WHERE bookingDate = ?",
+      [workDate],
+      (err, rows) => {
         if (err) {
           console.error('Error executing SELECT query:', err);
           return;
         }
-        res.json(rows)
-    })
-})
+        const lanes = [101, 102, 103, 104, 105, 106];
+        const shifts = [1, 2];
+        const laneStatus = {};
 
-module.exports = router;
+        lanes.forEach(lane => {
+          laneStatus[lane] = {};
+          shifts.forEach(shift => {
+            laneStatus[lane][shift] = false;
+          });
+        });
+
+        rows.forEach(row => {
+          const { targetLaneID, shiftID } = row;
+          laneStatus[targetLaneID][shiftID] = true;
+        });
+
+        const availability = [];
+
+        lanes.forEach(lane => {
+          shifts.forEach(shift => {
+            if (!laneStatus[lane][shift]) {
+              availability.push({ lane, shift });
+            }
+          });
+        });
+
+        res.json(availability);
+      }
+    );
+  });
+  
+  module.exports = router;

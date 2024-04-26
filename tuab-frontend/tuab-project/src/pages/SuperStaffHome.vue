@@ -34,7 +34,7 @@
                   </select>
                   <br>
             </div>
-            <center><button class="submit" type="submit">SAVE</button></center>
+            <center><button class="submit" type="submit">UPDATE</button></center>
           </div>
 
           <!-- Slip PopUp -->

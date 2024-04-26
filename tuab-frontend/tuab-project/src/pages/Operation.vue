@@ -12,30 +12,45 @@
           <div class="content">
             <br><br><br>
             <h1>Operation Editor</h1><br>
-            <form @submit.prevent="submitForm">
-            <p Align="center">
-                <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" >
-            </p>
+            <h2>Please select start and end date to set an opening day</h2><br>
+
+            <form @submit.prevent="submitForm" >
+              <!-- Start Date -->
+              <label>Start Date</label><br>
+              <center>
+              <input class="datepicker" type="date" v-model="startDate" :min="minDate" required>
+              </center>
+              <br><br>
+
+              <!-- End Date -->
+              <label>End Date</label><br>
+              <center>
+              <input class="datepicker" type="date" v-model="endDate" :min="startDate" required>
+              <center><button class="submit" @click="submitForm">SAVE</button></center>
+              </center>
             </form>
         </div>
 
-        <!-- PopUP -->
-        <div class="popup" id="popup">
+        <!-- CompletePopUP  -->
+        <div class="popup" id="completePopup">
           <img src="paychecked.png" width=30% height=30%><br>
-              <h7>DONE !</h7><br>
-              <button type="submit" @click="closePopup">HOME</button>
+              <h7>The operation has been saved</h7><br>
+              <button type="submit" @click="closePopup">DONE</button>
         </div> 
+        
     </body>
 </div>
 </template>
 
 <script>
 import NotToken from '../components/NotToken.vue';
+
 export default {
     data() {
         return {
           roleName: '',
-          selectedDate: '', // Selected date
+          startDate: '',
+          endDate:'',
           minDate: '',      // Minimum date
           name: '',
         };
@@ -46,12 +61,18 @@ export default {
           this.$router.push('/superStaff-home')
         },
 
+        submitForm() {
+          if (this.startDate && this.endDate) {
+            this.openPopup();
+          }
+        },
+
         openPopup(){
-          popup.classList.add('open-popup')
+          completePopup.classList.add('open-popup')
         },
 
         closePopup(){
-          this.$router.push('/superstaff-home')
+          completePopup.classList.remove('open-popup')
         }
     },
 
@@ -139,8 +160,9 @@ h2 {
     color: #000000;
     font-size: 130%;
     font-family: Verdana;
-    float: left;
+    /* float: left; */
     margin-left: 15%;
+    margin-bottom: 2%;
 }
 
 h3 {
@@ -156,6 +178,41 @@ h3 {
     height: 40px;
     padding-top: 0.5%;
     text-align: center;   
+}
+
+label {
+  font-size: 100%;
+  font-family: verdana;
+  color:#000000;
+  padding-left: 28%;
+  padding-bottom: 10%;
+}
+
+.submit {
+    color: #FFFFFF;
+    background-color: #3871c5;
+    font-family: Verdana;
+    font-size: 120%;
+    font-weight: bolder;
+    width: 20%;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.submit:hover {
+    color: #FFFFFF;
+    background-color: #649aeb;
+    font-family: Verdana;
+    font-size: 120%;
+    width: 20%;
+    height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .namebar {
@@ -185,7 +242,6 @@ h4 {
     height: 40px;
     border: none;
     border-radius: 10px;
-    /* daysOfWeekHighlighted: "0,5,6"; */
 }
 
 /* PopUp */
