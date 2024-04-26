@@ -18,6 +18,7 @@ router.get('/', jsonParser, function(req, res, next) {
         return;
         }
         res.json(rows)
+        console.log(rows);
     })
 })
   

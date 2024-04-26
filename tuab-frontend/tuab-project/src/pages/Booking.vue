@@ -22,12 +22,43 @@
               <br>
               <center><img src="status.jpg" width=35% height=10%></center>
               <br><br>
-              <h5>Lane 1</h5><button class="blueround" @click="selectedLane('L1R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L1R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 2</h5><button class="blueround" @click="selectedLane('L2R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L2R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 3</h5><button class="redround" @click="selectedLane('L3R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L3R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 4</h5><button class="redround" @click="selectedLane('L4R1')"><span> 17.00 </span></button><button class="redround" @click="selectedLane('L4R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 5</h5><button class="blueround" @click="selectedLane('L5R1')"><span> 17.00 </span></button><button class="blueround" @click="selectedLane('L5R2')"><span> 17.30 </span></button><br><br><br>
-              <h5>Lane 6</h5><button class="greyround" @click="selectedLane('L6R1')"><span> 17.00 </span></button><button class="greyround" @click="selectedLane('L6R2')"><span> 17.30 </span></button>
+              <!-- <h5 v-if="status=='false'">Lane 1</h5><button v-if="status=='true'" disabled @click="selectLane()"><span> 17.00 </span></button><button class="redround" @click="selectLane('L1R2')"><span> 17.30 </span></button><br><br><br> -->
+              <!-- <h5>Lane 1</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 2</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 3</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 4</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 5</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button><br><br><br>
+              <h5>Lane 6</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button> -->
+              <div class="lane-container">
+                <h5>Lane 1</h5>
+                <button class="blueround" @click="selectLane" data-lane-id="101" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane" data-lane-id="101" data-shift-id="2"><span>17:30</span></button>
+              </div>
+              <div class="lane-container">
+                <h5>Lane 2</h5>
+                <button class="blueround" @click="selectLane" data-lane-id="102" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane" data-lane-id="102" data-shift-id="2"><span>17:30</span></button>
+              </div>
+              <div class="lane-container">
+                <h5>Lane 3</h5>
+                <button class="blueround" @click="selectLane" data-lane-id="103" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane" data-lane-id="103" data-shift-id="2"><span>17:30</span></button>
+              </div>
+              <div class="lane-container">
+                <h5>Lane 4</h5>
+                <button class="blueround" @click="selectLane" data-lane-id="104" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane" data-lane-id="104" data-shift-id="2"><span>17:30</span></button>
+              </div>
+              <div class="lane-container">
+                <h5>Lane 5</h5>
+                <button class="blueround" @click="selectLane" data-lane-id="105" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane" data-lane-id="105" data-shift-id="2"><span>17:30</span></button>
+              </div>
+              <div class="lane-container">
+                <h5>Lane 6</h5>
+                <button class="blueround" @click="selectLane" data-lane-id="106" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane" data-lane-id="106" data-shift-id="2"><span>17:30</span></button>
+              </div>
               <br><br><br><br><br><br>
 
           </div>
@@ -36,10 +67,13 @@
 </template>
 
 <script>
+import { query } from 'express';
 import NotToken from '../components/NotToken.vue';
+import axios from 'axios';
 export default {
     data() {
         return {
+            status: 'true',
             roleName: '',
             roles: '',
             date: '2018-03-02', // YYYY-MM-DD
@@ -63,27 +97,86 @@ export default {
               this.$router.push('/staff-home')
           }
       },
-      async selectLane() {
-        try {
-          const formattedDate = this.selectedDate.toISOString().split('T')[0];
-          const data = {
-              date: formattedDate,
-              lane: selectedLane,
-              // username: this.username
-          };
-          sessionStorage.setItem("selectedData", JSON.stringify(data));
-          this.$router.push('/verifyInfo');
-          } catch (error) {
-              console.error('Error selecting lane:', error);
-          }
+      selectLane() {
+      //   const laneId = event.target.getAttribute('data-lane-id');
+      //   const shiftId = event.target.getAttribute('data-shift-id');
+
+      //   const dataToSend = {
+      //     date: this.selectedDate,
+      //     lane: laneId,
+      //     username: this.username,
+      //     shift: shiftId
+      //   }
+      //   this.$router.push({path: '/verifyInfo', query: dataToSend,});
+        // try {
+        //   const formattedDate = this.selectedDate.toISOString().split('T')[0];
+        //   const data = {
+        //       date: formattedDate,
+        //       lane: selectedLane,
+        //       // username: this.username
+        //   };
+        //   sessionStorage.setItem("selectedData", JSON.stringify(data));
+        //   this.$router.push('/verifyInfo');
+        //   } catch (error) {
+        //       console.error('Error selecting lane:', error);
+        //   }
       },
-      submitForm() {
-      // Call selectLane method to handle submission logic
-      this.selectedLane(this.selectedLane);
-    }
+      async submitForm() {
+      try {
+        const dayOffUrl = 'http://localhost:3000/checkdayoff';
+        const dayOffResponse = await axios.get(dayOffUrl, {
+          params: {
+            workDate: this.selectedDate
+          }
+        });
+
+        if (dayOffResponse.data.length === 0) {
+          const laneButtons = document.querySelectorAll('.blueround, .redround');
+          laneButtons.forEach(button => {
+            button.className = 'greyround';
+            button.disabled = true;
+          });
+        } else {
+          const bookingCheckUrl = 'http://localhost:3000/bookingCheck';
+          const bookingCheckResponse = await axios.get(bookingCheckUrl, {
+            params: {
+              workDate: this.selectedDate
+            }
+          });
+          const laneAvailabilityData = bookingCheckResponse.data;
+          const laneButtons = document.querySelectorAll('.blueround, .redround');
+          
+          laneButtons.forEach(button => {
+            const laneId = button.getAttribute('data-lane-id');
+            const shiftId = button.getAttribute('data-shift-id');
+
+            const isLaneShiftAvailable = laneAvailabilityData.some(item => {
+              return item.lane === parseInt(laneId) && item.shift === parseInt(shiftId);
+            });
+
+            if (isLaneShiftAvailable) {
+              button.className = 'blueround';
+            } else {
+              button.className = 'redround';
+            }
+            
+            button.disabled = false;
+          });
+        }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
     },
     mounted() {
-          // Get today's date
+      // // Set initial button styles to greyround
+      // const laneButtons = document.querySelectorAll('.blueround, .redround');
+      // laneButtons.forEach(button => {
+      //   button.className = 'greyround';
+      //   button.disabled = true;
+      // });
+
+      // Get today's date
       const today = new Date();
 
       // Set the minimum date to today
