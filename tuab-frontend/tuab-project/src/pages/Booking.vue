@@ -11,7 +11,8 @@
 
           <div class="content">
               <br><br><br>
-              <h1>Select Date</h1><br>
+              <h1>Book the Archery</h1><br>
+              <h2>Please select date first. Then select an available lane</h2><br><br>
               <form @submit.prevent="submitForm">
               <p Align="center">
                   <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" :max="maxDate">
@@ -107,8 +108,8 @@ export default {
           username: this.username,
           shift: shiftId
         }
-        this.$router.push('/verifyInfo');
-        // this.$router.push({path: '/verifyInfo', query: dataToSend,});
+        // this.$router.push('/verify-info');
+        this.$router.push({path: '/verify-info', query: dataToSend,});
         // try {
         //   const formattedDate = this.selectedDate.toISOString().split('T')[0];
         //   const data = {
@@ -318,6 +319,13 @@ h3 {
     padding-top: 2%;
     padding-bottom: 2%;
     text-transform: uppercase;
+}
+
+h2 {
+    color: #000000;
+    font-size: 130%;
+    font-family: Verdana;
+    padding-left: 15%;
 }
 
 /* Closed round */

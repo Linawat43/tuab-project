@@ -12,9 +12,9 @@
           <div class="content">
               <br><br><br>
               <h1>Please verify information</h1><br><br>
-              <h2>Date</h2><div class="info"> DD/MM/YYYY </div><br><br>
-              <h2>Lane</h2><div class="info"> Lane 1 </div><br><br>
-              <h2>Time</h2><div class="info"> 17.00 </div><br><br>
+              <h2>Date</h2><div class="info"> {{date}} </div><br><br>
+              <h2>Lane</h2><div class="info"> {{lane}} </div><br><br>
+              <h2>Time</h2><div class="info"> {{shift}} </div><br><br>
               <h2>Name</h2><div class="info"> {{name}} </div><br><br>
               <h2>Student ID</h2><div class="info"> {{username}} </div><br><br>
               <h2>Tel Number</h2><input type="text" v-model="tel" maxlength="10"><br>
@@ -34,6 +34,9 @@ export default {
           roleName: '',
           name: '',
           username: '',
+          date: '',
+          lane: '',
+          shift: '',
         };
     },
     methods: {
@@ -42,6 +45,13 @@ export default {
         }
     },
     mixins: [NotToken],
+    mounted() {
+      const { date, lane, username, shift } = this.$route.query;
+      this.date = ''
+      this.lane = ''
+      this.username = ''
+      this.shift = ''
+    },
 }
 </script>
 

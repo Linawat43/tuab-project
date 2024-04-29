@@ -11,7 +11,7 @@
 
           <div class="content">
             <br><br><br>
-            <h1>Operation Editor</h1><br>
+            <h1>Edit Settings</h1><br>
             <h2>Please select start and end date to set an opening day</h2><br>
 
             <form @submit.prevent="submitForm" >
@@ -160,9 +160,7 @@ h2 {
     color: #000000;
     font-size: 130%;
     font-family: Verdana;
-    /* float: left; */
-    margin-left: 15%;
-    margin-bottom: 2%;
+    padding-left: 15%;
 }
 
 h3 {

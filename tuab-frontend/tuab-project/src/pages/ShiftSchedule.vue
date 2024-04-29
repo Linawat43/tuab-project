@@ -12,7 +12,8 @@
 
             <div class="content">
               <br><br><br>
-              <h1>Shift Schedule</h1><br>
+              <h1>Manage Timesheet</h1><br>
+              <h2>Please select date first. Then, check/uncheck desired time shifts</h2><br><br>
             
               <!-- Date select -->
               <form align="center">
@@ -244,6 +245,13 @@ h1 {
     font-weight: bold;
     font-family: Verdana;
     padding-left: 10%;
+}
+
+h2 {
+    color: #000000;
+    font-size: 130%;
+    font-family: Verdana;
+    padding-left: 15%;
 }
 
 .namebar {
