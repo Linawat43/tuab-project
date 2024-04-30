@@ -32,33 +32,33 @@
               <h5>Lane 6</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button> -->
               <div class="lane-container">
                 <h5>Lane 1</h5>
-                <button class="blueround" @click="selectLane" data-lane-id="101" data-shift-id="1"><span>17:00</span></button>
-                <button class="blueround" @click="selectLane" data-lane-id="101" data-shift-id="2"><span>17:30</span></button>
+                <button class="blueround" @click="selectLane(101, 1)" data-lane-id="101" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane(101, 2)" data-lane-id="101" data-shift-id="2"><span>17:30</span></button>
               </div>
               <div class="lane-container">
                 <h5>Lane 2</h5>
-                <button class="blueround" @click="selectLane" data-lane-id="102" data-shift-id="1"><span>17:00</span></button>
-                <button class="blueround" @click="selectLane" data-lane-id="102" data-shift-id="2"><span>17:30</span></button>
+                <button class="blueround" @click="selectLane(102, 1)" data-lane-id="102" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane(102, 2)" data-lane-id="102" data-shift-id="2"><span>17:30</span></button>
               </div>
               <div class="lane-container">
                 <h5>Lane 3</h5>
-                <button class="blueround" @click="selectLane" data-lane-id="103" data-shift-id="1"><span>17:00</span></button>
-                <button class="blueround" @click="selectLane" data-lane-id="103" data-shift-id="2"><span>17:30</span></button>
+                <button class="blueround" @click="selectLane(103, 1)" data-lane-id="103" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane(103, 2)" data-lane-id="103" data-shift-id="2"><span>17:30</span></button>
               </div>
               <div class="lane-container">
                 <h5>Lane 4</h5>
-                <button class="blueround" @click="selectLane" data-lane-id="104" data-shift-id="1"><span>17:00</span></button>
-                <button class="blueround" @click="selectLane" data-lane-id="104" data-shift-id="2"><span>17:30</span></button>
+                <button class="blueround" @click="selectLane(104, 1)" data-lane-id="104" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane(104, 2)" data-lane-id="104" data-shift-id="2"><span>17:30</span></button>
               </div>
               <div class="lane-container">
                 <h5>Lane 5</h5>
-                <button class="blueround" @click="selectLane" data-lane-id="105" data-shift-id="1"><span>17:00</span></button>
-                <button class="blueround" @click="selectLane" data-lane-id="105" data-shift-id="2"><span>17:30</span></button>
+                <button class="blueround" @click="selectLane(105, 1)" data-lane-id="105" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane(105, 2)" data-lane-id="105" data-shift-id="2"><span>17:30</span></button>
               </div>
               <div class="lane-container">
                 <h5>Lane 6</h5>
-                <button class="blueround" @click="selectLane" data-lane-id="106" data-shift-id="1"><span>17:00</span></button>
-                <button class="blueround" @click="selectLane" data-lane-id="106" data-shift-id="2"><span>17:30</span></button>
+                <button class="blueround" @click="selectLane(106, 1)" data-lane-id="106" data-shift-id="1"><span>17:00</span></button>
+                <button class="blueround" @click="selectLane(106, 2)" data-lane-id="106" data-shift-id="2"><span>17:30</span></button>
               </div>
               <br><br><br><br><br><br>
 
@@ -74,7 +74,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            status: 'true',
+            status: '',
             roleName: '',
             roles: '',
             date: '2018-03-02', // YYYY-MM-DD
@@ -98,14 +98,17 @@ export default {
               this.$router.push('/staff-home')
           }
       },
-      selectLane(event) {
-        const laneId = event.target.getAttribute('data-lane-id');
-        const shiftId = event.target.getAttribute('data-shift-id');
+      selectLane(laneId, shiftId) {
+        // const laneId = event.target.getAttribute('data-lane-id');
+        // const shiftId = event.target.getAttribute('data-shift-id');
+
+        console.log('Selected Lane:', laneId);
+        console.log('Selected Shift:', shiftId);
 
         const dataToSend = {
           date: this.selectedDate,
           lane: laneId,
-          username: this.username,
+          // username: this.username,
           shift: shiftId
         }
         // this.$router.push('/verify-info');

@@ -13,8 +13,8 @@
               <br><br><br>
               <h1>Please verify information</h1><br><br>
               <h2>Date</h2><div class="info"> {{date}} </div><br><br>
-              <h2>Lane</h2><div class="info"> {{lane}} </div><br><br>
-              <h2>Time</h2><div class="info"> {{shift}} </div><br><br>
+              <h2>Lane</h2><div class="info"> {{Tlane}} </div><br><br>
+              <h2>Time</h2><div class="info"> {{Rshift}} </div><br><br>
               <h2>Name</h2><div class="info"> {{name}} </div><br><br>
               <h2>Student ID</h2><div class="info"> {{username}} </div><br><br>
               <h2>Tel Number</h2><input type="text" v-model="tel" maxlength="10"><br>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import NotToken from '../components/NotToken.vue';
 export default {
   data() {
@@ -34,23 +35,61 @@ export default {
           roleName: '',
           name: '',
           username: '',
-          date: '',
-          lane: '',
-          shift: '',
+          // date: '',
+          // lane: '',
+          // shift: '',
+          tel: ''
         };
     },
     methods: {
         backbook () {
             this.$router.push('/booking')
+        },
+        payment () {
+          const formData = {
+            date: this.date,
+            lane: this.lane,
+            username: this.username,
+            shift: this.shift
+          };
+
+          axios.post('http://localhost:3000/booking', formData)
+            .then(response => {
+              console.log('Booking saved successfully!');
+              this.openPopup();
+            })
+            .catch(error => {
+              console.error('Error saving Booking:', error);
+            });
         }
     },
     mixins: [NotToken],
     mounted() {
-      const { date, lane, username, shift } = this.$route.query;
-      this.date = ''
-      this.lane = ''
-      this.username = ''
-      this.shift = ''
+      const { date, lane, shift } = this.$route.query;
+      this.date = date
+      this.lane = lane
+      // this.username = username
+      this.shift = shift
+      var Tlane
+      if (this.lane == '101') {
+          this.Tlane = "1"
+      } else if (this.lane == '102') {
+          this.Tlane = "2"
+      } else if (this.lane == '103') {
+          this.Tlane = "3"
+      } else if (this.lane == '104') {
+          this.Tlane = "4"
+      } else if (this.lane == '105') {
+          this.Tlane = "5"
+      } else if (this.lane == '106') {
+          this.Tlane = "6"
+      }
+      var Rshift
+      if (this.shift == '1') {
+          this.Rshift = "17:00"
+      } else if (this.shift == '2') {
+          this.Rshift = "17:30"
+      }
     },
 }
 </script>
