@@ -9,7 +9,7 @@
               <p Align=center><button class="backbtn" @click="backbook"><span> BACK </span></button></p><br>
           </div>
 
-          <div class="content">
+          <div class="content" v-if="status">
               <br><br><br>
               <h1>Please verify information</h1><br><br>
               <h2>Date</h2><div class="info"> {{date}} </div><br><br>
@@ -18,6 +18,19 @@
               <h2>Name</h2><div class="info"> {{name}} </div><br><br>
               <h2>Student ID</h2><div class="info"> {{username}} </div><br><br>
               <h2>Tel Number</h2><input type="text" v-model="tel" maxlength="10"><br>
+              <h3>Please fill-in and verify your tel number (example: 0812345678)*</h3><br>
+              <center><button class="submit" type="submit" @click="payment"><span> NEXT </span></button></center>
+              <br><br>
+          </div>
+          <div class="content" v-else>
+              <br><br><br>
+              <h1>Please verify information</h1><br><br>
+              <h2>Date</h2><div class="info"> {{date}} </div><br><br>
+              <h2>Lane</h2><div class="info"> {{Tlane}} </div><br><br>
+              <h2>Time</h2><div class="info"> {{Rshift}} </div><br><br>
+              <h2>Name</h2><div class="info"> {{name}} </div><br><br>
+              <h2>Student ID</h2><div class="info"> {{username}} </div><br><br>
+              <h2>Tel Number</h2><div class="info"> {{tel}} </div><br>
               <h3>Please fill-in and verify your tel number (example: 0812345678)*</h3><br>
               <center><button class="submit" type="submit" @click="payment"><span> NEXT </span></button></center>
               <br><br>
@@ -32,12 +45,10 @@ import NotToken from '../components/NotToken.vue';
 export default {
   data() {
         return {
+          status: true,
           roleName: '',
           name: '',
           username: '',
-          // date: '',
-          // lane: '',
-          // shift: '',
           tel: ''
         };
     },
@@ -62,7 +73,21 @@ export default {
               console.error('Error saving Booking:', error);
             });
 
-            this.$router.push('/payment')
+            if (this.status = false) {
+            const telFormData = {
+              tel: this.tel,
+              username: this.username
+            };
+
+            axios.post('http://localhost:3000/addTelnumber', telFormData)
+              .then(response => {
+                console.log('TelNumber updated successfully!');
+              })
+              .catch(error => {
+                console.error('Error updating TelNumber:', error);
+              });
+            }
+          this.$router.push('/payment')
         }
     },
     mixins: [NotToken],
@@ -70,7 +95,6 @@ export default {
       const { date, lane, shift } = this.$route.query;
       this.date = date
       this.lane = lane
-      // this.username = username
       this.shift = shift
       var Tlane
       if (this.lane == '101') {
@@ -92,6 +116,10 @@ export default {
       } else if (this.shift == '2') {
           this.Rshift = "17:30"
       }
+
+      if (this.tel) {
+      this.status = false;
+  }
     },
 }
 </script>

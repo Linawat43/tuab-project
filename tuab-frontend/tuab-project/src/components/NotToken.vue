@@ -31,6 +31,7 @@ export default {
             this.name = response.data.name;
             this.username = response.data.username;
             this.roles = response.data.roleID;
+            this.tel = response.data.telNumber;
             var roleName;
             if (this.roles == '1') {
                 this.roleName = "General User"

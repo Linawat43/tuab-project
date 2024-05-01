@@ -30,32 +30,32 @@
               <h5>Lane 4</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button><br><br><br>
               <h5>Lane 5</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button><br><br><br>
               <h5>Lane 6</h5><button class="blueround" @click="selectLane()"><span> 17.00 </span></button><button class="blueround" @click="selectLane()"><span> 17.30 </span></button> -->
-              <div class="lane-container">
+              <div class="lane-container" v-if="status">
                 <h5>Lane 1</h5>
                 <button class="blueround" @click="selectLane(101, 1)" data-lane-id="101" data-shift-id="1"><span>17:00</span></button>
                 <button class="blueround" @click="selectLane(101, 2)" data-lane-id="101" data-shift-id="2"><span>17:30</span></button>
               </div>
-              <div class="lane-container">
+              <div class="lane-container" v-if="status">
                 <h5>Lane 2</h5>
                 <button class="blueround" @click="selectLane(102, 1)" data-lane-id="102" data-shift-id="1"><span>17:00</span></button>
                 <button class="blueround" @click="selectLane(102, 2)" data-lane-id="102" data-shift-id="2"><span>17:30</span></button>
               </div>
-              <div class="lane-container">
+              <div class="lane-container" v-if="status">
                 <h5>Lane 3</h5>
                 <button class="blueround" @click="selectLane(103, 1)" data-lane-id="103" data-shift-id="1"><span>17:00</span></button>
                 <button class="blueround" @click="selectLane(103, 2)" data-lane-id="103" data-shift-id="2"><span>17:30</span></button>
               </div>
-              <div class="lane-container">
+              <div class="lane-container" v-if="status">
                 <h5>Lane 4</h5>
                 <button class="blueround" @click="selectLane(104, 1)" data-lane-id="104" data-shift-id="1"><span>17:00</span></button>
                 <button class="blueround" @click="selectLane(104, 2)" data-lane-id="104" data-shift-id="2"><span>17:30</span></button>
               </div>
-              <div class="lane-container">
+              <div class="lane-container" v-if="status">
                 <h5>Lane 5</h5>
                 <button class="blueround" @click="selectLane(105, 1)" data-lane-id="105" data-shift-id="1"><span>17:00</span></button>
                 <button class="blueround" @click="selectLane(105, 2)" data-lane-id="105" data-shift-id="2"><span>17:30</span></button>
               </div>
-              <div class="lane-container">
+              <div class="lane-container" v-if="status">
                 <h5>Lane 6</h5>
                 <button class="blueround" @click="selectLane(106, 1)" data-lane-id="106" data-shift-id="1"><span>17:00</span></button>
                 <button class="blueround" @click="selectLane(106, 2)" data-lane-id="106" data-shift-id="2"><span>17:30</span></button>
@@ -74,7 +74,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            status: '',
+            status: false,
             roleName: '',
             roles: '',
             date: '2018-03-02', // YYYY-MM-DD
@@ -147,6 +147,7 @@ export default {
             button.disabled = true;
           });
         } else {
+          this.status = true;
           const bookingCheckUrl = 'http://localhost:3000/bookingCheck';
           const bookingCheckResponse = await axios.get(bookingCheckUrl, {
             params: {

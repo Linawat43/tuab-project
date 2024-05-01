@@ -7,6 +7,7 @@
                 </div>
               <br><br>
               <p Align=center><button class="backbtn" @click="backverify"><span> BACK </span></button></p><br>
+              <p Align=center><button class="skip" @click="backhome"><span> UPLOAD LATER </span></button></p>
           </div>
 
           <div class="content">
@@ -52,6 +53,18 @@ export default {
   methods: {
       backverify () {
           this.$router.push('/verify-info')
+      },
+
+      backhome () {
+        if(this.roles == '1'){
+              this.$router.push('/general-home')
+          }
+          else if(this.roles == '2'){
+              this.$router.push('/superStaff-home')
+          }
+          else if(this.roles == '3'){
+              this.$router.push('/staff-home')
+          }
       },
 
       openPopup(){
@@ -252,7 +265,7 @@ input {
   height: 50px;
   border-radius: 10px;
   cursor: pointer;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
 }
 .submit:hover {
   color: #FFFFFF;
@@ -263,7 +276,7 @@ input {
   height: 50px;
   border-radius: 10px;
   cursor: pointer;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
 }
 
 .imgdata {
@@ -277,6 +290,45 @@ input {
 input[type=file]::file-selector-button {
 color: #000000;
 cursor: pointer;
+}
+
+.skip {
+border-radius: 10px;
+background-color: #3871c5;
+font-family: Verdana;
+color: #FFFFFF;
+text-align: center;
+font-size: 100%;
+width: 80%;
+height: 60px;
+transition: all 0.5s;
+cursor: pointer;
+margin: 5px;
+}
+
+.skip span {
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.6s;
+}
+
+.skip span:after {
+content:'\00bb';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -5%;
+transition: 0.6s;
+}
+
+.skip:hover span {
+padding-right: 8%;
+}
+
+.skip:hover span:after {
+opacity: 1;
+right: 0;
 }
 
 /* PopUp */

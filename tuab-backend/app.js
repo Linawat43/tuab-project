@@ -23,6 +23,7 @@ var bookingCheckRouter = require('./routes/bookingCheck');
 var workScheduleRouter = require('./routes/workSchedule');
 var checkWorkRouter = require('./routes/checkWork');
 var checkdayoffRouter = require('./routes/checkdayoff');
+var addTelnumberRouter = require('./routes/addTelnumber');
 
 var app = express();
 
@@ -51,6 +52,7 @@ app.use('/bookingCheck', bookingCheckRouter);
 app.use('/workSchedule', workScheduleRouter);
 app.use('/checkWork', checkWorkRouter);
 app.use('/checkdayoff', checkdayoffRouter);
+app.use('/addTelnumber', addTelnumberRouter);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({
