@@ -44,6 +44,7 @@ import NotToken from '../components/NotToken.vue';
 export default {
   data() {
         return {
+          roles: '',
           roleName: '',
           name: '',
         };
@@ -58,7 +59,15 @@ export default {
       },
       
       closePopup(){
-        this.$router.push('/General-Home')
+        if(this.roles == '1'){
+              this.$router.push('/general-home')
+          }
+          else if(this.roles == '2'){
+              this.$router.push('/superStaff-home')
+          }
+          else if(this.roles == '3'){
+              this.$router.push('/staff-home')
+          }
       }
   },
     mixins: [NotToken],

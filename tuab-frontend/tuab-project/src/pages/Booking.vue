@@ -105,6 +105,11 @@ export default {
         console.log('Selected Lane:', laneId);
         console.log('Selected Shift:', shiftId);
 
+        if (!this.selectedDate) {
+            alert('please selected date')
+            return;
+          }
+
         const dataToSend = {
           date: this.selectedDate,
           lane: laneId,

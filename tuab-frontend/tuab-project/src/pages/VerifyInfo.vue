@@ -61,6 +61,8 @@ export default {
             .catch(error => {
               console.error('Error saving Booking:', error);
             });
+
+            this.$router.push('/payment')
         }
     },
     mixins: [NotToken],
