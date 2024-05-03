@@ -8,10 +8,10 @@ var jwt = require('jsonwebtoken');
 var connection = require('../connection/db.js');
 
 router.get('/', jsonParser, function(req, res, next) {
-  const { workDate } = req.query;
+  const { username } = req.query;
 
-    connection.execute("SELECT workingDate FROM WorkSchedule WHERE workingDate = ?",
-    [workDate],
+    connection.execute("SELECT bookingDate, targetLaneID, shiftID FROM Booking WHERE username = ?",
+    [username],
     (err, rows) => {
         if (err) {
         console.error('Error executing SELECT query:', err);

@@ -45,7 +45,7 @@ router.get('/', jsonParser, function(req, res, next) {
         });
 
         res.json(availability);
-        console.log(availability);
+        // console.log(availability);
       }
     );
   });

@@ -102,8 +102,8 @@ export default {
         // const laneId = event.target.getAttribute('data-lane-id');
         // const shiftId = event.target.getAttribute('data-shift-id');
 
-        console.log('Selected Lane:', laneId);
-        console.log('Selected Shift:', shiftId);
+        // console.log('Selected Lane:', laneId);
+        // console.log('Selected Shift:', shiftId);
 
         if (!this.selectedDate) {
             alert('please selected date')
@@ -347,6 +347,7 @@ h2 {
     width: 18%;
     height: 45px;
     margin-left: 5%;
+    margin-bottom: 4%;
 }
 
 /* Booked round */
@@ -359,6 +360,7 @@ h2 {
     width: 18%;
     height: 45px;
     margin-left: 5%;
+    margin-bottom: 4%;
 }
 
 /* Available round */
@@ -372,6 +374,7 @@ h2 {
     height: 45px;
     cursor: pointer;
     margin-left: 5%;
+    margin-bottom: 4%;
     transition: all 0.5s;
 }
 
@@ -398,6 +401,35 @@ h2 {
 .blueround:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+.select {
+    color: #FFFFFF;
+    background-color: #94b9ef;
+    border-color: #94b9ef;
+    font-family: Verdana;
+    font-size: 100%;
+    width: 10%;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 2%;
+    font-weight: bold;
+}
+
+.select:hover {
+    color: #94b9ef;
+    background-color: #FFFFFF;
+    border-color: #94b9ef;
+    border: 2px solid;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 100%;
+    width: 10%;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 2%;
 }
 
 .container {

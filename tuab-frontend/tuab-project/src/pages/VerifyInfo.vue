@@ -11,7 +11,8 @@
 
           <div class="content" v-if="status">
               <br><br><br>
-              <h1>Please verify information</h1><br><br>
+              <h1>You are about to book an archery lane</h1><br>
+              <h2>Please verify the following information before proceed.</h2><br><br><br>
               <h2>Date</h2><div class="info"> {{date}} </div><br><br>
               <h2>Lane</h2><div class="info"> {{Tlane}} </div><br><br>
               <h2>Time</h2><div class="info"> {{Rshift}} </div><br><br>
@@ -73,7 +74,7 @@ export default {
               console.error('Error saving Booking:', error);
             });
 
-            if (this.status = false) {
+            if (this.status = true) {
             const telFormData = {
               tel: this.tel,
               username: this.username
@@ -241,8 +242,23 @@ h4 {
     text-align: center;
 }
 
+/* .tel {
+    background-color:#d4dade;
+    color: #000000;
+    border-style: none;
+    border-radius: 10px;
+    border-color: #C5D4EB;
+    font-family: Verdana;
+    font-size: 120%;
+    width: 50%;
+    height: 40px;
+    margin-left: 35%;
+    padding-top: 0.5%;
+    text-align: center;
+} */
+
 input {
-    background-color:#C5D4EB;
+    background-color:#d4dade;
     color: #000000;
     border-style: none;
     border-radius: 10px;
