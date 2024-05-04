@@ -14,8 +14,8 @@ router.get('/', jsonParser, function(req, res, next) {
     [username],
     (err, rows) => {
         if (err) {
-        console.error('Error executing SELECT query:', err);
-        return;
+            console.error('Error executing SELECT query:', err);
+            return res.status(500).json({ error: 'Database error' });
         }
         res.json(rows)
         // console.log(rows);
