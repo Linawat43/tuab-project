@@ -12,8 +12,14 @@
             <div class="content">
                 <br><br><br>
                 <h1>Cancel Booking</h1><br><br>
-                <div class="slot">
+                <!-- <div class="slot">
                   <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.00</s1><button class="cancelbtn" @click="openPopup"> CANCEL </button><br>
+                </div> -->
+                <div v-for="(booking, index) in bookings" :key="index" class="slot">
+                  <h2>{{ booking.bookingDate }}</h2>
+                  <s1>Lane {{ booking.targetLaneID }}</s1>
+                  <s1>{{ booking.shiftID }}</s1>
+                  <button class="cancelbtn" @click="cancelBooking(booking)">CANCEL</button>
                 </div>
                 <br><br>
             </div>
@@ -31,35 +37,76 @@
 
 <script>
 import NotToken from '../components/NotToken.vue';
+import axios from 'axios';
 export default {
   data() {
-        return {
-          roleName: '',
-          name: '',
-        };
-    },
-    methods: {
-        backhome () {
-            if(this.roles == '1'){
-                this.$router.push('/general-home')
-            }
-            else if(this.roles == '2'){
-                this.$router.push('/superStaff-home')
-            }
-            else if(this.roles == '3'){
-                this.$router.push('/staff-home')
-            }
-        },
-        
-        openPopup(){
-          popup.classList.add('open-popup')
-        },
-      
-        closePopup(){
-          popup.classList.remove('open-popup')
+    return {
+      roleName: '',
+      name: '',
+      username: '6209620019',
+      bookings: []
+    };
+  },
+  methods: {
+    fetchBookings() {
+      const today = new Date().toISOString().split('T')[0];
+      const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+
+      axios.get('http://localhost:3000/bookingHistory', {
+        params: {
+          username: this.username
         }
+      })
+      .then(response => {
+        const filteredBookings = response.data.filter(booking => {
+        const bookingDate = new Date(booking.bookingDate);
+        return bookingDate >= new Date(today) && bookingDate <= new Date(tomorrow);
+        });
+        this.bookings = filteredBookings;
+      })
+      .catch(error => {
+        console.error('Error fetching bookings:', error);
+      });
     },
-    mixins: [NotToken],
+    cancelBooking(booking) {
+      const requestData = {
+        date: booking.bookingDate,
+        username: this.username,
+        status: 2 
+      };
+    axios.post('http://localhost:3000/cancelBooking', requestData)
+    .then(response => {
+      console.log('Booking canceled successfully:', response.data);
+    })
+    .catch(error => {
+      console.error('Error canceling booking:', error);
+      this.fetchBookings();
+    });
+    },
+    backhome () {
+      if(this.roles == '1'){
+        this.$router.push('/general-home')
+      }
+      else if(this.roles == '2'){
+        this.$router.push('/superStaff-home')
+      }
+      else if(this.roles == '3'){
+        this.$router.push('/staff-home')
+      }
+    },
+    
+    openPopup(){
+      popup.classList.add('open-popup')
+    },
+  
+    closePopup(){
+      popup.classList.remove('open-popup')
+    }
+  },
+  mixins: [NotToken],
+  mounted() {
+  this.fetchBookings();
+  },
 }  
 </script>
 

@@ -58,7 +58,6 @@ export default {
           name: '',
           date: '2018-03-02', // YYYY-MM-DD
           selectedLane: '',
-          name: '',
           selectedDate: '', // Selected date
           minDate: '',      // Minimum date
           maxDate: '',       // Maximum date
@@ -263,7 +262,7 @@ h4 {
   padding-left: 2%;
   padding-right: 1%;
   font-size: 120%;
-  width: 40%;
+  width: 45%;
   height: 40px;
   border: none;
   border-radius: 10px;

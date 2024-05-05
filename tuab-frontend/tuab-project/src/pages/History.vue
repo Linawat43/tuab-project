@@ -12,14 +12,23 @@
             <div class="content">
                 <br><br><br>
                 <h1>Booking History</h1><br><br>
-                <div class="slot">
+                <!-- <div class="slot">
                   <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.00</s1><button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
                   <img src="paychecked.png" width=4% height=4%>
                 </div>
                 <div class="slot">
                   <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.30</s1><button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
                   <img src="paypending.png" width=4% height=4%>
-                </div>
+                </div> -->
+                <div v-for="(booking, index) in bookings" :key="index" class="slot">
+                <h2>{{ booking.bookingDate }}</h2>
+                <s1>Lane {{ booking.targetLaneID }}</s1>
+                <s1>{{ booking.shiftID }}</s1>
+                <button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
+
+                <img v-if="booking.bookingStatusID === 2 || booking.bookingStatusID === 3 || booking.bookingStatusID === 4" src="paychecked.png" width="4%" height="4%">
+                <img v-else-if="booking.bookingStatusID === 1" src="paypending.png" width="4%" height="4%">
+            </div>
                 <br><br>
             </div>
         </body>
@@ -28,50 +37,51 @@
 
 <script>
 import NotToken from '../components/NotToken.vue';
+import axios from 'axios';
 export default {
   data() {
         return {
           roleName: '',
           name: '',
+          username: '6209620019',
+          bookings: []
         };
     },
+    mixins: [NotToken],
+    // mounted() {
+    //   const uuname = this.username
+    //   console.log(uuname);
+    // },
+    created() {
+      
+      this.fetchBookings();
+    },
     methods: {
-        backhome () {
-            if(this.roles == '1'){
-                this.$router.push('/general-home')
-            }
-            else if(this.roles == '2'){
-                this.$router.push('/superStaff-home')
-            }
-            else if(this.roles == '3'){
-                this.$router.push('/staff-home')
-            }
-        },
+      fetchBookings() {
+        axios.get('http://localhost:3000/bookingHistory', {params: {username: this.username}})
+            .then(response => {
+                this.bookings = response.data;
+            })
+            .catch(error => {
+                console.error('Error fetching bookings:', error);
+            });
+      },
+      backhome () {
+          if(this.roles == '1'){
+              this.$router.push('/general-home')
+          }
+          else if(this.roles == '2'){
+              this.$router.push('/superStaff-home')
+          }
+          else if(this.roles == '3'){
+              this.$router.push('/staff-home')
+          }
+      },
 
         addslip () {
           this.$router.replace("add-payment")
         }
     },
-    mixins: [NotToken],
-    // mounted() {
-    //     const token = localStorage.getItem("token");
-    //     if (token) {
-    //       axios.get('http://localhost:3000/user-detail', {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //     .then(response => {
-    //         // Update the name property with user information retrieved from the server
-    //         this.roles = response.data.roleID;
-
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching user information:', error);
-    //         // Handle error appropriately, such as displaying an error message
-    //     });
-    //     }
-    // }
 }  
 </script>
 
@@ -184,11 +194,10 @@ s1 {
     border-style: none;
     margin: auto;
     padding: auto;
-    width: 25%;
+    width: 17%;
     height: 40px;
     padding-top: 0.5%;
     text-align: center;
-    
 }
 
 .cancelbtn {
@@ -222,7 +231,7 @@ s1 {
   color: #FFFFFF;
   text-align: center;
   font-size: 100%;
-  width: 20%;
+  width: 15%;
   height: 40px;
   transition: all 0.5s;
   cursor: pointer;

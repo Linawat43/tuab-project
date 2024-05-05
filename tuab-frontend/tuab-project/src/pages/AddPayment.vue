@@ -20,14 +20,14 @@
               <h5>Please check the account no., account name, and the amount of money prior<br>to completing your transfer</h5>
               <n1>Note: Please finish your payment and upload slip photo within 10 minutes</n1>
               
-              <form enctype="multipart/form-data">
+              <form @submit.prevent="upload" >
                       <center>
                           <label for="img">Upload slip photo</label>
-                          <input class="imgdata" type="file" id="img" name="img" accept="image/*">
+                          <input class="imgdata" type="file" id="img" name="img" accept="image/*" required>
                       </center>
-              </form>
               <h6>Note: After uploading your slip photo, please wait for our confirming</h6>
-              <center><button class="submit" type="submit" @click="openPopup">UPLOAD</button></center>
+              <center><button class="submit" type="submit" @click="upload">UPLOAD</button></center>
+            </form>
           </div>
 
           <div class="popup" id="popup">
@@ -51,14 +51,22 @@
     methods: {
       backverify () {
             this.$router.push('/history')
-        },
-        openPopup(){
-          popup.classList.add('open-popup')
-        },
-      
-        closePopup(){
-          this.$router.push('/history')
+      },
+
+        upload(){
+        const fileInput = document.getElementById('img');
+        if (fileInput.files.length>0) {
+          this.openPopup();
         }
+      },
+
+      openPopup(){
+        popup.classList.add('open-popup')
+      },
+      
+      closePopup(){
+        this.$router.push('/history')
+      }
     },
     mixins: [NotToken],
   }

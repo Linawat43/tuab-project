@@ -59,7 +59,6 @@ export default {
           name: '',
           date: '2018-03-02', // YYYY-MM-DD
           selectedLane: '',
-          name: '',
           selectedDate: '', // Selected date
           minDate: '',      // Minimum date
           maxDate: '',       // Maximum date
