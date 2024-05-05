@@ -1,38 +1,38 @@
 <template lang="">
-    <div class="container">
-        <body>
-            <div class="menubar">
-              <div class="namebar">
-                    <h3>{{roleName}}: {{name}}</h3>
-                </div>
-                <br><br>
-                <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
-            </div>
+  <div class="container">
+      <body>
+          <div class="menubar">
+            <div class="namebar">
+                  <h3>{{roleName}}: {{name}}</h3>
+              </div>
+              <br><br>
+              <p Align=center><button class="backbtn" @click="backhome"><span> BACK </span></button></p><br>
+          </div>
 
-            <div class="content">
-                <br><br><br>
-                <h1>Cancel Booking</h1><br><br>
-                <!-- <div class="slot">
-                  <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.00</s1><button class="cancelbtn" @click="openPopup"> CANCEL </button><br>
-                </div> -->
-                <div v-for="(booking, index) in bookings" :key="index" class="slot">
-                  <h2>{{ booking.bookingDate }}</h2>
-                  <s1>Lane {{ booking.targetLaneID }}</s1>
-                  <s1>{{ booking.shiftID }}</s1>
-                  <button class="cancelbtn" @click="cancelBooking(booking)">CANCEL</button>
-                </div>
-                <br><br>
-            </div>
-          
-            <div class="popup" id="popup">
-              <a class="close" @click="closePopup">X</a>
-              <img src="warning.png" width=40% height=40%><br>
-                <h7>Cancel your booking?</h7><br>
-                <h8>Please click SUBMIT below, to cancelling your booking</h8><br>
-                <button type="submit" @click="closePopup"> SUBMIT </button>
-          </div> 
-        </body>
-    </div>
+          <div class="content">
+              <br><br><br>
+              <h1>Cancel Booking</h1><br><br>
+              <!-- <div class="slot">
+                <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.00</s1><button class="cancelbtn" @click="openPopup"> CANCEL </button><br>
+              </div> -->
+              <div v-for="(booking, index) in bookings" :key="index" class="slot">
+                <h2>{{ booking.bookingDate }}</h2>
+                <s1>Lane {{ booking.targetLaneID }}</s1>
+                <s1>{{ booking.shiftID }}</s1>
+                <button class="cancelbtn" @click="cancelBooking(booking)">CANCEL</button>
+              </div>
+              <br><br>
+          </div>
+        
+          <div class="popup" id="popup">
+            <a class="close" @click="closePopup">X</a>
+            <img src="warning.png" width=40% height=40%><br>
+              <h7>Cancel your booking?</h7><br>
+              <h8>Please click SUBMIT below, to cancelling your booking</h8><br>
+              <button type="submit" @click="submitCancellation"> SUBMIT </button>
+        </div> 
+      </body>
+  </div>
 </template>
 
 <script>
@@ -43,8 +43,7 @@ export default {
     return {
       roleName: '',
       name: '',
-      username: '6209620019',
-      bookings: []
+      bookings: [],
     };
   },
   methods: {
@@ -60,7 +59,14 @@ export default {
       .then(response => {
         const filteredBookings = response.data.filter(booking => {
         const bookingDate = new Date(booking.bookingDate);
-        return bookingDate >= new Date(today) && bookingDate <= new Date(tomorrow);
+        const bookingStatusID = booking.bookingStatusID;
+
+        const isNotCancelledOrRejected = bookingStatusID !== 3 && bookingStatusID !== 4;
+
+        const isWithinDateRange = bookingDate >= new Date(today) && bookingDate <= new Date(tomorrow);
+
+
+        return isNotCancelledOrRejected && isWithinDateRange;
         });
         this.bookings = filteredBookings;
       })
@@ -69,19 +75,25 @@ export default {
       });
     },
     cancelBooking(booking) {
-      const requestData = {
+      this.openPopup();
+      if(this.submitCancellation){
+        const requestData = {
         date: booking.bookingDate,
         username: this.username,
-        status: 2 
+        status: 3 
       };
-    axios.post('http://localhost:3000/cancelBooking', requestData)
-    .then(response => {
-      console.log('Booking canceled successfully:', response.data);
-    })
-    .catch(error => {
-      console.error('Error canceling booking:', error);
-      this.fetchBookings();
-    });
+      axios.post('http://localhost:3000/cancelBooking', requestData)
+      .then(response => {
+        console.log('Booking canceled successfully:', response.data);
+      })
+      .catch(error => {
+        console.error('Error canceling booking:', error);
+        this.fetchBookings();
+      });
+      }
+    },
+    submitCancellation() {
+      this.closePopup();
     },
     backhome () {
       if(this.roles == '1'){
@@ -98,14 +110,15 @@ export default {
     openPopup(){
       popup.classList.add('open-popup')
     },
-  
+
     closePopup(){
       popup.classList.remove('open-popup')
     }
   },
   mixins: [NotToken],
   mounted() {
-  this.fetchBookings();
+    this.username = localStorage.getItem("username");
+    this.fetchBookings();
   },
 }  
 </script>

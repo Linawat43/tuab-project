@@ -11,7 +11,7 @@ router.get('/', jsonParser, function(req, res, next) {
   const { workDate } = req.query;
   // const { workDate } = req.body;
 
-  connection.execute("SELECT targetLaneID, shiftID, DATE_FORMAT(bookingDate, '%Y-%m-%d') AS bookingDate FROM Booking WHERE bookingDate = ?",
+  connection.execute("SELECT targetLaneID, shiftID, DATE_FORMAT(bookingDate, '%Y-%m-%d') AS bookingDate, bookingStatusID FROM Booking WHERE bookingDate = ?",
       [workDate],
       (err, rows) => {
         if (err) {
@@ -30,8 +30,12 @@ router.get('/', jsonParser, function(req, res, next) {
         });
 
         rows.forEach(row => {
-          const { targetLaneID, shiftID } = row;
-          laneStatus[targetLaneID][shiftID] = true;
+          const { targetLaneID, shiftID, bookingStatusID } = row;
+          if (bookingStatusID === 1 || bookingStatusID === 2) {
+            laneStatus[targetLaneID][shiftID] = true;
+          } else if (bookingStatusID === 3 || bookingStatusID === 4) {
+            laneStatus[targetLaneID][shiftID] = false;
+          }
         });
 
         const availability = [];

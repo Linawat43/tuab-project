@@ -38,10 +38,11 @@ router.post('/', jsonParser, async function (req, res, next) {
               let userRoles = '1'; // set role generalUser
 
               const jwtToken = jwt.sign({
-                username: req.body.username
+                username: req.body.username,
+                roleID: userRoles
             }, process.env.JWT_SECRET, { expiresIn: '20m' });
 
-            res.json({ status: 'ok', token: jwtToken, roles: userRoles});
+            res.json({ status: 'ok', token: jwtToken});
               // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
 
           }
@@ -52,15 +53,13 @@ router.post('/', jsonParser, async function (req, res, next) {
                 console.error('Error executing SELECT query for roles:', err);
                 return;
               }
-              let userRoles = roles.map(role => role.roleID);
-
               const jwtToken = jwt.sign({
                 username: req.body.username,
-                // roles: userRoles,
+                roleID: roles[0].roleID,
                 // name: response.data.displayname_en
             }, process.env.JWT_SECRET, { expiresIn: '20m' });
 
-            res.json({ status: 'ok', token: jwtToken, roles: userRoles});
+            res.json({ status: 'ok', token: jwtToken});
               // res.json({ status: 'ok', message: 'login success', roles: userRoles, name: response.data.displayname_en, username: req.body.username});
             });
           }

@@ -6,9 +6,9 @@
 export default{
     methods: {
         logout() {
-            // sessionStorage.removeItem("name");
-            // sessionStorage.removeItem("role");
-            // sessionStorage.removeItem("username");
+            localStorage.removeItem("name");
+            localStorage.removeItem("roleName");
+            localStorage.removeItem("username");
             localStorage.removeItem("token");
             this.$router.push('/');
         }

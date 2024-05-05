@@ -10,24 +10,27 @@
             </div>
 
             <div class="content">
-                <br><br><br>
-                <h1>Booking History</h1><br><br>
-                <!-- <div class="slot">
-                  <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.00</s1><button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
-                  <img src="paychecked.png" width=4% height=4%>
-                </div>
-                <div class="slot">
-                  <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.30</s1><button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
-                  <img src="paypending.png" width=4% height=4%>
-                </div> -->
-                <div v-for="(booking, index) in bookings" :key="index" class="slot">
-                <h2>{{ booking.bookingDate }}</h2>
-                <s1>Lane {{ booking.targetLaneID }}</s1>
-                <s1>{{ booking.shiftID }}</s1>
-                <button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
+              <br><br><br>
+              <h1>Booking History</h1><br>
+              <center><img src="bstatus.png" width=39% height=15%></center>
+              <br><br>
+              <!-- <div class="slot">
+                <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.00</s1><button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
+                <img src="paychecked.png" width=4% height=4%>
+              </div>
+              <div class="slot">
+                <h2>DD/MM/YYYY</h2><s1>Lane 1</s1><s1>17.30</s1><button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
+                <img src="paypending.png" width=4% height=4%>
+              </div> -->
+              <div v-for="(booking, index) in bookings" :key="index" class="slot">
+              <h2>{{ booking.bookingDate }}</h2>
+              <s1>Lane {{ booking.targetLaneID }}</s1>
+              <s1>{{ booking.shiftID }}</s1>
+              <button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
 
-                <img v-if="booking.bookingStatusID === 2 || booking.bookingStatusID === 3 || booking.bookingStatusID === 4" src="paychecked.png" width="4%" height="4%">
-                <img v-else-if="booking.bookingStatusID === 1" src="paypending.png" width="4%" height="4%">
+              <img v-if="booking.bookingStatusID === 2 || booking.bookingStatusID === 4" src="paychecked.png" width="4%" height="4%">
+              <img v-else-if="booking.bookingStatusID === 1" src="paypending.png" width="4%" height="4%">
+              <img v-else-if="booking.bookingStatusID === 3" src="cancel.png" width="4%" height="4%">
             </div>
                 <br><br>
             </div>
@@ -43,17 +46,13 @@ export default {
         return {
           roleName: '',
           name: '',
-          username: '6209620019',
           bookings: []
         };
     },
     mixins: [NotToken],
-    // mounted() {
-    //   const uuname = this.username
-    //   console.log(uuname);
-    // },
-    created() {
-      
+    mounted() {
+      this.username = localStorage.getItem("username");
+      console.log('Username:',this.username);
       this.fetchBookings();
     },
     methods: {

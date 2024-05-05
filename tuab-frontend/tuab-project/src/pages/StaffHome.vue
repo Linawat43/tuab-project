@@ -21,17 +21,29 @@
               <form @submit.prevent="submitForm">
               <p Align="center">
                 <input class="datepicker" type="date" v-model="selectedDate" :min="minDate" :max="maxDate">
+                <button class="select" type="submit">Select</button>
               </p>
               </form>
               <br><br>
 
               <!-- Bookings Slot -->
-              <div class="slot">
+              <!-- <div class="slot">
                   <h2>620XXXXXXX</h2><h5>17.00</h5><h5>Lane 1</h5><button class="slipbtn" @click="openPopup">Slip photo</button>
                   <select v-model="selectedStatus" id="status">
                   <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
                   </select>
                   <br>
+              </div>
+              <center><button class="submit" type="submit">UPDATE</button></center> -->
+              <div v-for="(booking, index) in bookings" :key="index" class="slot">
+                <h2>{{ booking.username }}</h2>
+                <h5>{{ booking.shiftID }}</h5>
+                <h5>Lane {{ booking.targetLaneID }}</h5>
+                <button class="slipbtn" @click="openPopup">Slip photo</button>
+                <select v-model="selectedStatus" id="status">
+                    <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
+                </select>
+                <br>
               </div>
               <center><button class="submit" type="submit">UPDATE</button></center>
           </div>
@@ -46,6 +58,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import LogoutBotton from '../components/LogoutBotton.vue';
 import NotToken from '../components/NotToken.vue';
 export default {
@@ -63,10 +76,11 @@ export default {
           maxDate: '',       // Maximum date
           selectedStatus: null,
           status: [
-            {id: null, name: 'Please select one:'},
-            {id: 1, name: 'Completed'},
-            {id: 2, name: 'Contact Required'},
-          ]
+          {id: null, name: 'Please select one:'},
+            {id: 2, name: 'Confirm'},
+            {id: 3, name: 'Cancel'},
+          ],
+          bookings: []
         };
     },
     mixins: [NotToken],
@@ -88,7 +102,16 @@ export default {
         },
         closePopup(){
           popup.classList.remove('open-popup')
-        }
+        },
+        submitForm() {
+          axios.get('http://localhost:3000/checkBookStaff', { params: { date: this.selectedDate } })
+            .then(response => {
+              this.bookings = response.data;
+            })
+            .catch(error => {
+              console.error('Error fetching bookings:', error);
+            });
+        },
     },
     mounted() {
           // Get today's date
@@ -298,6 +321,7 @@ h4 {
   display: flex;
   flex-direction: row;
   column-gap: 4%;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -360,6 +384,35 @@ select {
     height: 50px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.select {
+    color: #FFFFFF;
+    background-color: #94b9ef;
+    border-color: #94b9ef;
+    font-family: Verdana;
+    font-size: 100%;
+    width: 10%;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 2%;
+    font-weight: bold;
+}
+
+.select:hover {
+    color: #94b9ef;
+    background-color: #FFFFFF;
+    border-color: #94b9ef;
+    border: 2px solid;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 100%;
+    width: 10%;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 2%;
 }
 
 /* PopUp */

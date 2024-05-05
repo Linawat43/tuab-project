@@ -50,7 +50,10 @@ export default {
           roleName: '',
           name: '',
           username: '',
-          tel: ''
+          tel: '',
+          date: '',
+          Tlane: '',
+          Rshift: ''
         };
     },
     methods: {

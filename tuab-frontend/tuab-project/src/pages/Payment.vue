@@ -43,6 +43,7 @@
 </template>
 <script>
 import NotToken from '../components/NotToken.vue';
+import axios from 'axios';
 export default {
   data() {
         return {
@@ -70,9 +71,16 @@ export default {
 
       upload(){
         const fileInput = document.getElementById('img');
-        if (fileInput.files.length>0) {
-          this.openPopup();
-        }
+        const formData = new FormData();
+        formData.append('image', fileInput.files[0]);
+
+        axios.post('http://localhost:3000/uploadSlip', formData)
+          .then(response => {
+            this.openPopup();
+          })
+          .catch(error => {
+            console.error('Error uploading image:', error);
+          });
       },
 
       openPopup(){

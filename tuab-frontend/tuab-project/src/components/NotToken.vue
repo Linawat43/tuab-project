@@ -2,6 +2,12 @@
 import axios from 'axios';
 
 export default {
+    data() {
+        return {
+            username: ''
+            
+        }
+    },
     mounted() {
         const token = localStorage.getItem("token");
         if (!token) {
