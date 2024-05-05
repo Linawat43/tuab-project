@@ -366,6 +366,7 @@ h2 {
     height: 45px;
     margin-left: 5%;
     margin-bottom: 4%;
+    pointer-events: none;
 }
 
 /* Booked round */
@@ -379,6 +380,7 @@ h2 {
     height: 45px;
     margin-left: 5%;
     margin-bottom: 4%;
+    pointer-events: none;
 }
 
 /* Available round */

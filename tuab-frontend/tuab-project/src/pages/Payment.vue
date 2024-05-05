@@ -73,6 +73,7 @@ export default {
         const fileInput = document.getElementById('img');
         const formData = new FormData();
         formData.append('image', fileInput.files[0]);
+        formData.append('username', this.username);
 
         axios.post('http://localhost:3000/uploadSlip', formData)
           .then(response => {
@@ -84,22 +85,26 @@ export default {
       },
 
       openPopup(){
+        const popup = document.getElementById('popup');
         popup.classList.add('open-popup')
       },
       
       closePopup(){
-        if(this.roles == '1'){
-              this.$router.push('/general-home')
-          }
-          else if(this.roles == '2'){
-              this.$router.push('/superStaff-home')
-          }
-          else if(this.roles == '3'){
-              this.$router.push('/staff-home')
-          }
+        const popup = document.getElementById('popup');
+        popup.classList.remove('open-popup');
+        if (this.roles === '1') {
+          this.$router.push('/general-home');
+        } else if (this.roles === '2') {
+          this.$router.push('/superStaff-home');
+        } else if (this.roles === '3') {
+          this.$router.push('/staff-home');
+        }
       }
   },
-    mixins: [NotToken],
+  mixins: [NotToken],
+  mounted() {
+    this.username = localStorage.getItem("username");
+  },
 }
 </script>
 

@@ -38,6 +38,7 @@
             <center><button class="submit" type="submit">UPDATE</button></center> -->
             <div v-for="(booking, index) in bookings" :key="index" class="slot">
               <h2>{{ booking.username }}</h2>
+              <t1>(Tel.{{tel}})</t1>
               <h5>{{ booking.shiftID }}</h5>
               <h5>Lane {{ booking.targetLaneID }}</h5>
               <button class="slipbtn" @click="openPopup">Slip photo</button>
@@ -81,7 +82,8 @@ export default {
             {id: 2, name: 'Confirm'},
             {id: 3, name: 'Cancel'},
           ],
-          bookings: []
+          bookings: [],
+          tel: ''
         };
     },
     mixins: [NotToken],
@@ -330,7 +332,7 @@ h4 {
   background-color: #DFE9F5;
   display: flex;
   flex-direction: row;
-  column-gap: 4%;
+  column-gap: 2%;
   margin-bottom: 20px;
 }
 
@@ -339,7 +341,15 @@ h2 {
     font-size: 130%;
     font-family: Verdana;
     float: left;
-    margin-left: 10%;
+    margin-left: 7%;
+}
+
+t1 {
+    color: #000000;
+    font-size: 100%;
+    font-family: Verdana;
+    float: left;
+    padding-top: 0.5%;
 }
 
 h5 {
@@ -351,7 +361,7 @@ h5 {
     border-style: none;
     margin: auto;
     padding: auto;
-    width: 15%;
+    width: 18%;
     height: 40px;
     padding-top: 0.5%;
     text-align: center;
@@ -374,6 +384,7 @@ h5 {
 
 .slipbtn:hover {
   color: #94b9ef;
+  width: 18%;
   background-color: #FFFFFF;
   border-color: #94b9ef;
   border: 2px solid;

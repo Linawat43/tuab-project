@@ -28,6 +28,8 @@ var cancelBookingRouter = require('./routes/cancelBooking');
 var bookingHistoryRouter = require('./routes/bookingHistory');
 var checkBookStaffRouter = require('./routes/checkBookStaff');
 var staffApproveRouter = require('./routes/staffApprove');
+var uploadSlipRouter = require('./routes/uploadSlip');
+var operationRouter = require('./routes/operation');
 
 var app = express();
 
@@ -61,6 +63,8 @@ app.use('/cancelBooking', cancelBookingRouter);
 app.use('/bookingHistory', bookingHistoryRouter);
 app.use('/checkBookStaff', checkBookStaffRouter);
 app.use('/staffApprove', staffApproveRouter);
+app.use('/uploadSlip', uploadSlipRouter);
+app.use('/operation', operationRouter);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({
