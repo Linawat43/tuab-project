@@ -44,10 +44,11 @@
 
 <script>
 import NotToken from '../components/NotToken.vue';
-
+import axios from 'axios';
 export default {
     data() {
         return {
+          isSubmitting: false,
           roleName: '',
           startDate: '',
           endDate:'',
@@ -62,16 +63,32 @@ export default {
         },
 
         submitForm() {
-          if (this.startDate && this.endDate) {
-            this.openPopup();
+          if (this.startDate && this.endDate && !this.isSubmitting) {
+            this.isSubmitting = true;
+            const formData = {
+              start: this.startDate,
+              end: this.endDate
+          };
+            axios.post('http://localhost:3000/operation', formData)
+            .then((response) => {
+              this.openPopup();
+            })
+            .catch((error) => {
+              console.error('Error inserting operation into database:', error);
+            })
+            .finally(() => {
+              this.isSubmitting = false;
+            });
           }
         },
 
         openPopup(){
+          const completePopup = document.getElementById('completePopup');
           completePopup.classList.add('open-popup')
         },
 
         closePopup(){
+          const completePopup = document.getElementById('completePopup');
           completePopup.classList.remove('open-popup')
         }
     },
