@@ -191,9 +191,11 @@ export default {
 
             if (workingShift === 1 && 2) {
                 button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
-            } else if (workingShift === 2 && 1) {
-                button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
-            } else if (workingShift === 1) {
+            } 
+            // else if (workingShift === 2 && 1) {
+            //     button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
+            // } 
+            else if (workingShift === 1) {
               if (shiftId === '1') {
                 button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
               } else {
