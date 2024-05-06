@@ -10,7 +10,7 @@ var connection = require('../connection/db.js');
 router.get('/', jsonParser, function(req, res, next) {
   const { workDate } = req.query;
 
-    connection.execute("SELECT workingDate FROM WorkSchedule WHERE workingDate = ?",
+    connection.execute("SELECT workingDate, workingShift FROM WorkSchedule WHERE workingDate = ?",
     [workDate],
     (err, rows) => {
         if (err) {

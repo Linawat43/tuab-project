@@ -7,16 +7,19 @@ require('dotenv').config();
 var connection = require('../connection/db.js');
 
 router.post('/', jsonParser, function(req, res, next) {
-  const { start, end } = req.body;
+  const { start, end, opID } = req.body;
 
-  connection.execute("INSERT INTO OperationDay ( startDate, endDate) VALUES (?, ?)",
-      [start, end],
+  connection.execute("INSERT INTO OperationDay (operationID, startDate, endDate) VALUES (?, ?, ?)",
+      [opID, start, end],
       (err, results) => {
           if (err) {
               console.error('Error inserting operation into database:', err);
               return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
           }
-          res.json({ status: 'ok', message: 'successful', operationId: results.insertId });
+          if (results.affectedRows === 0) {
+            return res.status(404).json({ status: 'error', message: 'User not found' });
+          }
+          res.json({ status: 'ok', message: 'successful'});
       });
 });
 
