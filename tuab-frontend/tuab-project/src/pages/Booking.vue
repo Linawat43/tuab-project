@@ -172,7 +172,7 @@ export default {
             }
           });
           const laneAvailabilityData = bookingCheckResponse.data;
-          const workingShift = dayOffResponse.data[0].workingShift;
+          const workingShift = dayOffResponse.data.map(item => item.workingShift);
           const laneButtons = document.querySelectorAll('.blueround, .redround');
           
           laneButtons.forEach(button => {
@@ -183,34 +183,43 @@ export default {
               return item.lane === parseInt(laneId) && item.shift === parseInt(shiftId);
             });
 
-            // if (isLaneShiftAvailable) {
-            //   button.className = 'blueround';
-            // } else {
-            //   button.className = 'redround';
-            // }
-
-            if (workingShift === 1 && 2) {
+            if (workingShift.includes(1) && workingShift.includes(2) && workingShift.includes(3)) {
+              if (shiftId === '1' || shiftId === '2') {
                 button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
-            } 
-            // else if (workingShift === 2 && 1) {
-            //     button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
-            // } 
-            else if (workingShift === 1) {
+              } else {
+                button.className = 'greyround';
+              }
+            } else if (workingShift.includes(1) && workingShift.includes(3)) {
+              if (shiftId === '1' || shiftId === '2') {
+                button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
+              } else {
+                button.className = 'greyround';
+              }
+            } else if (workingShift.includes(2) && workingShift.includes(3)) {
+              if (shiftId === '1' || shiftId === '2') {
+                button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
+              } else {
+                button.className = 'greyround';
+              }
+            } else if (workingShift.includes(1)) {
               if (shiftId === '1') {
                 button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
               } else {
                 button.className = 'greyround';
               }
-            } else if (workingShift === 2) {
+            } else if (workingShift.includes(2)) {
               if (shiftId === '2') {
                 button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
               } else {
                 button.className = 'greyround';
               }
-            } else if (workingShift === 3) {
-              button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
-            }
-            
+            } else if (workingShift.includes(3)) {
+              if (shiftId === '1' || shiftId === '2') {
+                button.className = isLaneShiftAvailable ? 'blueround' : 'redround';
+              } else {
+                button.className = 'greyround';
+              }
+            } 
             button.disabled = false;
           });
         }
