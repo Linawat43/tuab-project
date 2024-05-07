@@ -77,29 +77,27 @@ export default {
   },
 
   methods: {
-    fetchOperation() {
-        axios.get('http://localhost:3000/checkoperation')
-            .then(response => {
-              if (response.data && response.data.length > 0) {
-                const operationDay = response.data[0];
-                const endDate = operationDay.endDate;
-                localStorage.setItem("endDate", endDate);
-              } else {
-                console.error('No data received or invalid response format.');
-              }
-            })
-            .catch(error => {
-                console.error('Error fetching bookings:', error);
-            });
-    },
+    // fetchOperation() {
+    //     axios.get('http://localhost:3000/checkoperation')
+    //         .then(response => {
+    //           if (response.data && response.data.length > 0) {
+    //             const operationDay = response.data[0];
+    //             const endDate = operationDay.endDate;
+    //             localStorage.setItem("endDate", endDate);
+    //           } else {
+    //             console.error('No data received or invalid response format.');
+    //           }
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching bookings:', error);
+    //         });
+    // },
     backhome () {
       if(this.roles == '2'){
           this.$router.push('/superStaff-home')
-          localStorage.removeItem("endDate");
       }
       else if(this.roles == '3'){
           this.$router.push('/staff-home')
-          localStorage.removeItem("endDate");
       }
     },
 
@@ -183,7 +181,6 @@ export default {
       }
     }
   },
-
   mounted() {      
     // Get today's date
     const today = new Date();
@@ -191,7 +188,7 @@ export default {
     // Set the minimum date to today
     this.minDate = today.toISOString().split('T')[0];
 
-    this.fetchOperation();
+    // this.fetchOperation();
 
     this.maxDate = localStorage.getItem("endDate")
 

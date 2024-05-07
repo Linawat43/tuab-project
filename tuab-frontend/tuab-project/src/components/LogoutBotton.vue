@@ -10,6 +10,7 @@ export default{
             localStorage.removeItem("roleName");
             localStorage.removeItem("username");
             localStorage.removeItem("token");
+            localStorage.removeItem("endDate");
             this.$router.push('/');
         }
     },

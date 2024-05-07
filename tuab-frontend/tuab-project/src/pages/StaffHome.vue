@@ -68,71 +68,87 @@ import axios from 'axios';
 import LogoutBotton from '../components/LogoutBotton.vue';
 import NotToken from '../components/NotToken.vue';
 export default {
-    components:{
-        LogoutBotton
+  components:{
+    LogoutBotton
+  },
+  data() {
+    return {
+      roleName: '',
+      name: '',
+      date: '2018-03-02', // YYYY-MM-DD
+      selectedLane: '',
+      selectedDate: '', // Selected date
+      minDate: '',      // Minimum date
+      maxDate: '',       // Maximum date
+      selectedStatus: null,
+      status: [
+      {id: null, name: 'Please select one:'},
+        {id: 2, name: 'Confirm'},
+        {id: 3, name: 'Cancel'},
+      ],
+      bookings: []
+    };
+  },
+  mixins: [NotToken],
+  methods: {
+    booking() {
+      this.$router.replace("booking");
     },
-    data() {
-        return {
-          roleName: '',
-          name: '',
-          date: '2018-03-02', // YYYY-MM-DD
-          selectedLane: '',
-          selectedDate: '', // Selected date
-          minDate: '',      // Minimum date
-          maxDate: '',       // Maximum date
-          selectedStatus: null,
-          status: [
-          {id: null, name: 'Please select one:'},
-            {id: 2, name: 'Confirm'},
-            {id: 3, name: 'Cancel'},
-          ],
-          bookings: []
-        };
+    history() {
+      this.$router.replace("history");
     },
-    mixins: [NotToken],
-    methods: {
-        booking() {
-          this.$router.replace("booking");
-        },
-        history() {
-          this.$router.replace("history");
-        },
-        cancel() {
-          this.$router.replace("cancel");
-        },
-        shiftSchedule() {
-          this.$router.replace("shift-schedule");
-        },
-        openPopup(){
-          popup.classList.add('open-popup')
-        },
-        closePopup(){
-          popup.classList.remove('open-popup')
-        },
-        submitForm() {
-          axios.get('http://localhost:3000/checkBookStaff', { params: { date: this.selectedDate } })
-            .then(response => {
-              this.bookings = response.data;
-            })
-            .catch(error => {
+    cancel() {
+      this.$router.replace("cancel");
+    },
+    shiftSchedule() {
+      this.$router.replace("shift-schedule");
+    },
+    openPopup(){
+      popup.classList.add('open-popup')
+    },
+    closePopup(){
+      popup.classList.remove('open-popup')
+    },
+    submitForm() {
+      axios.get('http://localhost:3000/checkBookStaff', { params: { date: this.selectedDate } })
+        .then(response => {
+          this.bookings = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching bookings:', error);
+        });
+    },
+    fetchOperation() {
+      axios.get('http://localhost:3000/checkoperation')
+          .then(response => {
+            if (response.data && response.data.length > 0) {
+              const operationDay = response.data[0];
+              const endDate = operationDay.endDate;
+              localStorage.setItem("endDate", endDate);
+            } else {
+              console.error('No data received or invalid response format.');
+            }
+          })
+          .catch(error => {
               console.error('Error fetching bookings:', error);
-            });
-        },
+          });
     },
-    mounted() {
-          // Get today's date
-      const today = new Date();
+  },
+  mounted() {
+        // Get today's date
+    const today = new Date();
 
-      // Set the minimum date to today
-      this.minDate = today.toISOString().split('T')[0];
+    // Set the minimum date to today
+    this.minDate = today.toISOString().split('T')[0];
 
-      // Get tomorrow's date
-      const tomorrow = new Date();
-      tomorrow.setDate(today.getDate() + 1);
+    // Get tomorrow's date
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
 
-      // Set the maximum date to tomorrow
-      this.maxDate = tomorrow.toISOString().split('T')[0];
-    }
+    // Set the maximum date to tomorrow
+    this.maxDate = tomorrow.toISOString().split('T')[0];
+    this.fetchOperation();
+  }
 }
 </script>
 
