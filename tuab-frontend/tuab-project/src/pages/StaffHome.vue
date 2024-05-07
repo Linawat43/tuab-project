@@ -40,7 +40,7 @@
                 <t1>(Tel.{{tel}})</t1>
                 <h5>{{ booking.shiftID }}</h5>
                 <h5>Lane {{ booking.targetLaneID }}</h5>
-                <button class="slipbtn" @click="openPopup">Slip photo</button>
+                <button class="slipbtn" @click="openPopup">Payment</button>
                 <select v-model="selectedStatus" id="status">
                     <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
                 </select>
@@ -52,7 +52,12 @@
           <!-- Slip PopUp -->
           <div class="popup" id="popup">
               <a class="close" @click="closePopup">X</a>
-              <img src="slip.jpg" width=50%><br>
+              <br><br>
+              <p1>Payment Detail</p1>
+              <br><br>
+              <p2>Bank:  </p2><br>
+              <p2>Last 4 digits of account no.:  </p2><br>
+              <p2>Proceed date and time:  </p2>
           </div>
       </body>
   </div>
@@ -357,6 +362,25 @@ h5 {
     text-align: center;
 }
 
+p1 {
+  font-size: 150%;
+  background-color: #FFFFFF;
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 8px;
+  color: #000000;
+  font-weight: bold;
+  margin-top: 10%;
+}
+
+p2 {
+  padding-top: 5%;
+  font-size: 150%;
+  color: #000000;
+}
+
 /* selection */
 select {
   cursor: pointer;
@@ -427,6 +451,7 @@ select {
 /* PopUp */
 .popup{
     width: 40%;
+    height: 40%;
     background: #c2dbf0;
     border-radius: 10px;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
@@ -442,10 +467,7 @@ select {
     top: 50%;
     transform: translate(-50%, -50%) scale(1);
 }
-.popup img{
-    padding-top: 5%;
-    padding-bottom: 5%;
-}
+
 .popup .close {
   position: absolute;
   top: 20px;

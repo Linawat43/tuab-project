@@ -20,7 +20,7 @@ router.get('/', jsonParser, function(req, res, next) {
         const formattedRows = rows.map(row => {
             const { bookingDate, targetLaneID, shiftID, bookingStatusID } = row;
             const dateObject = new Date(bookingDate);
-            const options = { year: 'numeric', month: '2-digit', day: '2-digit' }; // กำหนด options สำหรับการแสดงผล
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
             const formattedDate = dateObject.toLocaleDateString('en-GB', options)
               .split('/')

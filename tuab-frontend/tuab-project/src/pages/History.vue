@@ -52,7 +52,7 @@ export default {
     mixins: [NotToken],
     mounted() {
       this.username = localStorage.getItem("username");
-      console.log('Username:',this.username);
+      // console.log('Username:',this.username);
       this.fetchBookings();
     },
     methods: {

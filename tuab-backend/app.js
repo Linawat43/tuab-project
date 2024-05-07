@@ -31,6 +31,7 @@ var staffApproveRouter = require('./routes/staffApprove');
 var uploadSlipRouter = require('./routes/uploadSlip');
 var operationRouter = require('./routes/operation');
 var checkoperationRouter = require('./routes/checkoperation');
+var editoperationRouter = require('./routes/editoperation');
 
 var app = express();
 
@@ -67,6 +68,7 @@ app.use('/staffApprove', staffApproveRouter);
 app.use('/uploadSlip', uploadSlipRouter);
 app.use('/operation', operationRouter);
 app.use('/checkoperation', checkoperationRouter);
+app.use('/editoperation', editoperationRouter);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({

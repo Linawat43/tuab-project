@@ -7,7 +7,7 @@
                 </div>
               <br><br>
               <p Align=center><button class="backbtn" @click="backverify"><span> BACK </span></button></p><br>
-              <p Align=center><button class="skip" @click="backhome"><span> UPLOAD LATER </span></button></p>
+              <p Align=center><button class="skip" @click="backhome"><span> PAY LATER </span></button></p>
           </div>
 
           <div class="content">
@@ -19,23 +19,31 @@
               </center>
               <br>
               <h5>Please check the account no., account name, and the amount of money prior<br>to completing your transfer</h5>
-              <n1>Note: Please finish your payment and upload slip photo within 10 minutes</n1>
+              <n1>Note: When finish your payment, please insert the payment detail below.</n1>
               
-              <form @submit.prevent="upload" >
-                      <center>
-                          <label for="img">Upload slip photo</label>
-                          <input class="imgdata" type="file" id="img" name="img" accept="image/*" required>
-                      </center>
-              
-              <h6>Note: After uploading your slip photo, please wait for our confirming</h6>
-              <center><button class="submit" type="submit" @click="upload">UPLOAD</button></center>
+
+              <!-- Payment detail -->
+              <h1>Your payment detail</h1><br>
+              <form @submit.prevent="upload">
+              <h4>Please select bank: </h4>
+              <select v-model="selectedBank" id="bank" required>
+                  <option v-for="bank in bank" :key="bank.id" :value="bank.id">{{ bank.name }}</option>
+              </select>
+              <br><br>
+              <h4>Last 4 digits of your account no.: </h4>
+              <input class="bankno" type="text" v-model="bankno" maxlength="4" required>
+              <br><br>
+              <h4>Proceed date and time: </h4>
+              <input class="datepicker" v-model="proceedDate" type="datetime-local" required>
+              <h6>Note: After submitting your payment, please wait for our confirming</h6>
+              <center><button class="submit" type="submit" @click="upload">SUBMIT</button></center>
             </form>
           </div>
 
           <div class="popup" id="popup">
             <img src="paychecked.png" width=30% height=30%><br>
                 <h7>Thank you for supporting us!</h7><br>
-                <h8>We have recieving your slip photo, Please wait for our confirming</h8><br>
+                <h8>We have recieving your payment information, Please wait for our confirming</h8><br>
                 <button type="submit" @click="closePopup">DONE</button>
           </div>  
       </body>
@@ -50,6 +58,18 @@ export default {
           roles: '',
           roleName: '',
           name: '',
+          selectedBank: null,
+          bank: [
+            {id: null, name: 'Please select bank:'},
+            {id: 1, name: 'KTB'},
+            {id: 2, name: 'KBANK'},
+            {id: 3, name: 'SCB'},
+            {id: 4, name: 'BBL'},
+            {id: 5, name: 'TTB'},
+            {id: 6, name: 'BAY'},
+            {id: 7, name: 'UOBT'},
+            {id: 8, name: 'etc.'},
+          ],
         };
     },
   methods: {
@@ -70,24 +90,16 @@ export default {
       },
 
       upload(){
-        const fileInput = document.getElementById('img');
-        const formData = new FormData();
-        formData.append('image', fileInput.files[0]);
-        formData.append('username', this.username);
-
-        axios.post('http://localhost:3000/uploadSlip', formData)
-          .then(response => {
-            this.openPopup();
-          })
-          .catch(error => {
-            console.error('Error uploading image:', error);
-          });
+        if(this.selectedBank && this.bankno && this.proceedDate){
+          const popup = document.getElementById('popup');
+          popup.classList.add('open-popup')
+        }
       },
 
-      openPopup(){
-        const popup = document.getElementById('popup');
-        popup.classList.add('open-popup')
-      },
+      // openPopup(){
+      //   const popup = document.getElementById('popup');
+      //   popup.classList.add('open-popup')
+      // },
       
       closePopup(){
         const popup = document.getElementById('popup');
@@ -218,7 +230,7 @@ n1 {
 
 h4 {
   color: #000000;
-  font-size: 150%;
+  font-size: 130%;
   font-family: Verdana;
   float: left;
   margin-left: 20%;
@@ -299,19 +311,6 @@ input {
   border-radius: 10px;
   cursor: pointer;
   margin-bottom: 8%;
-}
-
-.imgdata {
-  background-color: #FFFFFF;
-  border-style: groove;
-  padding-left: 0.5%;
-  margin: auto;
-  color: #737373;
-}
-
-input[type=file]::file-selector-button {
-color: #000000;
-cursor: pointer;
 }
 
 .skip {
@@ -421,6 +420,47 @@ right: 0;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+}
+
+.datepicker {
+  background-color: #ffffff;
+  border-color: #C5D4EB;
+  font-family: sans-serif;
+  padding-left: 2%;
+  padding-right: 1%;
+  font-size: 120%;
+  width: 40%;
+  height: 33px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 2%;
+}
+
+select {
+  cursor: pointer;
+  font-family: Verdana;
+  width: 25%;
+  height: 50%;
+  color: #000000;
+  border-radius: 6px;
+  border-style: initial;
+  padding-left: 2%;
+  font-size: 120%;
+  background-color: #ffffff;
+  border-style: none;
+  margin-left: 5%;
+}
+
+.bankno {
+  font-family: Verdana;
+  width: 20%;
+  height: 28px;
+  color: #000000;
+  font-size: 120%;
+  background-color: #ffffff;
+  border-radius: 6px;
+  border-style: initial;
+  margin-left: 5%;
 }
 
 .container {
