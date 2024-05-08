@@ -7,15 +7,15 @@ require('dotenv').config();
 var connection = require('../connection/db.js');
 
 router.post('/', jsonParser, function(req, res, next) {
-    const { date, username, status } = req.body;
+    const { bookId, status } = req.body;
 
-    if (!date || !username || !status) {
+    if (!bookId || !status) {
         return res.status(400).json({ status: 'error', message: 'Missing username or status' });
     }
 
     connection.execute(
-        "UPDATE Booking SET bookingStatusID = ? WHERE bookingDate = ? AND username = ?",
-        [status, date, username],
+        "UPDATE Booking SET bookingStatusID = ? WHERE bookingID = ?",
+        [status, bookId],
         (err, results) => {
           if (err) {
             console.error('Error updating status for user:', err);

@@ -28,7 +28,7 @@
               <s1>{{ booking.shiftID }}</s1>
               <button class="addbtn" @click="addslip(booking.bookingID)"><span>PAYMENT</span></button>
 
-              <img v-if="booking.bookingStatusID === 2 || booking.bookingStatusID === 4" src="paychecked.png" width="4%" height="4%">
+              <img v-if="booking.bookingStatusID === 2" src="paychecked.png" width="4%" height="4%">
               <img v-else-if="booking.bookingStatusID === 1" src="paypending.png" width="4%" height="4%">
               <img v-else-if="booking.bookingStatusID === 3" src="cancel.png" width="4%" height="4%">
             </div>

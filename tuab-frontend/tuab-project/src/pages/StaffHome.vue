@@ -27,26 +27,21 @@
               <br><br>
 
               <!-- Bookings Slot -->
-              <!-- <div class="slot">
-                  <h2>620XXXXXXX</h2><h5>17.00</h5><h5>Lane 1</h5><button class="slipbtn" @click="openPopup">Slip photo</button>
-                  <select v-model="selectedStatus" id="status">
-                  <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
-                  </select>
-                  <br>
-              </div>
-              <center><button class="submit" type="submit">UPDATE</button></center> -->
               <div v-for="(booking, index) in bookings" :key="index" class="slot">
+              <template v-if="booking.bookingStatusID !== 3">
                 <h2>{{ booking.username }}</h2>
-                <t1>(Tel.{{tel}})</t1>
+                <t1>(Tel.{{booking.telNumber}})</t1>
                 <h5>{{ booking.shiftID }}</h5>
                 <h5>Lane {{ booking.targetLaneID }}</h5>
-                <button class="slipbtn" @click="openPopup">Payment</button>
-                <select v-model="selectedStatus" id="status">
-                    <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
+                <button class="slipbtn" @click="showSlip(booking)">Payment</button>
+                <select v-model="selectedStatus[index]" class="status-select" id="status">
+                  <option v-if="!selectedStatus[index]" :value="null" disabled selected>Please select one:</option>
+                  <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
                 </select>
                 <br>
-              </div>
-              <center><button class="submit" type="submit">UPDATE</button></center>
+              </template>
+            </div>
+            <center><button class="submit" type="submit" @click="updateStatus">UPDATE</button></center>
           </div>
 
           <!-- Slip PopUp -->
@@ -55,9 +50,9 @@
               <br><br>
               <p1>Payment Detail</p1>
               <br><br>
-              <p2>Bank:  </p2><br>
-              <p2>Last 4 digits of account no.:  </p2><br>
-              <p2>Proceed date and time:  </p2>
+              <p2>Bank:  {{ bankName }}</p2><br>
+              <p2>Last 4 digits of account no.: {{ accountDigit }}</p2><br>
+              <p2>Proceed date and time: {{ dateATime }}</p2>
           </div>
       </body>
   </div>
@@ -80,13 +75,17 @@ export default {
       selectedDate: '', // Selected date
       minDate: '',      // Minimum date
       maxDate: '',       // Maximum date
-      selectedStatus: null,
       status: [
-      {id: null, name: 'Please select one:'},
+        {id: 1, name: 'Pending'},
         {id: 2, name: 'Confirm'},
         {id: 3, name: 'Cancel'},
       ],
-      bookings: []
+      bookings: [],
+      tel: '',
+      bankName: '',
+      accountDigit: '',
+      dateATime: '',
+      selectedStatus: []
     };
   },
   mixins: [NotToken],
@@ -109,10 +108,30 @@ export default {
     closePopup(){
       popup.classList.remove('open-popup')
     },
+    showSlip(booking) {
+      const { username, bookingID } = booking;
+      console.log(bookingID);
+      axios.get('http://localhost:3000/checkSlip', { params: { username, bookId: bookingID } })
+      .then(response => {
+        this.bankName = response.data[0].bankName
+        this.accountDigit = response.data[0].accountDigit
+        this.dateATime = response.data[0].dateATime
+        this.openPopup()
+      })
+      .catch(error => {
+        console.error('Error fetching payment details:', error);
+      });
+    },
     submitForm() {
       axios.get('http://localhost:3000/checkBookStaff', { params: { date: this.selectedDate } })
         .then(response => {
           this.bookings = response.data;
+          this.selectedStatus = new Array(this.bookings.length).fill(null);
+          this.bookings.forEach((booking, index) => {
+            if (booking.bookingStatusID === 2) {
+              this.selectedStatus[index] = 2;
+            }
+          });
         })
         .catch(error => {
           console.error('Error fetching bookings:', error);
@@ -133,6 +152,25 @@ export default {
               console.error('Error fetching bookings:', error);
           });
     },
+    updateStatus() {
+      if (this.selectedStatus.some(status => status === null)) {
+        alert('Please select a status for each booking');
+        return;
+      }
+      this.bookings.forEach((booking, index) => {
+        if (booking.bookingStatusID !== 3) {
+          const selectedStatus = this.selectedStatus[index];
+          const { bookingID } = booking;
+          axios.post('http://localhost:3000/staffApprove', { bookId: bookingID, status: selectedStatus })
+            .then(response => {
+              console.log(`Status updated for bookingID ${bookingID}: ${response.data.message}`);
+            })
+            .catch(error => {
+              console.error(`Error updating status for bookingID ${bookingID}:`, error);
+            });
+        }
+      });
+    }
   },
   mounted() {
         // Get today's date
