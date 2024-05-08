@@ -16,7 +16,32 @@ router.post('/', jsonParser, function(req, res, next) {
             console.error('Error inserting payment into database:', err);
             return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
         }
-        res.json({ status: 'ok', message: 'Payment successfully', paymentId: results.insertId });
+        const paymentId = results.insertId;
+        console.log('Payment inserted successfully with paymentId:', paymentId);
+
+        connection.execute("SELECT * FROM Booking WHERE bookingID = ?",
+          [bookingID],
+          (err, bookingResults) => {
+            if (err) {
+              console.log('Error querying Booking table:', err);
+              return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+            }
+            if (bookingResults && bookingResults.length > 0) {
+              connection.execute("UPDATE Booking SET paymentID = ? WHERE bookingID = ?",
+                [paymentId, bookingID],
+                (err, updateResults) => {
+                  if (err) {
+                    console.error('Error updating Booking table:', err);
+                    return res.status(500).json({ status: 'error', message: 'Internal Server Error' });
+                  }
+                  res.json({ status: 'ok', message: 'Payment successfully', paymentId: paymentId});
+                })
+            } else {
+              console.error('BookingID not found in Booking table.');
+              res.status(404).json({ status: 'error', message: 'BookingID not found' });
+            }
+        })
+        // res.json({ status: 'ok', message: 'Payment successfully', paymentId: results.insertId });
       });
 });
 

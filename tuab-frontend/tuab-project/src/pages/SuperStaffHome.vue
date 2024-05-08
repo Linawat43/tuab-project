@@ -28,24 +28,18 @@
             <br><br>
 
             <!-- Bookings Slot -->
-            <!-- <div class="slot">
-                  <h2>620XXXXXXX</h2><h5>17.00</h5><h5>Lane 1</h5><button class="slipbtn" @click="openPopup">Slip photo</button>
-                  <select v-model="selectedStatus" id="status">
-                  <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
-                  </select>
-                  <br>
-            </div>
-            <center><button class="submit" type="submit">UPDATE</button></center> -->
             <div v-for="(booking, index) in bookings" :key="index" class="slot">
-              <h2>{{ booking.username }}</h2>
-              <t1>(Tel.{{booking.telNumber}})</t1>
-              <h5>{{ booking.shiftID }}</h5>
-              <h5>Lane {{ booking.targetLaneID }}</h5>
-              <button class="slipbtn" @click="openPopup">Payment</button>
-              <select v-model="selectedStatus" id="status">
-                  <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
-              </select>
-              <br>
+              <template v-if="booking.bookingStatusID !== 3">
+                <h2>{{ booking.username }}</h2>
+                <t1>(Tel.{{booking.telNumber}})</t1>
+                <h5>{{ booking.shiftID }}</h5>
+                <h5>Lane {{ booking.targetLaneID }}</h5>
+                <button class="slipbtn" @click="showSlip(booking)">Payment</button>
+                <select v-model="selectedStatus" id="status">
+                    <option v-for="status in status" :key="status.id" :value="status.id">{{ status.name }}</option>
+                </select>
+                <br>
+              </template>
             </div>
             <center><button class="submit" type="submit">UPDATE</button></center>
           </div>
@@ -56,9 +50,9 @@
               <br><br>
               <p1>Payment Detail</p1>
               <br><br>
-              <p2>Bank:  </p2><br>
-              <p2>Last 4 digits of account no.:  </p2><br>
-              <p2>Proceed date and time:  </p2>
+              <p2>Bank:  {{ bankName }}</p2><br>
+              <p2>Last 4 digits of account no.: {{ accountDigit }}</p2><br>
+              <p2>Proceed date and time: {{ dateATime }}</p2>
           </div>
       </body>
   </div>
@@ -88,7 +82,10 @@ export default {
         {id: 3, name: 'Cancel'},
       ],
       bookings: [],
-      tel: ''
+      tel: '',
+      bankName: '',
+      accountDigit: '',
+      dateATime: ''
     };
   },
   mixins: [NotToken],
@@ -108,10 +105,25 @@ export default {
     shiftSchedule() {
       this.$router.replace("shift-schedule");
     },
+    showSlip(booking) {
+      const { username, bookingID } = booking;
+      console.log(bookingID);
+      axios.get('http://localhost:3000/checkSlip', { params: { username, bookId: bookingID } })
+      .then(response => {
+        this.bankName = response.data[0].bankName
+        this.accountDigit = response.data[0].accountDigit
+        this.dateATime = response.data[0].dateATime
+        this.openPopup()
+      })
+      .catch(error => {
+        console.error('Error fetching payment details:', error);
+      });
+    },
     openPopup(){
       popup.classList.add('open-popup')
     },
     closePopup(){
+      this.showPopup = false;
       popup.classList.remove('open-popup')
     },
     submitForm() {
@@ -153,7 +165,12 @@ export default {
     // Set the maximum date to tomorrow
     this.maxDate = tomorrow.toISOString().split('T')[0];
     this.fetchOperation();
-  }
+  },
+//   computed: {
+//   shouldShowUpdateButton() {
+//     return this.selectedStatus === 1 || this.selectedStatus === 2;
+//   }
+// }
 }
 </script>
 

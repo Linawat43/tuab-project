@@ -33,6 +33,7 @@ var operationRouter = require('./routes/operation');
 var checkoperationRouter = require('./routes/checkoperation');
 var editoperationRouter = require('./routes/editoperation');
 var checkBookForPayRouter = require('./routes/checkBookForPay');
+var checkSlipRouter = require('./routes/checkSlip');
 
 var app = express();
 
@@ -71,6 +72,7 @@ app.use('/operation', operationRouter);
 app.use('/checkoperation', checkoperationRouter);
 app.use('/editoperation', editoperationRouter);
 app.use('/checkBookForPay', checkBookForPayRouter);
+app.use('/checkSlip', checkSlipRouter);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({

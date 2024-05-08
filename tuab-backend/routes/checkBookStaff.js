@@ -10,7 +10,7 @@ var connection = require('../connection/db.js');
 router.get('/', jsonParser, function(req, res, next) {
   const { date } = req.query;
 
-  connection.execute("SELECT User.username, User.telNumber, Booking.shiftID, Booking.targetLaneID " +
+  connection.execute("SELECT Booking.bookingID, User.username, User.telNumber, Booking.shiftID, Booking.targetLaneID, Booking.bookingStatusID " +
   "FROM Booking " +
   "INNER JOIN User ON Booking.username = User.username " +
   "WHERE Booking.bookingDate = ?",
