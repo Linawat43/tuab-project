@@ -9,20 +9,22 @@ var connection = require('../connection/db.js');
 
 router.get('/', jsonParser, function(req, res, next) {
   const { date } = req.query;
-  // const { workDate } = req.body;
 
-  connection.execute("SELECT username, shiftID, targetLaneID FROM Booking WHERE bookingDate = ?",
-      [date],
-      (err, rows) => {
-        if (err) {
-          console.error('Error executing SELECT query:', err);
-          return;
-        }
-
-        res.json(rows)
-        // console.log(availability);
+  connection.execute("SELECT User.username, User.telNumber, Booking.shiftID, Booking.targetLaneID " +
+  "FROM Booking " +
+  "INNER JOIN User ON Booking.username = User.username " +
+  "WHERE Booking.bookingDate = ?",
+    [date],
+    (err, rows) => {
+      if (err) {
+        console.error('Error executing SELECT query:', err);
+        return;
       }
-    );
-  });
+
+      res.json(rows)
+      // console.log(availability);
+    }
+  );
+});
   
-  module.exports = router;
+module.exports = router;

@@ -32,6 +32,7 @@ var uploadSlipRouter = require('./routes/uploadSlip');
 var operationRouter = require('./routes/operation');
 var checkoperationRouter = require('./routes/checkoperation');
 var editoperationRouter = require('./routes/editoperation');
+var checkBookForPayRouter = require('./routes/checkBookForPay');
 
 var app = express();
 
@@ -69,6 +70,7 @@ app.use('/uploadSlip', uploadSlipRouter);
 app.use('/operation', operationRouter);
 app.use('/checkoperation', checkoperationRouter);
 app.use('/editoperation', editoperationRouter);
+app.use('/checkBookForPay', checkBookForPayRouter);
 
 // app.use('/protectedRoute', jwtMiddleware);
 // app.use(session({

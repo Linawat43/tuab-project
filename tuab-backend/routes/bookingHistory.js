@@ -10,7 +10,7 @@ var connection = require('../connection/db.js');
 router.get('/', jsonParser, function(req, res, next) {
   const { username } = req.query;
 
-    connection.execute("SELECT bookingDate, targetLaneID, shiftID, bookingStatusID FROM Booking WHERE username = ?",
+    connection.execute("SELECT bookingDate, targetLaneID, shiftID, bookingStatusID, bookingID FROM Booking WHERE username = ?",
     [username],
     (err, rows) => {
         if (err) {
@@ -18,7 +18,7 @@ router.get('/', jsonParser, function(req, res, next) {
             return res.status(500).json({ error: 'Database error' });
         }
         const formattedRows = rows.map(row => {
-            const { bookingDate, targetLaneID, shiftID, bookingStatusID } = row;
+            const { bookingDate, targetLaneID, shiftID, bookingStatusID, bookingID } = row;
             const dateObject = new Date(bookingDate);
             const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
@@ -52,7 +52,8 @@ router.get('/', jsonParser, function(req, res, next) {
               bookingDate: formattedDate,
               targetLaneID: lane,
               shiftID: shift,
-              bookingStatusID
+              bookingStatusID,
+              bookingID
             };
           });
       

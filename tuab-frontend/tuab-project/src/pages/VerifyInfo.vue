@@ -61,16 +61,21 @@ export default {
             this.$router.push('/booking')
         },
         payment () {
+          const { date, lane, shift } = this;
           const formData = {
             date: this.date,
             lane: this.lane,
             username: this.username,
             shift: this.shift
           };
+          localStorage.setItem("date", date)
+          localStorage.setItem("lane", lane)
+          localStorage.setItem("shift", shift)
 
           axios.post('http://localhost:3000/booking', formData)
             .then(response => {
               console.log('Booking saved successfully!');
+              
               this.openPopup();
             })
             .catch(error => {
@@ -122,8 +127,8 @@ export default {
       }
 
       if (this.tel) {
-      this.status = false;
-  }
+        this.status = false;
+      }
     },
 }
 </script>

@@ -21,11 +21,12 @@ export default {
             error => {
                 if (error.response && error.response.status === 401) {
                     // Token expired or unauthorized, navigate back to login page
-                    localStorage.removeItem("name");
-                    localStorage.removeItem("roleName");
-                    localStorage.removeItem("username");
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("endDate");
+                    // localStorage.removeItem("name");
+                    // localStorage.removeItem("roleName");
+                    // localStorage.removeItem("username");
+                    // localStorage.removeItem("token");
+                    // localStorage.removeItem("endDate");
+                    localStorage.clear();
                     this.$router.push('/');
                 }
                 return Promise.reject(error);

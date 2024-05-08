@@ -38,7 +38,7 @@
             <center><button class="submit" type="submit">UPDATE</button></center> -->
             <div v-for="(booking, index) in bookings" :key="index" class="slot">
               <h2>{{ booking.username }}</h2>
-              <t1>(Tel.{{tel}})</t1>
+              <t1>(Tel.{{booking.telNumber}})</t1>
               <h5>{{ booking.shiftID }}</h5>
               <h5>Lane {{ booking.targetLaneID }}</h5>
               <button class="slipbtn" @click="openPopup">Payment</button>

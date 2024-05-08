@@ -77,33 +77,59 @@ export default {
     cancelBooking(booking) {
       this.openPopup();
       if(this.submitCancellation){
-        const requestData = {
-        date: booking.bookingDate,
-        username: this.username,
-        status: 3 
-      };
-      axios.post('http://localhost:3000/cancelBooking', requestData)
+      //   const requestData = {
+      //   date: booking.bookingDate,
+      //   username: this.username,
+      //   status: 3 
+      // };
+      this.date = booking.bookingDate,
+      this.status = 3
+      localStorage.setItem("date", this.date)
+      localStorage.setItem("status", this.status)
+      // axios.post('http://localhost:3000/cancelBooking', requestData)
+      // .then(response => {
+      //   console.log('Booking canceled successfully:', response.data);
+      // })
+      // .catch(error => {
+      //   console.error('Error canceling booking:', error);
+      //   this.fetchBookings();
+      // });
+      }
+    },
+    submitCancellation() {
+      this.date = localStorage.getItem("date");
+      this.status = localStorage.getItem("status");
+      axios.post('http://localhost:3000/cancelBooking', {
+        date: this.date,
+        status: this.status,
+        username: this.username
+      })
       .then(response => {
         console.log('Booking canceled successfully:', response.data);
+        this.closePopup();
+        localStorage.removeItem("date");
+        localStorage.removeItem("status");
       })
       .catch(error => {
         console.error('Error canceling booking:', error);
         this.fetchBookings();
       });
-      }
-    },
-    submitCancellation() {
-      this.closePopup();
     },
     backhome () {
       if(this.roles == '1'){
         this.$router.push('/general-home')
+        localStorage.removeItem("date");
+        localStorage.removeItem("status");
       }
       else if(this.roles == '2'){
         this.$router.push('/superStaff-home')
+        localStorage.removeItem("date");
+        localStorage.removeItem("status");
       }
       else if(this.roles == '3'){
         this.$router.push('/staff-home')
+        localStorage.removeItem("date");
+        localStorage.removeItem("status");
       }
     },
     

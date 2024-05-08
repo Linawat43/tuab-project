@@ -25,19 +25,19 @@
               <!-- Payment detail -->
               <h1>Your payment detail</h1><br>
               <form @submit.prevent="upload">
-              <h4>Please select bank: </h4>
-              <select v-model="selectedBank" id="bank" required>
-                  <option v-for="bank in bank" :key="bank.id" :value="bank.id">{{ bank.name }}</option>
-              </select>
-              <br><br>
-              <h4>Last 4 digits of your account no.: </h4>
-              <input class="bankno" type="text" v-model="bankno" maxlength="4" required>
-              <br><br>
-              <h4>Proceed date and time: </h4>
-              <input class="datepicker" v-model="proceedDate" type="datetime-local" required>
-              <h6>Note: After submitting your payment, please wait for our confirming</h6>
-              <center><button class="submit" type="submit" @click="upload">SUBMIT</button></center>
-            </form>
+                <h4>Please select bank: </h4>
+                <select v-model="selectedBank" id="bank" required>
+                    <option v-for="bank in bank" :key="bank.id" :value="bank">{{ bank.name }}</option>
+                </select>
+                <br><br>
+                <h4>Last 4 digits of your account no.: </h4>
+                <input class="bankno" type="text" v-model="bankno" maxlength="4" required>
+                <br><br>
+                <h4>Proceed date and time: </h4>
+                <input class="datepicker" v-model="proceedDate" type="datetime-local" required>
+                <h6>Note: After submitting your payment, please wait for our confirming</h6>
+                <center><button class="submit" type="submit" @click="upload">SUBMIT</button></center>
+              </form>
           </div>
 
           <div class="popup" id="popup">
@@ -59,6 +59,8 @@ export default {
           roleName: '',
           name: '',
           selectedBank: null,
+          proceedDate: '',
+          bankno: '',
           bank: [
             {id: null, name: 'Please select bank:'},
             {id: 1, name: 'KTB'},
@@ -70,52 +72,107 @@ export default {
             {id: 7, name: 'UOBT'},
             {id: 8, name: 'etc.'},
           ],
+          isSubmitting: false,
+          bookingID: null,
         };
     },
   methods: {
-      backverify () {
-          this.$router.push('/verify-info')
-      },
+    fetchBookings() {
+      this.date = localStorage.getItem('date');
+      this.lane = localStorage.getItem('lane');
+      this.shift = localStorage.getItem('shift');
+      this.username = localStorage.getItem('username');
 
-      backhome () {
-        if(this.roles == '1'){
-              this.$router.push('/general-home')
-          }
-          else if(this.roles == '2'){
-              this.$router.push('/superStaff-home')
-          }
-          else if(this.roles == '3'){
-              this.$router.push('/staff-home')
-          }
-      },
+      const params = {
+        date: this.date,
+        lane: this.lane,
+        shift: this.shift,
+        username: this.username
+      };
+      console.log(params);
 
-      upload(){
-        if(this.selectedBank && this.bankno && this.proceedDate){
-          const popup = document.getElementById('popup');
-          popup.classList.add('open-popup')
+      axios.get('http://localhost:3000/checkBookForPay', { params: params })
+          .then(response => {
+            // const bookingID = response.data.bookingID;
+            this.bookingID = response.data[0].bookingID;
+            localStorage.setItem("bookingID", this.bookingID)
+          console.log('Booking ID:', this.bookingID);
+          })
+          .catch(error => {
+              console.error('Error fetching bookings:', error);
+          });
+    },
+    backverify () {
+        this.$router.push('/verify-info')
+        localStorage.removeItem("date");
+        localStorage.removeItem("lane");
+        localStorage.removeItem("shift");
+        localStorage.removeItem("bookingID");
+    },
+    backhome () {
+      if(this.roles == '1'){
+            this.$router.push('/general-home')
         }
-      },
-
-      // openPopup(){
-      //   const popup = document.getElementById('popup');
-      //   popup.classList.add('open-popup')
-      // },
-      
-      closePopup(){
-        const popup = document.getElementById('popup');
-        popup.classList.remove('open-popup');
-        if (this.roles === '1') {
-          this.$router.push('/general-home');
-        } else if (this.roles === '2') {
-          this.$router.push('/superStaff-home');
-        } else if (this.roles === '3') {
-          this.$router.push('/staff-home');
+        else if(this.roles == '2'){
+            this.$router.push('/superStaff-home')
         }
+        else if(this.roles == '3'){
+            this.$router.push('/staff-home')
+        }
+        localStorage.removeItem("date");
+        localStorage.removeItem("lane");
+        localStorage.removeItem("shift");
+        localStorage.removeItem("bookingID");
+    },
+    upload () {
+        if(!this.isSubmitting && this.selectedBank && this.bankno && this.proceedDate){
+          this.isSubmitting = true;
+          this.bookingID = localStorage.getItem('bookingID');
+          //     this.username = localStorage.getItem("username");
+
+          const formData = {
+          bank: this.selectedBank.name,
+          username: this.username,
+          bankno: this.bankno,
+          proceedDate: this.proceedDate,
+          bookingID: this.bookingID
+          };
+          console.log(formData);
+          
+          axios.post('http://localhost:3000/uploadSlip', formData)
+          .then(response => {
+            console.log('Data sent successfully:', response.data);
+            const popup = document.getElementById('popup');
+            popup.classList.add('open-popup')
+          })
+          .catch(error => {
+            console.error('Error canceling booking:', error);
+          })
+          .finally(() => {
+            this.isSubmitting = false;
+          });
+        }
+    },
+    closePopup(){
+      const popup = document.getElementById('popup');
+      popup.classList.remove('open-popup');
+      if (this.roles === '1') {
+        this.$router.push('/general-home');
+      } else if (this.roles === '2') {
+        this.$router.push('/superStaff-home');
+      } else if (this.roles === '3') {
+        this.$router.push('/staff-home');
       }
+      localStorage.removeItem("date");
+      localStorage.removeItem("lane");
+      localStorage.removeItem("shift");
+      localStorage.removeItem("bookingID");
+    }
   },
   mixins: [NotToken],
   mounted() {
-    this.username = localStorage.getItem("username");
+    // this.username = localStorage.getItem("username");
+    this.fetchBookings();
   },
 }
 </script>

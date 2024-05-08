@@ -31,6 +31,7 @@ router.get('/', jsonParser, function(req, res, next) {
           });
       
           res.json(formattedRows);
+          console.log(formattedRows);
       }
     );
   });

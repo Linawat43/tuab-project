@@ -24,19 +24,19 @@
               <!-- Payment detail -->
               <h1>Your payment detail</h1><br>
               <form @submit.prevent="upload">
-              <h4>Please select bank: </h4>
-              <select v-model="selectedBank" id="bank" required>
-                  <option v-for="bank in bank" :key="bank.id" :value="bank.id">{{ bank.name }}</option>
-              </select>
-              <br><br>
-              <h4>Last 4 digits of your account no.: </h4>
-              <input class="bankno" type="text" v-model="bankno" maxlength="4" required>
-              <br><br>
-              <h4>Proceed date and time: </h4>
-              <input class="datepicker" v-model="proceedDate" type="datetime-local" required>
-              <h6>Note: After submitting your payment, please wait for our confirming</h6>
-              <center><button class="submit" type="submit" @click="upload">SUBMIT</button></center>
-            </form>
+                <h4>Please select bank: </h4>
+                <select v-model="selectedBank" id="bank" required>
+                    <option v-for="bank in bank" :key="bank.id" :value="bank">{{ bank.name }}</option>
+                </select>
+                <br><br>
+                <h4>Last 4 digits of your account no.: </h4>
+                <input class="bankno" type="text" v-model="bankno" maxlength="4" required>
+                <br><br>
+                <h4>Proceed date and time: </h4>
+                <input class="datepicker" v-model="proceedDate" type="datetime-local" required>
+                <h6>Note: After submitting your payment, please wait for our confirming</h6>
+                <center><button class="submit" type="submit" @click="upload">SUBMIT</button></center>
+              </form>
           </div>
 
           <div class="popup" id="popup">
@@ -50,12 +50,15 @@
 </template>
 <script>
   import NotToken from '../components/NotToken.vue';
+  import axios from 'axios';
   export default {
     data() {
         return {
           roleName: '',
           name: '',
           selectedBank: null,
+          proceedDate: '',
+          bankno: '',
           bank: [
             {id: null, name: 'Please select bank:'},
             {id: 1, name: 'KTB'},
@@ -67,27 +70,46 @@
             {id: 7, name: 'UOBT'},
             {id: 8, name: 'etc.'},
           ],
+          isSubmitting: false,
+
         };
     },
     methods: {
       backverify () {
             this.$router.push('/history')
       },
-
-      upload(){
-        if(this.selectedBank && this.bankno && this.proceedDate){
-          const popup = document.getElementById('popup');
-          popup.classList.add('open-popup')
+      upload () {
+        if(!this.isSubmitting && this.selectedBank && this.bankno && this.proceedDate){
+          this.isSubmitting = true;
+          // this.bookingID = localStorage.getItem('bookingID');
+          this.bookingID = this.$route.query.bookingID;
+          
+          axios.post('http://localhost:3000/uploadSlip', {
+            bank: this.selectedBank.name,
+            username: this.username,
+            bankno: this.bankno,
+            proceedDate: this.proceedDate,
+            bookingID: this.bookingID
+          })
+          .then(response => {
+            console.log('Data sent successfully:', response.data);
+            const popup = document.getElementById('popup');
+            popup.classList.add('open-popup')
+          })
+          .catch(error => {
+            console.error('Error canceling booking:', error);
+          })
+          .finally(() => {
+            this.isSubmitting = false;
+          });
         }
       },
-
-      // openPopup(){
-      //   popup.classList.add('open-popup')
-      // },
-      
       closePopup(){
         this.$router.push('/history')
-      }
+      },
+      // mounted() {
+      //   this.bookingID = localStorage.getItem('bookingID');
+      // },
     },
     mixins: [NotToken],
   }

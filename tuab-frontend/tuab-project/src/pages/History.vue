@@ -26,7 +26,7 @@
               <h2>{{ booking.bookingDate }}</h2>
               <s1>Lane {{ booking.targetLaneID }}</s1>
               <s1>{{ booking.shiftID }}</s1>
-              <button class="addbtn" @click="addslip"><span>UPLOAD SLIP</span></button>
+              <button class="addbtn" @click="addslip(booking.bookingID)"><span>PAYMENT</span></button>
 
               <img v-if="booking.bookingStatusID === 2 || booking.bookingStatusID === 4" src="paychecked.png" width="4%" height="4%">
               <img v-else-if="booking.bookingStatusID === 1" src="paypending.png" width="4%" height="4%">
@@ -77,8 +77,13 @@ export default {
           }
       },
 
-        addslip () {
-          this.$router.replace("add-payment")
+        addslip (bookingID) {
+          this.$router.push({
+              path: '/add-payment',
+              query: { bookingID: bookingID }
+          });
+          // localStorage.setItem('bookingID', bookingID);
+          // this.$router.push("add-payment")
         }
     },
 }  
