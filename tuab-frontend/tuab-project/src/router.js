@@ -80,22 +80,3 @@ export default new Router({
     }
     ]
 })
-
-// const routes = [
-//     { 
-//         path: '/',
-//         name: 'login',
-//         component: LoginTuab
-//     },
-//     { 
-//         path: '/general-home',
-//         name: 'general-home',
-//         component: GeneralHome
-//     }
-// ]
-
-// const router = new VueRouter({
-//     routes
-// })
-
-// export default router

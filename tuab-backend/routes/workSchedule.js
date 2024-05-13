@@ -7,6 +7,7 @@ var jwt = require('jsonwebtoken');
 
 var connection = require('../connection/db.js');
 
+// Added workingDate staff to Database.
 router.post('/', jsonParser, function(req, res, next) {
     const { username, workDate, workShift } = req.body;
     const formattedDate = new Date(workDate).toISOString().split('T')[0];

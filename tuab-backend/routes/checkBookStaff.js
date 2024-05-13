@@ -7,10 +7,11 @@ var jwt = require('jsonwebtoken');
 
 var connection = require('../connection/db.js');
 
+// Browse all booking times for that day for staff to check.
 router.get('/', jsonParser, function(req, res, next) {
   const { date } = req.query;
 
-  connection.execute("SELECT Booking.bookingID, User.username, User.telNumber, Booking.shiftID, Booking.targetLaneID, Booking.bookingStatusID " +
+  connection.execute("SELECT Booking.bookingID, User.name, User.username, User.telNumber, Booking.shiftID, Booking.targetLaneID, Booking.bookingStatusID " +
   "FROM Booking " +
   "INNER JOIN User ON Booking.username = User.username " +
   "WHERE Booking.bookingDate = ?",
@@ -21,8 +22,22 @@ router.get('/', jsonParser, function(req, res, next) {
         return;
       }
 
-      res.json(rows)
-      // console.log(availability);
+      const formattedRows = rows.map(row => {
+        const fullName = row.name;
+        const firstName = fullName.split(' ')[0];
+
+        return {
+          bookingID: row.bookingID,
+          name: firstName,
+          username: row.username,
+          telNumber: row.telNumber,
+          shiftID: row.shiftID,
+          targetLaneID: row.targetLaneID,
+          bookingStatusID: row.bookingStatusID
+        }
+      })
+
+      res.json(formattedRows)
     }
   );
 });

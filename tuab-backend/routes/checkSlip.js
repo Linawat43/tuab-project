@@ -7,25 +7,26 @@ var jwt = require('jsonwebtoken');
 
 var connection = require('../connection/db.js');
 
+// Check whether the user has paid or not.
 router.get('/', jsonParser, function(req, res, next) {
-    const { username, bookId } = req.query;
-  
-    connection.execute(
-      "SELECT bankName, accountDigit, dateATime FROM Payment WHERE username = ? AND bookingID = ?",
-      [username, bookId],
-      (err, rows) => {
-        if (err) {
-          console.error('Error executing SELECT query:', err);
-          return res.status(500).json({ error: 'Database error' });
-        }
+  const { username, bookId } = req.query;
 
-        const transformedRows = rows.map(row => ({
-          bankName: row.bankName,
-          accountDigit: row.accountDigit,
-          dateATime: formatDateTime(row.dateATime)
-        }));
-  
-        res.json(transformedRows);
+  connection.execute(
+    "SELECT bankName, accountDigit, dateATime FROM Payment WHERE username = ? AND bookingID = ?",
+    [username, bookId],
+    (err, rows) => {
+      if (err) {
+        console.error('Error executing SELECT query:', err);
+        return res.status(500).json({ error: 'Database error' });
+      }
+
+      const transformedRows = rows.map(row => ({
+        bankName: row.bankName,
+        accountDigit: row.accountDigit,
+        dateATime: formatDateTime(row.dateATime)
+      }));
+
+      res.json(transformedRows);
       }
     );
   });

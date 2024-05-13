@@ -8,15 +8,9 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 const axios = require('axios');
 require('dotenv').config();
-// const session = require('express-session');
 var jwt = require('jsonwebtoken');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
-// const jwtMiddleware = require('./routes/jwtMiddleware');
-// var registerRouter = require('./routes/register');
-// var generalUseHomeRouter = require('./routes/generalUserHome');
 var bookingRouter = require('./routes/booking');
 var userDetail = require('./routes/user/user_detail');
 var bookingCheckRouter = require('./routes/bookingCheck');
@@ -34,6 +28,7 @@ var checkoperationRouter = require('./routes/checkoperation');
 var editoperationRouter = require('./routes/editoperation');
 var checkBookForPayRouter = require('./routes/checkBookForPay');
 var checkSlipRouter = require('./routes/checkSlip');
+var filterBookMonthRouter = require('./routes/filterBookMonth');
 
 var app = express();
 
@@ -51,11 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser());
 app.use(bodyParser.json());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/login', loginRouter);
-// app.use('/register', registerRouter);
-// app.use('/generalUserHome', generalUserHome);
 app.use('/booking', bookingRouter);
 app.use('/user-detail', userDetail);
 app.use('/bookingCheck', bookingCheckRouter);
@@ -73,15 +64,7 @@ app.use('/checkoperation', checkoperationRouter);
 app.use('/editoperation', editoperationRouter);
 app.use('/checkBookForPay', checkBookForPayRouter);
 app.use('/checkSlip', checkSlipRouter);
-
-// app.use('/protectedRoute', jwtMiddleware);
-// app.use(session({
-//   secret: 'your_secret_key',
-//   resave: false,
-//   saveUninitialized: true,
-// }));
-
-// app.use(authRoutes);
+app.use('/filterBookMonth', filterBookMonthRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

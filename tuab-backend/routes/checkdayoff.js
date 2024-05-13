@@ -7,19 +7,19 @@ var jwt = require('jsonwebtoken');
 
 var connection = require('../connection/db.js');
 
+// Check the opening and closing times of the archery field.
 router.get('/', jsonParser, function(req, res, next) {
   const { workDate } = req.query;
 
-    connection.execute("SELECT workingDate, workingShift FROM WorkSchedule WHERE workingDate = ?",
-    [workDate],
-    (err, rows) => {
-        if (err) {
+  connection.execute("SELECT workingDate, workingShift FROM WorkSchedule WHERE workingDate = ?",
+  [workDate],
+  (err, rows) => {
+      if (err) {
         console.error('Error executing SELECT query:', err);
         return;
-        }
-        res.json(rows)
-        console.log(rows);
-    })
+      }
+      res.json(rows)
+  })
 })
   
 module.exports = router;

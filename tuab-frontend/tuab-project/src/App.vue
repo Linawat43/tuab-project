@@ -10,27 +10,23 @@
 
 <script>
 import Information from './components/Information.vue';
-
 export default {
-    name: 'app',
-    components: { Information }
+  name: 'app',
+  components: { Information }
 }
 </script>
 
 <style>
 #app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
 }
 .hd {
-    width:100%;
-    background-color: #275496;
-    }
-/* body {
-    background-color: #DFE9F5;
-  } */
+width:100%;
+background-color: #275496;
+}
 .logo {
-  padding-left: 5%;
+padding-left: 5%;
 }
 </style>
