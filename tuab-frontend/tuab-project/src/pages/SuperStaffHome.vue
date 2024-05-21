@@ -31,7 +31,7 @@
         <div v-for="(booking, index) in bookings" :key="index" class="slot">
           <template v-if="booking.bookingStatusID !== 3">
             <h2>{{ booking.username }}</h2>
-            <h2>{{ booking.name }}</h2>
+            <name>{{ booking.name }}</name>
             <t1>(Tel.{{booking.telNumber}})</t1>
             <h5>{{ booking.shiftID }}</h5>
             <h5>Lane {{ booking.targetLaneID }}</h5>
@@ -400,7 +400,15 @@ color: #000000;
 font-size: 130%;
 font-family: Verdana;
 float: left;
-margin-left: 7%;
+margin-left: 5%;
+}
+
+name {
+color: #000000;
+font-size: 130%;
+font-family: Verdana;
+float: left;
+margin-left: 1%;
 }
 
 t1 {
