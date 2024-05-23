@@ -1,29 +1,39 @@
 # tuab-project
 
-This template should help get you started developing with Vue 3 in Vite.
+web application tu archery booking is a web application for archery field reservation system. This project uses express.js on the backend side and uses vue.js on the frontend side.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Project installation steps
 
 ```sh
+git clone https://github.com/Linawat43/tuab-project.git
+```
+
+## Setup Backend Project
+
+```sh
+cd tuab-backend
+
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Running the Backend Project
+
+```sh
+nodemon tuab-backend
+```
+
+## Setup Frontend Project
+
+```sh
+cd tuab-frontend
+
+cd tuab-project
+
+npm install
+```
+
+### Running the Frontendend Project
 
 ```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```
